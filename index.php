@@ -61,7 +61,7 @@
 					}
 					pg_set_client_encoding("UTF-8");
 
-					$result = $pdo->prepare(" SELECT * FROM warn_info WHERE  submit_name LIKE '%" . $_POST["Search_text"] . "%' "); 
+					$result = $pdo->prepare(" SELECT id,user_id,timestamp,longitube FROM warn_info WHERE  submit_name LIKE '%" . $_POST["Search_text"] . "%' "); 
 
 
 					//stringの配列情報
