@@ -61,7 +61,8 @@
 					}
 					pg_set_client_encoding("UTF-8");
 
-					$result = pg_query($conn, "select id,user_id,timestamp,longitude,latitude,car_data_id,image_url from warn_info");
+					$result = $pdo->prepare(" SELECT * FROM warn_info WHERE  submit_name LIKE '%" . $_POST["Search_text"] . "%' "); 
+
 
 					//stringの配列情報
 					while ($row = pg_fetch_row($result)) {
@@ -77,7 +78,10 @@
 					foreach($arr as $rows){
 						echo "<tr>\n";
 						foreach($rows as $value){
-							printf("<td>" .$value. "</td>\n");
+							printf("<td>" .$rows[0]. "</td>\n");
+							printf("<td>" .$rows[1]. "</td>\n");
+							printf("<td>" .$rows[2]. "</td>\n");
+							printf("<td>" .$rows[3]. "</td>\n");
 						}
 					}
 					echo "</table>\n";
