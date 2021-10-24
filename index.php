@@ -80,8 +80,7 @@
 						foreach($rows as $value){
 							printf("<td>" .$value[0]. "</td>\n");
 							printf("<td>" .$value[1]. "</td>\n");
-							printf("<td>" .$value[2]. "</td>\n");
-							printf("<td>" .$value[3]. "</td>\n");
+							echo("<td>" .$value[2]. "</td>\n");
 						}
 					}
 					echo "</table>\n";
