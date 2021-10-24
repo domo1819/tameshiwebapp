@@ -47,7 +47,7 @@
 							<option value="日時">日時</option>
 						</select><br><br>
 						<label>検索単語を入力してください。(空欄の場合は全検索をします。)</label>
-						<input type="text" id="Search_text" name="Search_text" placeholder="検索語を入力してください">
+						<input type="text" id="search_text" name="Search_name" placeholder="検索語を入力してください">
 						<br><br><br>
 						<div class="engine">
 							<input type="submit"  name="submit" value="検索" style="width:10%;padding:10px;font-size:20px; background-color:#00c4ff; color:#FFF; margin-bottom:10px;">
@@ -63,7 +63,7 @@
 
 					
 
-					$result = pg_query($conn,"select id,user_id, timestamp from warn_info WHERE  submit_name LIKE '%" . $_POST["Search_text"] . "%' "); 
+					$result = pg_query($conn,"select id,user_id, timestamp from warn_info WHERE  submit_name LIKE '%" . $_POST["Search_name"] . "%' "); 
 
 
 					//stringの配列情報
