@@ -61,7 +61,9 @@
 					}
 					pg_set_client_encoding("UTF-8");
 
-					$result = pg_query(" SELECT id,user_id,timestamp,longitube FROM warn_info WHERE  submit_name LIKE '%" . $_POST["Search_text"] . "%' "); 
+					$result = pg_query($conn, "select id,region_name from region_data");
+
+					$result = pg_query($conn,"select id, user_id, timestamp,longitube from warn_info WHERE  submit_name LIKE '%" . $_POST["Search_text"] . "%' "); 
 
 
 					//stringの配列情報
