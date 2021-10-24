@@ -63,7 +63,7 @@
 
 					
 
-					$result = pg_query($conn,"select id,user_id, timestamp from warn_info WHERE id LIKE '%" . $_POST["Search_name"] . "%' "); 
+					$result = pg_query($conn,"select * from warn_info WHERE id LIKE '%" . $_POST["Search_name"] . "%' "); 
 
 
 					//stringの配列情報
