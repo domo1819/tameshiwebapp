@@ -1,0 +1,175 @@
+@charset "utf-8";
+
+
+html {
+
+	font-family: sans-serif;
+
+}
+
+html  {
+
+	box-sizing: border-box;
+
+}
+
+.wrapper {
+	margin: 0 auto 0 auto;
+	max-width: 960px;
+}
+
+
+
+
+h1{
+  text-align: center;
+  background-color: aqua;
+}
+
+h2{
+  font-size: 26px;
+  margin-left: 15px;
+  border-bottom: 3px dotted aqua;
+}
+
+p{
+  font-size: 20px;
+  margin-left: 15px;
+}
+
+.top1{
+  margin: px 0px 50px;
+}
+
+.engine2{
+  margin: 50px 0px 100px;
+}
+
+.pp3{
+  margin: 50px 0px 50px;
+}
+
+.terms4{
+  margin: 50px 0px 50px;
+}
+
+table{
+  width: 100%;
+  table-layout: fixed;
+}
+
+
+
+li{
+  display: inline;
+  list-style-type: none;
+  padding: 0px 30px 0px 0px;
+}
+a:link{
+  color: #66B5FF;
+  text-decoration: none;
+}
+/* 初期の状態 */
+a:visited{
+  color: #4CA9FF;
+  text-decoration: none;
+}
+/* リンク先に訪問した後 */
+a:hover{
+  color:#246DB3;
+  text-decoration: none;
+}
+/* マウスが重なった状態 */
+a:active{
+  color:#555555;
+  text-decoration: none;
+}
+
+footer{
+  padding: 80px 15px 20px 15px;
+  font-size: 12px;
+  color: black;
+}
+
+
+.pagetop {
+    display: none;
+    position: fixed;
+    bottom: 60px;
+    right: 20px;
+    z-index:100;
+}
+.pagetop a {
+    display: block;
+    background-color: rgba(0,255,0,0.3);
+    text-align: center;
+    color: #60f;
+    font-size: 20px;
+    text-decoration: none;
+    padding: 20px 30px;
+    border:solid 1px #000;
+    border-radius: 10px;
+}
+
+.pagetop a:hover {
+    display: block;
+    background-color:rgba(153,153,255,0.4);
+    text-align: center;
+    color: #f00;
+    font-size: 20px;
+    text-decoration: none;
+    padding:20px 30px;
+    border:solid 1px #000;
+    border-radius: 10px;
+}
+.pagetop {
+    display: none;
+    position: fixed;
+    bottom: 60px;
+    right: 20px;
+    z-index:100;
+}
+.pagetop a {
+    display: block;
+    background-color: rgba(0,255,0,0.3);
+    text-align: center;
+    color: #60f;
+    font-size: 20px;
+    text-decoration: none;
+    padding: 20px 30px;
+    border:solid 1px #000;
+    border-radius: 10px;
+}
+
+.pagetop a:hover {
+    display: block;
+    background-color:rgba(153,153,255,0.4);
+    text-align: center;
+    color: #f00;
+    font-size: 20px;
+    text-decoration: none;
+    padding:20px 30px;
+    border:solid 1px #000;
+    border-radius: 10px;
+}
+@media only screen and (max-width: 480px) {
+	.pagetop a {padding:10px 15px;}
+	.pagetop a:hover {padding:10px 15px;}
+}
+@media only screen and (min-width:481px) and (max-width:780px) {
+	.pagetop a {padding:15px 20px;}
+	.pagetop a:hover {padding:15px 20px;}
+}
+@media only screen and (max-width: 480px) {
+	.pagetop a {padding:10px 15px;}
+	.pagetop a:hover {padding:10px 15px;}
+}
+@media only screen and (min-width:481px) and (max-width:780px) {
+	.pagetop a {padding:15px 20px;}
+	.pagetop a:hover {padding:15px 20px;}
+
+}
+
+
+
+
