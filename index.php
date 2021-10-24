@@ -61,7 +61,7 @@
 					}
 					pg_set_client_encoding("UTF-8");
 
-					$result = pg_query($conn, "select id,user_id,timestamp from warn_info"); 
+					$result = pg_query($conn, "select id,user_id,timestamp,car_data_id from warn_info"); 
 
 
 					//stringの配列情報
