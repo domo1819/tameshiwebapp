@@ -61,9 +61,7 @@
 					}
 					pg_set_client_encoding("UTF-8");
 
-					
-
-					$result = pg_query($conn,"select * from warn_info WHERE id LIKE '%" . $_POST["Search_name"] . "%' "); 
+					$result = pg_query($conn,"select id,user_id,timestamp,, from warn_info "); 
 
 
 					//stringの配列情報
@@ -75,7 +73,7 @@
 
 					$arr = pg_fetch_all($result);
 
-					echo "<table border=1><tr><th>ID</th><th>user</th><th>日時</th><th>経度</th><th>緯度</th><th>car_id</th><th>写真</th></tr>";
+					echo "<table border=1><tr><th>ID</th><th>user</th><th>日時</th><th>car_id</th></tr>";
 					//データの出力
 					foreach($arr as $rows){
 						echo "<tr>\n";
