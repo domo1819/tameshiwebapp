@@ -61,8 +61,8 @@
 					}
 					pg_set_client_encoding("UTF-8");
 
-					$result = pg_query($conn, "select id,user_id,timestamp,longitude,latitude,car_data_id,image_url from warn_info");
-					
+					$result = pg_query($conn, "select id,user_id from warn_info");
+
 					//stringの配列情報
 					while ($row = pg_fetch_row($result)) {
 						$region_name_result = $row[0];
