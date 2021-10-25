@@ -1,37 +1,3 @@
-<?php
-					$conn = pg_connect(getenv("DATABASE_URL"));
-					if (!$conn) {
-						exit('データベースに接続できませんでした。');
-					}
-					pg_set_client_encoding("UTF-8");
-
-					$result = pg_query($conn, "select id,user_id,timestamp,car_data_id from warn_info WHERE id LIKE '%".$_POST["word"]."%'"); 
-
-
-					//stringの配列情報
-					while ($row = pg_fetch_row($result)) {
-						$region_name_result = $row[0];
-					 }
-					 //string->array
-					 $region_name_result = explode("," , substr($region_name_result, 1, strlen($region_name_result)-2));
-
-					$arr = pg_fetch_all($result);
-
-					
-
-					echo "<table border=1><tr><th>ID</th><th>user</th><th>日時</th><th>car_id</th></tr>";
-					//データの出力
-					foreach($arr as $rows){
-						echo "<tr>\n";
-						foreach($rows as $value){
-							printf("<td>" .$value. "</td>\n");
-						}
-					}
-					echo "</table>\n";
-
-					pg_close($conn);
-				?>
-
 <!doctype html>
 <html lang="ja"><!--  htmlでここから記述する -->
 <head><!--  コンピューターが見る内容を記述 -->
@@ -81,13 +47,69 @@
 							<option value="日時">日時</option>
 						</select><br><br>
 						<label>検索単語を入力してください。(空欄の場合は全検索をします。)</label>
-						<input type="text" id="search_text" name="word" placeholder="検索語を入力してください" value="<?php echo $_POST['user_name']?>">
+						<input type="text" id="search_text" name="word" placeholder="検索語を入力してください" >
 						<br><br><br>
 						<div class="engine">
 							<input type="submit"  name="submit" value="検索" style="width:10%;padding:10px;font-size:20px; background-color:#00c4ff; color:#FFF; margin-bottom:10px;">
 						</div>
 					</div>
 				</form>
+				<?php
+					$conn = pg_connect(getenv("DATABASE_URL"));
+					if (!$conn) {
+						exit('データベースに接続できませんでした。');
+					}
+					pg_set_client_encoding("UTF-8");
+
+					try{
+
+					$sql = pg_query($conn, "select id,user_id,timestamp,car_data_id from warn_info");
+					
+					if (isset($_POST['word'])) {
+						$sql = "SELECT * FROM id WHERE user_id LIKE '%{$_POST['word']}%' OR timestamp LIKE '%{$_POST['word']}%' OR car_data_id LIKE '%{$_POST['word']}%' ";
+				}
+
+				$stmt = $pdo->prepare($sql);
+				$stmt->execute(null);
+				$res = "<table border=1>
+										<tr>
+										<th>ID</th>
+										<th>user</th>
+										<th>日時</th>
+										<th>car_id</th>
+						    </tr>\n";
+								while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+
+									$res .= <<<eod
+									<tr>
+											<td>{$row['id']}</td>
+											<td>{$row['user_id']}</td>
+											<td>{$row['timestamp']}</td>
+											<td>{$row['car_data_id']}</td>
+									</tr>
+					eod;
+							}
+					
+							$res .= "</table>\n";
+					
+					}catch(Exception $e){
+							echo "エラー発生" . $e->getMessage();
+					}
+					
+			
+
+
+					//stringの配列情報
+					while ($row = pg_fetch_row($result)) {
+						$region_name_result = $row[0];
+					 }
+					 //string->array
+					 $region_name_result = explode("," , substr($region_name_result, 1, strlen($region_name_result)-2));
+
+					$arr = pg_fetch_all($result);
+
+					pg_close($conn);
+				?>
 			</div>
 			<div class = "pp3">
 			<h2 id = "pp">プライバシーポリシー</h2>
