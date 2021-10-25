@@ -1,3 +1,37 @@
+<?php
+					$conn = pg_connect(getenv("DATABASE_URL"));
+					if (!$conn) {
+						exit('データベースに接続できませんでした。');
+					}
+					pg_set_client_encoding("UTF-8");
+
+					$result = pg_query($conn, "select id,user_id,timestamp,car_data_id from warn_info WHERE id LIKE '%".$_POST["word"]."%'"); 
+
+
+					//stringの配列情報
+					while ($row = pg_fetch_row($result)) {
+						$region_name_result = $row[0];
+					 }
+					 //string->array
+					 $region_name_result = explode("," , substr($region_name_result, 1, strlen($region_name_result)-2));
+
+					$arr = pg_fetch_all($result);
+
+					
+
+					echo "<table border=1><tr><th>ID</th><th>user</th><th>日時</th><th>car_id</th></tr>";
+					//データの出力
+					foreach($arr as $rows){
+						echo "<tr>\n";
+						foreach($rows as $value){
+							printf("<td>" .$value. "</td>\n");
+						}
+					}
+					echo "</table>\n";
+
+					pg_close($conn);
+				?>
+
 <!doctype html>
 <html lang="ja"><!--  htmlでここから記述する -->
 <head><!--  コンピューターが見る内容を記述 -->
@@ -54,39 +88,6 @@
 						</div>
 					</div>
 				</form>
-				<?php
-					$conn = pg_connect(getenv("DATABASE_URL"));
-					if (!$conn) {
-						exit('データベースに接続できませんでした。');
-					}
-					pg_set_client_encoding("UTF-8");
-
-					$result = pg_query($conn, "select id,user_id,timestamp,car_data_id from warn_info"); 
-
-
-					//stringの配列情報
-					while ($row = pg_fetch_row($result)) {
-						$region_name_result = $row[0];
-					 }
-					 //string->array
-					 $region_name_result = explode("," , substr($region_name_result, 1, strlen($region_name_result)-2));
-
-					$arr = pg_fetch_all($result);
-
-					
-
-					echo "<table border=1><tr><th>ID</th><th>user</th><th>日時</th><th>car_id</th></tr>";
-					//データの出力
-					foreach($arr as $rows){
-						echo "<tr>\n";
-						foreach($rows as $value){
-							printf("<td>" .$value. "</td>\n");
-						}
-					}
-					echo "</table>\n";
-
-					pg_close($conn);
-				?>
 			</div>
 			<div class = "pp3">
 			<h2 id = "pp">プライバシーポリシー</h2>
