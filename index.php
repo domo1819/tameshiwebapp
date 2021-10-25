@@ -88,7 +88,7 @@
 
 					$arr = pg_fetch_all($result);
 
-					echo "<table border=1><tr><th>ID</th><th>地方</th><th>車（地方）</th><th>分類番号</th><th>分類ひらがな</th><th>ナンバー</th></tr>";
+					echo "<table border=1><tr><th>ID</th><th>地方</th><th>車（地方）</th><th>分類番号</th><th>分類ひらがな</th><th>ナンバー</th><th>日時</th><th>刑罰ID</th><th>支払い状況</th></tr>";
 					//データの出力
 					foreach($arr as $rows){
 						echo "<tr>\n";
