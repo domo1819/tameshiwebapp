@@ -55,6 +55,31 @@
 					</div>
 				</form>
 				<?php
+          $textbox = $_POST["word"];
+
+					$textboxs = explode(" ",mb_convert_kana($textbox,'s'));
+						
+						//SQL文に追加する字句の生成
+						foreach($textboxs as $textbox){
+								$textboxCondition[] = "([カラム名] LIKE ?)";
+								$values[] = '%'.preg_replace('/(?=[!_%])/', '', $textbox) . '%';
+						}
+						
+						//各Like条件を「OR」でつなぐ
+						$textboxCondition = implode(' OR ', $textboxCondition);
+						
+						//SQLの作成
+						$sql = "SELECT * FROM warn_info WHERE $textboxCondition";
+					
+						//実行
+						$stmt = $pdo->prepare($sql);
+						$stmt->execute($values);
+
+						foreach($stmt as $row){
+							echo $row['id'];
+						}
+				?>
+				<?php
 					$conn = pg_connect(getenv("DATABASE_URL"));
 					if (!$conn) {
 						exit('データベースに接続できませんでした。');
@@ -79,7 +104,6 @@
 						echo "<tr>\n";
 						foreach($rows as $value){
 							printf("<td>" .$value. "</td>\n");
-
 						}
 					}
 					echo "</table>\n";
