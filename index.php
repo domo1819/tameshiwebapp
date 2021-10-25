@@ -61,7 +61,7 @@
 					}
 					pg_set_client_encoding("UTF-8");
 
-					$result = pg_query($conn, "select id,user_id,timestamp,car_data_id from warn_info WHERE user_id  LIKE '%{$_POST['word']}%' "); 
+					$result = pg_query($conn, "select id,user_id,timestamp,car_data_id from warn_info WHERE user_id  LIKE '%{$_POST['word']}%' OR car_data_id LIKE '%{$_POST['word']}%'"); 
 
 
 					//stringの配列情報
