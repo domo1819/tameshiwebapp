@@ -47,7 +47,7 @@
 							<option value="日時">日時</option>
 						</select><br><br>
 						<label>検索単語を入力してください。(空欄の場合は全検索をします。)</label>
-						<input type="text" id="search_text" name="word" placeholder="検索語を入力してください">
+						<input type="text" id="search_text" name="word" placeholder="検索語を入力してください" value="<?php echo $_POST['user_name']?>">
 						<br><br><br>
 						<div class="engine">
 							<input type="submit"  name="submit" value="検索" style="width:10%;padding:10px;font-size:20px; background-color:#00c4ff; color:#FFF; margin-bottom:10px;">
@@ -61,7 +61,7 @@
 					}
 					pg_set_client_encoding("UTF-8");
 
-					$result = pg_query($conn, "select id,user_id,timestamp,car_data_id from warn_info"); 
+					$result = pg_query($conn, "select id,user_id,timestamp,car_data_id from warn_info WHERE id LIKE '%".$_POST["word"]."%'"); 
 
 
 					//stringの配列情報
