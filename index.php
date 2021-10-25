@@ -11,6 +11,7 @@
 
 	while ($table = mysqli_fetch_assoc($recordSet))
 
+	pg_close($con);
 ?>
 
 <!doctype html>
@@ -70,10 +71,9 @@
 					</div>
 				</form>
 				<?php
-					while ($table = mysqli_fetch_assoc($recordSet)) {
-					?>
-
-					<p><?php print(htmlspecialchars($table['id'])); ?></p>
+					while ($table = mysqli_fetch_assoc($recordSet)) 
+					print(htmlspecialchars($table['id'])); 
+				?>
 				<?php
 					$conn = pg_connect(getenv("DATABASE_URL"));
 					if (!$conn) {
