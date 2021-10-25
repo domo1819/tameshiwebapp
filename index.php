@@ -57,6 +57,10 @@
 									while($data = pg_fetch_array($col)){
 									?>
 									<OPTION VALUE="<?php $data['region_name'] ?>"><?php echo $data['region_name'] ?></OPTION><?php
+									foreach($data as $data_val){
+										$data .= "<option value='". $data_val['region_name'];
+										$data .= "'>". "</option>";
+								}
 									}
 									pg_close($con);
 									?>
