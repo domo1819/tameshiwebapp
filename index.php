@@ -52,11 +52,13 @@
 						if (!$con) {
 							exit('データベースに接続できませんでした。');
 						}
-							$col = pg_query($con, "SELECT region_name FROM region_data ORDER BY region_name;");;
+							$col = pg_query($con, "select region_name from region_data ORDER BY region_name;");;
 							while($data = pg_fetch_array($col)){
 							?>
 							<OPTION VALUE="<?php $data['region_name'] ?>"><?php echo $data['region_name'] ?></OPTION><?php
 							}
+
+							pg_close($con);
 							?>
 						</select>		
 						<label>検索単語を入力してください。(空欄の場合は全検索をします。)</label>
