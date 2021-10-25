@@ -5,7 +5,7 @@
 	}
 	pg_set_client_encoding("UTF-8");
 
-	$KEY = mysql_real_escape_string($_POST['word']);
+	$KEY = $_POST['word'];
 
 	$sql = pg_query($con, "select id,user_id,timestamp,car_data_id from warn_info WHERE id LIKE '%{$KEY}%'"); 
 
