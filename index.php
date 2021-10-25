@@ -76,7 +76,7 @@
 					echo "<table border=1><tr><th>ID</th><th>user</th><th>日時</th><th>car_id</th></tr>";
 					//データの出力
 					foreach($arr as $value){
-						var_dump("<td>" .$value['id']. "</td>\n");
+						var_dump($value['id']);
 						var_dump("<td>" .$value['user_id']. "</td>\n");
 						var_dump("<td>" .$value['timestamp']. "</td>\n");
 						var_dump("<td>" .$value['car_data_id']. "</td>\n");
