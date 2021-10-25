@@ -47,8 +47,7 @@
 							<option value="日時">日時</option>
 						</select><br><br>
 						<label>検索単語を入力してください。(空欄の場合は全検索をします。)</label>
-						<input type="text" id="search_text" name="word" placeholder="検索語を入力してください"
-						value="<?php echo $_POST['word']?>">
+						<input type="text" id="search_text" name="word" placeholder="検索語を入力してください">
 						<br><br><br>
 						<div class="engine">
 							<input type="submit"  name="submit" value="検索" style="width:10%;padding:10px;font-size:20px; background-color:#00c4ff; color:#FFF; margin-bottom:10px;">
@@ -65,8 +64,6 @@
 					$result = pg_query($conn, "select id,user_id,timestamp,car_data_id from warn_info"); 
 
 
-
-
 					//stringの配列情報
 					while ($row = pg_fetch_row($result)) {
 						$region_name_result = $row[0];
@@ -81,7 +78,10 @@
 					echo "<table border=1><tr><th>ID</th><th>user</th><th>日時</th><th>car_id</th></tr>";
 					//データの出力
 					foreach($arr as $rows){
-							printf("<td>" .$rows. "</td>\n");
+						echo "<tr>\n";
+						foreach($rows as $value){
+							printf("<td>" .$value. "</td>\n");
+						}
 					}
 					echo "</table>\n";
 
