@@ -53,7 +53,7 @@
 								if (!$con) {
 									exit('データベースに接続できませんでした。');
 								}
-									$col = pg_query($con, "select region_name from region_data ORDER BY region_name;");;
+									$col = pg_query($con, "SELECT region_name FROM region_data ORDER BY region_name;");;
 									while($data = pg_fetch_array($col)){
 									?>
 									<OPTION VALUE="<?php $data['region_name'] ?>"><?php echo $data['region_name'] ?></OPTION><?php
@@ -76,7 +76,7 @@
 					}
 					pg_set_client_encoding("UTF-8");
 
-					$result = pg_query($conn, "SELECT region_data.id, region_data.region_name, car_data.id, car_data.car_region_id, car_data.car_classify_num, car_data.car_classify_hiragana, car_data.car_number FROM region_data, car_data WHERE region_name LIKE '%{$_POST['word']}%' OR car_number LIKE '%{$_POST['word']}%'"); 
+					$result = pg_query($conn, "SELECT region_data.id, region_data.region_name, car_data.id, car_data.car_region_id, car_data.car_classify_num, car_data.car_classify_hiragana, car_data.car_number warn_info.id, warn_info.user_id, warn_info.timestamp, warn_info.longitude, warn_info.latitude, warn_info.car_data_id, warn_info.punish_id, warn_info.is_payment FROM region_data, car_data warn_info WHERE region_name LIKE '%{$_POST['word']}%' OR car_number LIKE '%{$_POST['word']}%' OR user_id LIKE '%{$_POST['word']}%'"); 
 
 
 					//stringの配列情報
