@@ -1,3 +1,18 @@
+<?php
+	$con = pg_connect(getenv("DATABASE_URL"));
+	if (!$con) {
+		exit('データベースに接続できませんでした。');
+	}
+	pg_set_client_encoding("UTF-8");
+
+	$KEY = mysql_real_escape_string($_POST['word']);
+
+	$sql = pg_query($con, "select id,user_id,timestamp,car_data_id from warn_info WHERE id LIKE '%{$KEY}%'"); 
+
+	while ($table = mysqli_fetch_assoc($recordSet))
+
+?>
+
 <!doctype html>
 <html lang="ja"><!--  htmlでここから記述する -->
 <head><!--  コンピューターが見る内容を記述 -->
@@ -55,57 +70,39 @@
 					</div>
 				</form>
 				<?php
+					while ($table = mysqli_fetch_assoc($recordSet)) {
+					?>
+
+					<p><?php print(htmlspecialchars($table['id'])); ?></p>
+				<?php
 					$conn = pg_connect(getenv("DATABASE_URL"));
 					if (!$conn) {
 						exit('データベースに接続できませんでした。');
 					}
 					pg_set_client_encoding("UTF-8");
 
-					if($_POST) {
-						try {$search_word = $_POST['word'];
-							if($search_word==""){
-								echo "input search word";
-							}
-							else{
-								$sql = pg_query($conn, "select id,		 user_id,timestamp,car_data_id from warn_info  where name like '".$search_word."%'");
-									 $sth = $conn->prepare($sql);
-									 $sth->execute();
-									 $result = $sth->fetchAll();
-									 if($result){
-											 foreach ($result as $row) {
-													 echo $row['id']." ";
-													 echo $row['user_id'];
-													 echo "<br />";
-											 }
-									 }
-									 else{
-											 echo "not found";
-									 }
-							 }
-					 }catch (PDOException $e) {
-							 echo  "<p>Failed : " . $e->getMessage()."</p>";
-							 exit();
-					 }
-			 }
-							
+					$result = pg_query($conn, "select id,user_id,timestamp,car_data_id from warn_info"); 
 
 
 					//stringの配列情報
-					while ($row = pg_fetch_row($sql)) {
+					while ($row = pg_fetch_row($result)) {
 						$region_name_result = $row[0];
 					 }
 					 //string->array
 					 $region_name_result = explode("," , substr($region_name_result, 1, strlen($region_name_result)-2));
 
-					
+					$arr = pg_fetch_all($result);
 
-					//echo "<table border=1><tr><th>ID</th><th>user</th><th>日時</th><th>car_id</th></tr>";
+					echo "<table border=1><tr><th>ID</th><th>user</th><th>日時</th><th>car_id</th></tr>";
 					//データの出力
-					//($arr as $rows){
-					 // echo("<td>" .$rows['id']. "</td>\n");
-					//	echo("<td>" .$rows['user_id']. "</td>\n");
-				//	}
-					//echo "</table>\n";
+					foreach($arr as $rows){
+						echo "<tr>\n";
+						foreach($rows as $value){
+							printf("<td>" .$value. "</td>\n");
+
+						}
+					}
+					echo "</table>\n";
 
 					pg_close($conn);
 				?>
