@@ -46,6 +46,16 @@
 							<option value="違反対応">違反態様</option>
 							<option value="日時">日時</option>
 						</select><br><br>
+						<select>
+						<?php
+							$sql = "SELECT region_name FROM region_data ORDER BY region_name;";
+							$col = pg_query($conn, $sql);;
+							while($data = pg_fetch_array($col)){
+							?>
+							<OPTION VALUE="<?php $data['region_name'] ?>"><?php echo $data['region_name'] ?></OPTION><?php
+							}
+							?>
+						</select>		
 						<label>検索単語を入力してください。(空欄の場合は全検索をします。)</label>
 						<input type="text" id="search_text" name="word" placeholder="検索語を入力してください">
 						<br><br><br>
