@@ -66,7 +66,7 @@
 					$sql = pg_query($conn, "select id,user_id,timestamp,car_data_id from warn_info");
 					
 					if (isset($_POST['word'])) {
-						$sql = "SELECT * FROM id WHERE user_id LIKE '%{$_POST['word']}%' OR timestamp LIKE '%{$_POST['word']}%' OR car_data_id LIKE '%{$_POST['word']}%' ";
+						$sql = "SELECT id,user_id,timestamp,car_data_id FROM warn_info WHERE user_id LIKE '%{$_POST['word']}%' OR timestamp LIKE '%{$_POST['word']}%' OR car_data_id LIKE '%{$_POST['word']}%' ";
 				}
 
 				$stmt = $pdo->prepare($sql);
