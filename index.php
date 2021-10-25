@@ -47,7 +47,7 @@
 							<option value="日時">日時</option>
 						</select><br><br>
 						<label>検索単語を入力してください。(空欄の場合は全検索をします。)</label>
-						<input type="text" id="search_text" name="Search_name" placeholder="検索語を入力してください" >
+						<input type="text" id="search_text" name="word" placeholder="検索語を入力してください" >
 						<br><br><br>
 						<div class="engine">
 							<input type="submit"  name="submit" value="検索" style="width:10%;padding:10px;font-size:20px; background-color:#00c4ff; color:#FFF; margin-bottom:10px;">
@@ -61,28 +61,51 @@
 					}
 					pg_set_client_encoding("UTF-8");
 
-					$result = pg_query($conn, "select id,user_id,timestamp,car_data_id from warn_info"); 
+					if($_POST) {
+						try {$search_word = $_POST['word'];
+							if($search_word==""){
+								echo "input search word";
+							}
+							else{
+								$sql = pg_query($conn, "select id,		 user_id,timestamp,car_data_id from warn_info  where name like '".$search_word."%'");
+									 $sth = $conn->prepare($sql);
+									 $sth->execute();
+									 $result = $sth->fetchAll();
+									 if($result){
+											 foreach ($result as $row) {
+													 echo $row['id']." ";
+													 echo $row['user_id'];
+													 echo "<br />";
+											 }
+									 }
+									 else{
+											 echo "not found";
+									 }
+							 }
+					 }catch (PDOException $e) {
+							 echo  "<p>Failed : " . $e->getMessage()."</p>";
+							 exit();
+					 }
+			 }
+							
 
 
 					//stringの配列情報
-					while ($row = pg_fetch_row($result)) {
+					while ($row = pg_fetch_row($sql)) {
 						$region_name_result = $row[0];
 					 }
 					 //string->array
 					 $region_name_result = explode("," , substr($region_name_result, 1, strlen($region_name_result)-2));
 
-					$arr = pg_fetch_all($result);
+					
 
-					echo "<table border=1><tr><th>ID</th><th>user</th><th>日時</th><th>car_id</th></tr>";
+					//echo "<table border=1><tr><th>ID</th><th>user</th><th>日時</th><th>car_id</th></tr>";
 					//データの出力
-					foreach($arr as $rows){
-						echo "<tr>\n";
-						foreach($rows as $value){
-							printf("<td>" .$value. "</td>\n");
-
-						}
-					}
-					echo "</table>\n";
+					//($arr as $rows){
+					 // echo("<td>" .$rows['id']. "</td>\n");
+					//	echo("<td>" .$rows['user_id']. "</td>\n");
+				//	}
+					//echo "</table>\n";
 
 					pg_close($conn);
 				?>
