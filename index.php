@@ -47,7 +47,8 @@
 							<option value="日時">日時</option>
 						</select><br><br>
 						<label>検索単語を入力してください。(空欄の場合は全検索をします。)</label>
-						<input type="text" id="search_text" name="word" placeholder="検索語を入力してください" >
+						<input type="text" id="search_text" name="word" placeholder="検索語を入力してください"
+						value="<?php echo $_POST['user_name']?>">
 						<br><br><br>
 						<div class="engine">
 							<input type="submit"  name="submit" value="検索" style="width:10%;padding:10px;font-size:20px; background-color:#00c4ff; color:#FFF; margin-bottom:10px;">
@@ -55,38 +56,13 @@
 					</div>
 				</form>
 				<?php
-          $textbox = $_POST["word"];
-
-					$textboxs = explode(" ",mb_convert_kana($textbox,'s'));
-						
-						//SQL文に追加する字句の生成
-						foreach($textboxs as $textbox){
-								$textboxCondition[] = "([カラム名] LIKE ?)";
-								$values[] = '%'.preg_replace('/(?=[!_%])/', '', $textbox) . '%';
-						}
-						
-						//各Like条件を「OR」でつなぐ
-						$textboxCondition = implode(' OR ', $textboxCondition);
-						
-						//SQLの作成
-						$sql = "SELECT * FROM warn_info WHERE $textboxCondition";
-					
-						//実行
-						$stmt = $pdo->prepare($sql);
-						$stmt->execute($values);
-
-						foreach($stmt as $row){
-							echo $row['id'];
-						}
-				?>
-				<?php
 					$conn = pg_connect(getenv("DATABASE_URL"));
 					if (!$conn) {
 						exit('データベースに接続できませんでした。');
 					}
 					pg_set_client_encoding("UTF-8");
 
-					$result = pg_query($conn, "select id,user_id,timestamp,car_data_id from warn_info"); 
+					$result = pg_query($conn, "select id,user_id,timestamp,car_data_id from warn_info WHERE Name LIKE '%".$_POST["word"]."%'"); 
 
 
 					//stringの配列情報
@@ -98,13 +74,15 @@
 
 					$arr = pg_fetch_all($result);
 
+					
+
 					echo "<table border=1><tr><th>ID</th><th>user</th><th>日時</th><th>car_id</th></tr>";
 					//データの出力
 					foreach($arr as $rows){
-						echo "<tr>\n";
-						foreach($rows as $value){
-							printf("<td>" .$value. "</td>\n");
-						}
+							printf("<td>" .$rows[0]. "</td>\n");
+							printf("<td>" .$rows[1]. "</td>\n");
+							printf("<td>" .$rows[2]. "</td>\n");
+							printf("<td>" .$rows[3]. "</td>\n");
 					}
 					echo "</table>\n";
 
