@@ -53,14 +53,12 @@
 								if (!$con) {
 									exit('データベースに接続できませんでした。');
 								}
-									$col = pg_query($con, "SELECT region_name FROM region_data ORDER BY region_name;");;
+									$col = pg_query($con, "SELECT region_name FROM region_data WHERE region_name LIKE '%{$_POST['su']}%' ORDER BY region_name;");;
 									while($data = pg_fetch_array($col)){
 									?>
-								 <?php
-									foreach($data as $data_val){
-										$data .= "<option value='". $data_val['region_name'];"</option>";
+									<OPTION name="su" VALUE="<?php $data['region_name'] ?>"><?php echo $data['region_name'] ?></OPTION><?php
 								}
-									}
+									
 									pg_close($con);
 									?>
 								</select><br><br>	
