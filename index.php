@@ -46,6 +46,7 @@
 							<option value="違反対応">違反態様</option>
 							<option value="日時">日時</option>
 						</select><br><br>
+						<label>住所検索</label>
 						<select>
 						<?php
 						$con = pg_connect(getenv("DATABASE_URL"));
@@ -57,7 +58,6 @@
 							?>
 							<OPTION VALUE="<?php $data['region_name'] ?>"><?php echo $data['region_name'] ?></OPTION><?php
 							}
-
 							pg_close($con);
 							?>
 						</select><br><br>	
