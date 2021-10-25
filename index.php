@@ -42,7 +42,7 @@
 					<div class="engine2">
 						<label>検索項目</label>
 						<select id="kind" name="kind">
-							<option value="ナンバープレート">ナンバープレート</option>
+							<option value="<?php $arr['car_number'] ?>">ナンバープレート</option>
 							<option value="違反対応">違反態様</option>
 							<option value="日時">日時</option>
 						</select><br><br>
