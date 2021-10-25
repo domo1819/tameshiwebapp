@@ -56,8 +56,8 @@
 									$col = pg_query($con, "SELECT region_name FROM region_data WHERE region_name LIKE '%{$_POST['region']}%'");;
 									while($data = pg_fetch_array($col)){
 									?>
-									<OPTION>選択してください</OPTION>
-									<OPTION name="region" VALUE="<?php $data['region_name'] ?>"><?php echo $data['region_name'] ?></OPTION><?php
+									<OPTION value="disabled">選択してください</OPTION>
+									<OPTION name="region" value="<?php $data['region_name'] ?>"><?php echo $data['region_name'] ?></OPTION><?php
 								}
 									
 									pg_close($con);
