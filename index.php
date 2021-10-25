@@ -62,7 +62,9 @@
 					}
 					pg_set_client_encoding("UTF-8");
 
-					$result = pg_query($conn, "select id,user_id,timestamp,car_data_id from warn_info WHERE timestamp LIKE '%".$_POST["word"]."%'"); 
+					$result = pg_query($conn, "select id,user_id,timestamp,car_data_id from warn_info"); 
+
+
 
 
 					//stringの配列情報
@@ -81,8 +83,6 @@
 					foreach($arr as $rows){
 							printf("<td>" .$rows[0]. "</td>\n");
 							printf("<td>" .$rows[1]. "</td>\n");
-							printf("<td>" .$rows[2]. "</td>\n");
-							printf("<td>" .$rows[3]. "</td>\n");
 					}
 					echo "</table>\n";
 
