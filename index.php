@@ -9,7 +9,7 @@
 
 	$sql = pg_query($con, "select id,user_id,timestamp,car_data_id from warn_info WHERE id LIKE '%{$KEY}%'"); 
 
-	while ($table = mysqli_fetch_assoc($recordSet))
+	$arrr = pg_fetch_all($sql);
 
 	pg_close($con);
 ?>
@@ -71,8 +71,10 @@
 					</div>
 				</form>
 				<?php
-					while ($table = mysqli_fetch_assoc($recordSet)) 
-					print(htmlspecialchars($table['id'])); 
+					foreach($arrr as $row){
+						echo $row['id'];
+					}
+					echo "</table>\n";
 				?>
 				<?php
 					$conn = pg_connect(getenv("DATABASE_URL"));
