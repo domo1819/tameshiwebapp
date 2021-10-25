@@ -76,7 +76,7 @@
 					}
 					pg_set_client_encoding("UTF-8");
 
-					$result = pg_query($conn, "select region_data.id,region_data.region_name, car_data.id,car_data.car_region_id,car_data.car_classify_num,car_data.car_classify_hiragana,car_data.car_number, from region_data,car_data WHERE id  LIKE '%{$_POST['word']}%' "); 
+					$result = pg_query($conn, "SELECT region_data.id, region_data.region_name, car_data.id,car_data.car_region_id, car_data.car_classify_num, car_data.car_classify_hiragana, car_data.car_number, FROM region_data, car_data WHERE id  LIKE '%{$_POST['word']}%' "); 
 
 
 					//stringの配列情報
