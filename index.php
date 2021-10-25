@@ -81,8 +81,7 @@
 					echo "<table border=1><tr><th>ID</th><th>user</th><th>日時</th><th>car_id</th></tr>";
 					//データの出力
 					foreach($arr as $rows){
-							printf("<td>" .$rows['id']. "</td>\n");
-							printf("<td>" .$rows[1]. "</td>\n");
+							printf("<td>" .$rows. "</td>\n");
 					}
 					echo "</table>\n";
 
