@@ -78,6 +78,8 @@
 					foreach($arr as $value){
 							printf("<td>" .$value['id']. "</td>\n");
 							printf("<td>" .$value['user_id']. "</td>\n");
+							printf("<td>" .$value['timestamp']. "</td>\n");
+							printf("<td>" .$value['car_data_id']. "</td>\n");
 						}
 					echo "</table>\n";
 
