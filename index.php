@@ -49,22 +49,22 @@
 						<label>住所検索</label>
 						<select>
 						<?php
-						$con = pg_connect(getenv("DATABASE_URL"));
-						if (!$con) {
-							exit('データベースに接続できませんでした。');
-						}
-							$col = pg_query($con, "select region_name from region_data ORDER BY region_name;");;
-							while($data = pg_fetch_array($col)){
-							?>
-							<OPTION VALUE="<?php $data['region_name'] ?>"><?php echo $data['region_name'] ?></OPTION><?php
-							}
-							pg_close($con);
-							?>
-						</select><br><br>	
-						<label>検索単語を入力してください。(空欄の場合は全検索をします。)</label>
-						<input type="text" id="search_text" name="word" placeholder="検索語を入力してください">
-						<br><br><br>
-						<div class="engine">
+								$con = pg_connect(getenv("DATABASE_URL"));
+								if (!$con) {
+									exit('データベースに接続できませんでした。');
+								}
+									$col = pg_query($con, "select region_name from region_data ORDER BY region_name;");;
+									while($data = pg_fetch_array($col)){
+									?>
+									<OPTION VALUE="<?php $data['region_name'] ?>"><?php echo $data['region_name'] ?></OPTION><?php
+									}
+									pg_close($con);
+									?>
+								</select><br><br>	
+								<label>検索単語を入力してください。(空欄の場合は全検索をします。)</label>
+								<input type="text" id="search_text" name="word" placeholder="検索語を入力してください">
+								<br><br><br>
+								<div class="engine">
 							<input type="submit"  name="submit" value="検索" style="width:10%;padding:10px;font-size:20px; background-color:#00c4ff; color:#FFF; margin-bottom:10px;">
 						</div>
 					</div>
@@ -76,7 +76,7 @@
 					}
 					pg_set_client_encoding("UTF-8");
 
-					$result = pg_query($conn, "select id,user_id,timestamp,punish_id from warn_info WHERE user_id  LIKE '%{$_POST['word']}%' "); 
+					$result = pg_query($conn, "select region_data.id,region_data.region_name, car_data.id,car_data.car_region_id,car_data.car_classify_num,car_data.car_classify_hiragana,car_data.car_number, from region_data,car_data WHERE id  LIKE '%{$_POST['word']}%' "); 
 
 
 					//stringの配列情報
