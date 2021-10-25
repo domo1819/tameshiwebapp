@@ -1,19 +1,3 @@
-<?php
-	$con = pg_connect(getenv("DATABASE_URL"));
-	if (!$con) {
-		exit('データベースに接続できませんでした。');
-	}
-	pg_set_client_encoding("UTF-8");
-
-	$KEY = $_POST['word'];
-
-	$sql = pg_query($con, "select id,user_id,timestamp,car_data_id from warn_info WHERE id LIKE '%{$KEY}%'"); 
-
-	$arrr = pg_fetch_all($sql);
-
-	pg_close($con);
-?>
-
 <!doctype html>
 <html lang="ja"><!--  htmlでここから記述する -->
 <head><!--  コンピューターが見る内容を記述 -->
@@ -71,12 +55,6 @@
 					</div>
 				</form>
 				<?php
-					foreach($arrr as $row){
-						echo $row['id'];
-					}
-					echo "</table>\n";
-				?>
-				<?php
 					$conn = pg_connect(getenv("DATABASE_URL"));
 					if (!$conn) {
 						exit('データベースに接続できませんでした。');
@@ -97,13 +75,10 @@
 
 					echo "<table border=1><tr><th>ID</th><th>user</th><th>日時</th><th>car_id</th></tr>";
 					//データの出力
-					foreach($arr as $rows){
-						echo "<tr>\n";
-						foreach($rows as $value){
-							printf("<td>" .$value. "</td>\n");
-
+					foreach($arr as $value){
+							printf("<td>" .$value['id']. "</td>\n");
+							printf("<td>" .$value['user_id']. "</td>\n");
 						}
-					}
 					echo "</table>\n";
 
 					pg_close($conn);
