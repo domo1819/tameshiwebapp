@@ -67,8 +67,6 @@
 						$sql = pg_query($conn, "SELECT id,user_id,timestamp,car_data_id FROM warn_info WHERE user_id LIKE '%{$_POST['word']}%' OR timestamp LIKE '%{$_POST['word']}%' OR car_data_id LIKE '%{$_POST['word']}%' ");
 				}
 
-				$stmt = $conn->prepare($sql);
-				$stmt->execute(null);
 				$res = "<table border=1>
 										<tr>
 										<th>ID</th>
@@ -76,7 +74,7 @@
 										<th>日時</th>
 										<th>car_id</th>
 						    </tr>\n";
-								while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+								while($row = $sql->fetch(PDO::FETCH_ASSOC)){
 
 									$res .= <<<eod
 									<tr>
