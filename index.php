@@ -76,7 +76,7 @@
 					}
 					pg_set_client_encoding("UTF-8");
 
-					$result = pg_query($conn, "SELECT region_data.id, region_data.region_name, car_data.id, car_data.car_region_id, car_data.car_classify_num, car_data.car_classify_hiragana, car_data.car_number FROM region_data, car_data WHERE region_name LIKE '%{$_POST['word']}%' "); 
+					$result = pg_query($conn, "SELECT region_data.id, region_data.region_name, car_data.id, car_data.car_region_id, car_data.car_classify_num, car_data.car_classify_hiragana, car_data.car_number FROM region_data, car_data WHERE region_name LIKE '%{$_POST['word']}%'"); 
 
 
 					//stringの配列情報
@@ -90,7 +90,7 @@
 
 					
 
-					echo "<table border=1><tr><th>ID</th><th>user</th><th>日時</th><th>car_id</th></tr>";
+					echo "<table border=1><tr><th>ID</th><th>地方</th><th>車（地方）</th><th>分類番号</th><th>分類ひらがな</th><th>ナンバー</th></tr>";
 					//データの出力
 					foreach($arr as $rows){
 						echo "<tr>\n";
