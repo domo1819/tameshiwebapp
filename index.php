@@ -75,12 +75,13 @@
 
 					echo "<table border=1><tr><th>ID</th><th>user</th><th>日時</th><th>car_id</th></tr>";
 					//データの出力
-					foreach($arr as $value){
-						var_dump($value['id']);
-						var_dump($value['user_id']);
-						var_dump($value['timestamp']);
-						var_dump($value['car_data_id']);
+					foreach($arr as $rows){
+						echo "<tr>\n";
+						foreach($rows as $value){
+							printf("<td>" .$value. "</td>\n");
+
 						}
+					}
 					echo "</table>\n";
 
 					pg_close($conn);
