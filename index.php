@@ -42,35 +42,25 @@
 					<div class="engine2">
 						<label>検索項目</label>
 						<select id="kind" name="kind">
-							<option value="ナンバープレート">全件検索</option>
-							<option value="違反対応">日付検索</option>
-							<option value="日時">地域検索</option>
+						  <option value="">選択して下さい</option>
+							<option value="1">全件検索</option>
+							<option value="2">日付検索</option>
+							<option value="3">日時</option>
 						</select><br><br>
 						<label>住所検索</label>
 						<select>
 						<?php
-								if (! isset($_POST['kind']) Or $_POST['kind'] == "none") {
-									echo '<option value="none" selected>-------------</option>';
-									}
-									else {
-									echo '<option value="none">-------------</option>';
-									}
 								$con = pg_connect(getenv("DATABASE_URL"));
 								if (!$con)  {
 									exit('データベースに接続できませんでした。');
 								}
-									$col = pg_query($con, "SELECT a.timestamp, h.belong_name, c.region_name, b.car_classify_num, b.car_classify_hiragana, b.car_number, e.fine_amount, f.afk_mode, a.is_payment FROM warn_info a INNER JOIN car_data b ON a.car_data_id=b.id INNER JOIN region_data c ON b.car_region_id=c.id INNER JOIN punish_data d ON a.punish_id=d.id INNER JOIN fine_data e ON d.fine_id=e.id INNER JOIN afk_mode_data f ON d.afk_mode_id=f.id INNER JOIN user_data g ON a.user_id=g.user_id INNER JOIN belong_data h ON g.belong_id = h.id ORDER BY a.id ASC");
+									$col = pg_query($con, "SELECT region_name FROM region_data ORDER BY region_name;");
+									while($data = pg_fetch_array($col)){
+									?>
+									<OPTION VALUE="<?php $data['region_name'] ?>"><?php echo $data['region_name'] ?></OPTION><?php
+									}
 
-									while ($rows=pg_fetch_array($col)) {
-										if ($_POST['kind'] == $rows['id']) {
-											echo '<option value="'.$rows['id'].'" selected>'.$rows['kind'];
-											}
-											else {
-											echo '<option value="'.$rows['id'].'">'.$rows['kind'];
-											}
-											}
-											echo "</select>";
-											?>
+									$col = pg_query($con, "SELECT  FROM region_data ORDER BY region_name;");
 									?>
 								</select><br><br>	
 								<label>検索単語を入力してください。(空欄の場合は全検索をします。)</label>
