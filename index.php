@@ -53,8 +53,8 @@
 								if (!$con)  {
 									exit('データベースに接続できませんでした。');
 								}
-									$col = pg_query($con, "SELECT region_name FROM region_data ORDER BY region_name;");;
-									while($data = pg_fetch_array($col)){
+									$result = pg_query($con, "SELECT region_name FROM region_data ORDER BY region_name;");;
+									while($data = pg_fetch_array($result)){
 									?>
 									<OPTION VALUE="<?php $data['region_name'] ?>"><?php echo $data['region_name'] ?></OPTION><?php
 									}
@@ -77,8 +77,7 @@
 					pg_set_client_encoding("UTF-8");
 
 					$result = pg_query($conn, "SELECT a.timestamp, h.belong_name, c.region_name, b.car_classify_num, b.car_classify_hiragana, b.car_number, e.fine_amount, f.afk_mode, a.is_payment FROM warn_info a INNER JOIN car_data b ON a.car_data_id=b.id INNER JOIN region_data c ON b.car_region_id=c.id INNER JOIN punish_data d ON a.punish_id=d.id INNER JOIN fine_data e ON d.fine_id=e.id INNER JOIN afk_mode_data f ON d.afk_mode_id=f.id INNER JOIN user_data g ON a.user_id=g.user_id INNER JOIN belong_data h ON g.belong_id = h.id ORDER BY a.id ASC"); 
-					//$result = pg_query($conn, "SELECT warn_info.id, warn_info.user_id, warn_info.timestamp, warn_info.car_data_id, warn_info.punish_id, warn_info.is_payment, car_data.id, car_data.car_region_id, car_data.car_classify_num, car_data.car_classify_hiragana, car_data.car_number, region_data.id, region_data.region_name FROM warn_info, car_data, region_data WHERE region_name LIKE '%{$_POST['word']}%' OR car_number LIKE '%{$_POST['word']}%'");
-
+					
 					//stringの配列情報
 					while ($row = pg_fetch_row($result)) {
 						$region_name_result = $row[0];
