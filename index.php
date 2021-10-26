@@ -53,6 +53,7 @@
 								if (!$con)  {
 									exit('データベースに接続できませんでした。');
 								}
+								  pg_set_client_encoding("UTF-8");
 									$col = pg_query($con, "SELECT region_name FROM region_data");
 									$arr = pg_fetch_all($col);
 									foreach($arr as $value) {
