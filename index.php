@@ -61,6 +61,7 @@
 									}
 									?>
 								</select><br><br>	
+								<label>日時検索</label>
 								<select>
 								<?php
 										$co = pg_query($con, "SELECT timestamp FROM warn_info ORDER BY timestamp;");
@@ -69,7 +70,7 @@
 											<OPTION VALUE="<?php $date['timestamp'] ?>"><?php echo $date['timestamp'] ?></OPTION><?php
 											}
 										?>
-								</select>
+								</select><br><br>	
 								<label>検索単語を入力してください。(空欄の場合は全検索をします。)</label>
 								<input type="text" id="search_text" name="word" placeholder="検索語を入力してください">
 								<br><br><br>
@@ -78,91 +79,6 @@
 						</div>
 					</div>
 				</form>
-				<script type="text/javascript">
-    /* 子ジャンル（selectC）用の配列 */
-    var item = new Array();
-
-        item[0] = new Array();
-        item[0][0]="---------------------";
-
-        /* Fruits */
-        item[1] = new Array();
-        item[1][0]="子ジャンルを選択して下さい";
-        item[1][1]="Apple";
-        item[1][2]="Banana";
-        item[1][3]="Melon";
-        item[1][4]="Grape";
-
-        /* Vegitables */
-        item[2]= new Array();
-        item[2][0]="子ジャンルを選択して下さい";
-        item[2][1]="Potato";
-        item[2][2]="Carrot";
-        item[2][3]="Tomato";
-
-        /* Drinks */
-        item[3] = new Array();
-        item[3][0]="子ジャンルを選択して下さい";
-        item[3][1] = "Splite";
-        item[3][2] = "Beer";
-        item[3][3] = "Cola";
-        item[3][4] = "Coffee";
-        item[3][5] = "Milk Tea";
-
-    /* 子ジャンルのID名 */
-    var idName="childS";
-
-    /* 親ジャンルが変更されたら、子ジャンルを生成 */
-    function createChildOptions(frmObj) {
-        /* 親ジャンルを変数pObjに格納 */
-        var pObj=frmObj.elements["parentS"].options;
-        /* 親ジャンルのoption数 */
-        var pObjLen=pObj.length;
-        var htm="<select name='childS' style='width:200px;'>";
-        for(i=0; i<pObjLen; i++ ) {
-            /* 親ジャンルの選択値を取得 */
-            if(pObj[i].selected>0){
-                var itemLen=item[i].length;
-                for(j=0; j<itemLen; j++){
-                    htm+="<option value='"+j+"'>"+item[i][j]+"<\/option>";
-                }
-            }
-        }
-        htm+="<\/select>";
-        /* HTML出力 */
-        document.getElementById(idName).innerHTML=htm;
-    }
-
-    /* 選択されている値をアラート表示 */
-    function chkSelect(frmObj) {
-        var s="";
-        var idxP=frmObj.elements['parentS'].selectedIndex;
-        var idxC=frmObj.elements['childS'].selectedIndex;
-        if(idxP>0){
-            s+="親ジャンルの選択肢："+frmObj.elements['parentS'][idxP].text+"\n";
-            if(idxC > 0){
-                s+="子ジャンルの選択肢："+frmObj.elements['childS'][idxC].text+"\n";
-            }else{
-                s+="子ジャンルが選択されていません\n";
-            }
-        }else{
-            s+="親ジャンルが選択されていません\n";
-        }
-        alert(s);
-    }
-
-    /* onLoad時にプルダウンを初期化 */
-    function init(){
-        htm ="<select name='childS' style='width:200px;'>";
-        htm+="<option value=''>"+item[0][0]+"<\/option>";
-        htm+="<\/select>";
-        /* HTML出力 */
-        document.getElementById("childS").innerHTML=htm;
-    }
-
-    /* ページ読み込み完了時に、プルダウン初期化を実行 */
-    window.onload=init;
-</script>
 				<?php
 					$conn = pg_connect(getenv("DATABASE_URL"));
 					if (!$conn) {
