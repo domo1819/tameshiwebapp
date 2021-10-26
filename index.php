@@ -49,6 +49,12 @@
 						<label>住所検索</label>
 						<select>
 						<?php
+								if (! isset($_POST['kind']) Or $_POST['kind'] == "none") {
+									echo '<option value="none" selected>-------------</option>';
+									}
+									else {
+									echo '<option value="none">-------------</option>';
+									}
 								$con = pg_connect(getenv("DATABASE_URL"));
 								if (!$con)  {
 									exit('データベースに接続できませんでした。');
@@ -56,10 +62,15 @@
 									$col = pg_query($con, "SELECT a.timestamp, h.belong_name, c.region_name, b.car_classify_num, b.car_classify_hiragana, b.car_number, e.fine_amount, f.afk_mode, a.is_payment FROM warn_info a INNER JOIN car_data b ON a.car_data_id=b.id INNER JOIN region_data c ON b.car_region_id=c.id INNER JOIN punish_data d ON a.punish_id=d.id INNER JOIN fine_data e ON d.fine_id=e.id INNER JOIN afk_mode_data f ON d.afk_mode_id=f.id INNER JOIN user_data g ON a.user_id=g.user_id INNER JOIN belong_data h ON g.belong_id = h.id ORDER BY a.id ASC");
 
 									while ($rows=pg_fetch_array($col)) {
-										echo "<option value=\"".$rows['id']."\">".$rows['kind']."\n";
-										}
-										echo "</select>";
-									
+										if ($_POST['kind'] == $rows['id']) {
+											echo '<option value="'.$rows['id'].'" selected>'.$rows['kind'];
+											}
+											else {
+											echo '<option value="'.$rows['id'].'">'.$rows['kind'];
+											}
+											}
+											echo "</select>";
+											?>
 									?>
 								</select><br><br>	
 								<label>検索単語を入力してください。(空欄の場合は全検索をします。)</label>
@@ -89,7 +100,16 @@
 
 					$arr = pg_fetch_all($result);
 
-
+					echo "<table border=1><tr><th>日時</th><th>所属名</th><th>地域名</th><th>分類番号(番号)</th><th>分類番号(ひらがな)</th><th>車番号</th><th>罰金額</th><th>違反態様</th><th>支払い状況</th></tr>";
+					//echo "<table border=1><tr><th>ID</th><th>userID</th><th>日時</th><th>車情報ID</th><th>刑罰ID</th><th>支払い状況</th><th>地方</th><th>地方（車）</th><th>分類ひらがな</th><th>分類番号</th><th>ナンバー</th></tr>";
+					//データの出力
+					foreach($arr as $rows){
+						echo "<tr>\n";
+						foreach($rows as $value){
+							printf("<td>" .$value. "</td>\n");
+						}
+					}
+					echo "</table>\n";
 
 					pg_close($conn);
 				?>
