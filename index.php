@@ -42,9 +42,9 @@
 					<div class="engine2">
 						<label>検索項目</label>
 						<select id="kind" name="kind">
-							<option value="ナンバープレート">ナンバープレート</option>
-							<option value="違反対応">違反態様</option>
-							<option value="日時">日時</option>
+							<option value="ナンバープレート">全件検索</option>
+							<option value="違反対応">日付検索</option>
+							<option value="日時">地域検索</option>
 						</select><br><br>
 						<label>住所検索</label>
 						<select>
@@ -53,12 +53,9 @@
 								if (!$con)  {
 									exit('データベースに接続できませんでした。');
 								}
-									$result = pg_query($con, "SELECT region_name FROM region_data ORDER BY region_name;");;
-									while($data = pg_fetch_array($result)){
-									?>
-									<OPTION VALUE="<?php $data['region_name'] ?>"><?php echo $data['region_name'] ?></OPTION><?php
-									}
-									pg_close($con);
+									$col = pg_query($con, "SELECT region_name FROM region_data ORDER BY region_name;");
+									foreach($col as $value) {
+										print('<option value="' . $value . '">' . $value . '</option>');}
 									?>
 								</select><br><br>	
 								<label>検索単語を入力してください。(空欄の場合は全検索をします。)</label>
@@ -78,6 +75,7 @@
 
 					$result = pg_query($conn, "SELECT a.timestamp, h.belong_name, c.region_name, b.car_classify_num, b.car_classify_hiragana, b.car_number, e.fine_amount, f.afk_mode, a.is_payment FROM warn_info a INNER JOIN car_data b ON a.car_data_id=b.id INNER JOIN region_data c ON b.car_region_id=c.id INNER JOIN punish_data d ON a.punish_id=d.id INNER JOIN fine_data e ON d.fine_id=e.id INNER JOIN afk_mode_data f ON d.afk_mode_id=f.id INNER JOIN user_data g ON a.user_id=g.user_id INNER JOIN belong_data h ON g.belong_id = h.id ORDER BY a.id ASC"); 
 					
+
 					//stringの配列情報
 					while ($row = pg_fetch_row($result)) {
 						$region_name_result = $row[0];
