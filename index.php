@@ -59,14 +59,14 @@
 									?>
 									<OPTION VALUE="<?php $data['region_name'] ?>"><?php echo $data['region_name'] ?></OPTION><?php
 									}
-
-									$co = pg_query($con, "SELECT timestamp FROM warn_info ORDER BY timestamp;");
-									while($date = pg_fetch_array($co)){
-										?>
-										<OPTION VALUE="<?php $date['timestamp'] ?>"><?php echo $date['timestamp'] ?></OPTION><?php
-										}
-
 									?>
+									<?php
+										$co = pg_query($con, "SELECT timestamp FROM warn_info ORDER BY timestamp;");
+										while($date = pg_fetch_array($co)){
+											?>
+											<OPTION VALUE="<?php $date['timestamp'] ?>"><?php echo $date['timestamp'] ?></OPTION><?php
+											}
+										?>
 								</select><br><br>	
 								<label>検索単語を入力してください。(空欄の場合は全検索をします。)</label>
 								<input type="text" id="search_text" name="word" placeholder="検索語を入力してください">
