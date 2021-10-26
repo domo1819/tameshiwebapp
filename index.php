@@ -53,7 +53,7 @@
 								if (!$con)  {
 									exit('データベースに接続できませんでした。');
 								}
-									$col = pg_query($con, "SELECT region_name FROM region_data ORDER BY region_name;");
+									$col = pg_query($con, "SELECT region_name FROM region_data");
 									$arr = pg_fetch_all($col);
 									foreach($arr as $value) {
 										print('<option value="' . $value . '">' . $value . '</option>');}
