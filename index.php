@@ -47,17 +47,19 @@
 							<option value="日時">地域検索</option>
 						</select><br><br>
 						<label>住所検索</label>
-						<select name="kenmei" id="kenmei">
+						<select>
 						<?php
 								$con = pg_connect(getenv("DATABASE_URL"));
 								if (!$con)  {
 									exit('データベースに接続できませんでした。');
 								}
-									$col = pg_query($con, "SELECT region_name FROM region_data ORDER BY region_name;");
-									while($data = pg_fetch_array($col)){
-										foreach($data as $kenmei) {
-											print('<option value="' . $kenmei . '">' . $kenmei . '</option>');
-											}
+									$col = pg_query($con, "SELECT a.timestamp, h.belong_name, c.region_name, b.car_classify_num, b.car_classify_hiragana, b.car_number, e.fine_amount, f.afk_mode, a.is_payment FROM warn_info a INNER JOIN car_data b ON a.car_data_id=b.id INNER JOIN region_data c ON b.car_region_id=c.id INNER JOIN punish_data d ON a.punish_id=d.id INNER JOIN fine_data e ON d.fine_id=e.id INNER JOIN afk_mode_data f ON d.afk_mode_id=f.id INNER JOIN user_data g ON a.user_id=g.user_id INNER JOIN belong_data h ON g.belong_id = h.id ORDER BY a.id ASC");
+
+									while ($rows=pg_fetch_array($col)) {
+										echo "<option value=\"".$rows['id']."\">".$rows['kind']."\n";
+										}
+										echo "</select>";
+									
 									?>
 								</select><br><br>	
 								<label>検索単語を入力してください。(空欄の場合は全検索をします。)</label>
