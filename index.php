@@ -76,8 +76,8 @@
 					}
 					pg_set_client_encoding("UTF-8");
 
-					$result = pg_query($conn, "SELECT warn_info.id, warn_info.user_id, warn_info.timestamp, warn_info.car_data_id, warn_info.punish_id, warn_info.is_payment, car_data.id, car_data.car_region_id, car_data.car_classify_num, car_data.car_classify_hiragana, car_data.car_number, region_data.id, region_data.region_name FROM warn_info, car_data, region_data WHERE region_name LIKE '%{$_POST['word']}%' OR car_number LIKE '%{$_POST['word']}%'"); 
-
+					$result = pg_query($conn, "SELECT a.timestamp, h.belong_name, c.region_name, b.car_classify_num, b.car_classify_hiragana, b.car_number, e.fine_amount, f.afk_mode, a.is_payment FROM warn_info a INNER JOIN car_data b ON a.car_data_id=b.id INNER JOIN region_data c ON b.car_region_id=c.id INNER JOIN punish_data d ON a.punish_id=d.id INNER JOIN fine_data e ON d.fine_id=e.id INNER JOIN afk_mode_data f ON d.afk_mode_id=f.id INNER JOIN user_data g ON a.user_id=g.user_id INNER JOIN belong_data h ON g.belong_id = h.id ORDER BY a.id ASC"); 
+					//$result = pg_query($conn, "SELECT warn_info.id, warn_info.user_id, warn_info.timestamp, warn_info.car_data_id, warn_info.punish_id, warn_info.is_payment, car_data.id, car_data.car_region_id, car_data.car_classify_num, car_data.car_classify_hiragana, car_data.car_number, region_data.id, region_data.region_name FROM warn_info, car_data, region_data WHERE region_name LIKE '%{$_POST['word']}%' OR car_number LIKE '%{$_POST['word']}%'");
 
 					//stringの配列情報
 					while ($row = pg_fetch_row($result)) {
@@ -88,7 +88,8 @@
 
 					$arr = pg_fetch_all($result);
 
-					echo "<table border=1><tr><th>ID</th><th>userID</th><th>日時</th><th>車情報ID</th><th>刑罰ID</th><th>支払い状況</th><th>地方</th><th>地方（車）</th><th>分類ひらがな</th><th>分類番号</th><th>ナンバー</th></tr>";
+					echo "<table border=1><tr><th>日時</th><th>所属名</th><th>地域名</th><th>分類番号(番号)</th><th>分類番号(ひらがな)</th><th>車番号</th><th>罰金額</th><th>違反態様</th><th>支払い状況</th></tr>";
+					//echo "<table border=1><tr><th>ID</th><th>userID</th><th>日時</th><th>車情報ID</th><th>刑罰ID</th><th>支払い状況</th><th>地方</th><th>地方（車）</th><th>分類ひらがな</th><th>分類番号</th><th>ナンバー</th></tr>";
 					//データの出力
 					foreach($arr as $rows){
 						echo "<tr>\n";
