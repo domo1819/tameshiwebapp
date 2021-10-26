@@ -47,17 +47,17 @@
 							<option value="日時">地域検索</option>
 						</select><br><br>
 						<label>住所検索</label>
-						<select>
+						<select name="kenmei" id="kenmei">
 						<?php
 								$con = pg_connect(getenv("DATABASE_URL"));
 								if (!$con)  {
 									exit('データベースに接続できませんでした。');
 								}
-								  pg_set_client_encoding("UTF-8");
-									$col = pg_query($con, "SELECT region_name FROM region_data");
-									$arr = pg_fetch_all($col);
-									foreach($arr as $value) {
-										print('<option value="' . $value . '">' . $value . '</option>');}
+									$col = pg_query($con, "SELECT region_name FROM region_data ORDER BY region_name;");
+									while($data = pg_fetch_array($col)){
+										foreach($data as $kenmei) {
+											print('<option value="' . $kenmei . '">' . $kenmei . '</option>');
+											}
 									?>
 								</select><br><br>	
 								<label>検索単語を入力してください。(空欄の場合は全検索をします。)</label>
