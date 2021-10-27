@@ -73,22 +73,16 @@
 									if (isset($_POST['all']) === TRUE) {
 											$query = "SELECT a.timestamp, h.belong_name, c.region_name, b.car_classify_num, b.car_classify_hiragana, b.car_number, e.fine_amount, f.afk_mode, a.is_payment FROM warn_info a INNER JOIN car_data b ON a.car_data_id=b.id INNER JOIN region_data c ON b.car_region_id=c.id INNER JOIN punish_data d ON a.punish_id=d.id INNER JOIN fine_data e ON d.fine_id=e.id INNER JOIN afk_mode_data f ON d.afk_mode_id=f.id INNER JOIN user_data g ON a.user_id=g.user_id INNER JOIN belong_data h ON g.belong_id = h.id ORDER BY a.id ASC";
 									}
-							 
-									if (isset($_POST['emp']) === TRUE) {
-										 $query = "SELECT region_name FROM region_data WHERE region_name = '$emp'";
-									} else {
-										 $query = 'SELECT a.timestamp, h.belong_name, c.region_name, b.car_classify_num, b.car_classify_hiragana, b.car_number, e.fine_amount, f.afk_mode, a.is_payment FROM warn_info a INNER JOIN car_data b ON a.car_data_id=b.id INNER JOIN region_data c ON b.car_region_id=c.id INNER JOIN punish_data d ON a.punish_id=d.id INNER JOIN fine_data e ON d.fine_id=e.id INNER JOIN afk_mode_data f ON d.afk_mode_id=f.id INNER JOIN user_data g ON a.user_id=g.user_id INNER JOIN belong_data h ON g.belong_id = h.id';
-									}
 									// クエリを実行します
 									$result = pg_query($con, $query);
 									// 1行ずつ結果を配列で取得します
-									while ($row = mysqli_fetch_array($result)) {
+									while ($row = pg_fetch_array($result)) {
 											$emp_data[] = $row;
 									}
 									// 結果セットを開放します
-									mysqli_free_result($result);
+									pg_free_result($result);
 									// 接続を閉じます
-									mysqli_close($con);
+									pg_close($con);
 							 // 接続失敗した場合
 							 } else {
 									print 'DB接続失敗';
@@ -96,7 +90,16 @@
 							 
 							 echo "<table border=1><tr><th>日時</th><th>所属名</th><th>地域名</th><th>分類番号(番号)</th><th>分類番号(ひらがな)</th><th>車番号</th><th>罰金額</th><th>違反態様</th><th>支払い状況</th></tr>";
 							 foreach($emp_data as $value){
-									 print("<td>" .$value. "</td>\n");
+								printf("<td>" .$value['id']. "</td>\n");
+								printf("<td>" .$value['timestamp']. "</td>\n");
+								printf("<td>" .$value['belong_name']. "</td>\n");
+								printf("<td>" .$value['region_name']. "</td>\n");
+								printf("<td>" .$value['car_classify_num']. "</td>\n");
+								printf("<td>" .$value['car_classify_hiragana']. "</td>\n");
+								printf("<td>" .$value['car_number']. "</td>\n");
+								printf("<td>" .$value['fine_amount']. "</td>\n");
+								printf("<td>" .$value['afk_mode']. "</td>\n");
+							}
 							 }
 							 echo "</table>\n";
 
@@ -132,15 +135,7 @@
 					foreach($arr as $rows){
 						echo "<tr>\n";
 						foreach($rows as $value){
-							printf("<td>" .$value['id']. "</td>\n");
-							printf("<td>" .$value['timestamp']. "</td>\n");
-							printf("<td>" .$value['belong_name']. "</td>\n");
-							printf("<td>" .$value['region_name']. "</td>\n");
-							printf("<td>" .$value['car_classify_num']. "</td>\n");
-							printf("<td>" .$value['car_classify_hiragana']. "</td>\n");
-							printf("<td>" .$value['car_number']. "</td>\n");
-							printf("<td>" .$value['fine_amount']. "</td>\n");
-							printf("<td>" .$value['afk_mode']. "</td>\n");
+							printf("<td><center>" .$value. "</center></td>\n");
 						}
 					}
 					echo "</table>\n";
