@@ -60,9 +60,7 @@
 									<OPTION VALUE="<?php $data['region_name'] ?>"><?php echo $data['region_name'] ?></OPTION><?php
 									}
 									?>
-								</select><br><br>	
-								<label>日時検索</label>
-								
+								<label>日時検索</label>					
 								<?php
 										$co = pg_query($con, "SELECT timestamp FROM warn_info ORDER BY timestamp;");
 										while($date = pg_fetch_array($co)){
