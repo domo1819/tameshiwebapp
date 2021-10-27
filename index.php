@@ -6,8 +6,6 @@
 	<title>
 		検索サイト
 	</title>
-		<script type="text/javascript" src="jquery-3.6.0.min.js"></script>
-		<script type="text/javascript" src="main.js"></script>
     <script type="text/javascript" src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 	<link rel="stylesheet" href="../css/style.css">
 </head>
@@ -145,5 +143,7 @@
                  return false; });
         });
 	</script>
+		<script type="text/javascript" src="./jquery-3.6.0.min.js"></script>
+		<script type="text/javascript" src="./main.js"></script>
 </body>
 </html>
