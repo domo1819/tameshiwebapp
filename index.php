@@ -41,63 +41,36 @@
 				<form method="POST" action="index.php">
 					<div class="engine2">
 						<label>検索項目</label>
-						<select id="kind" name="emp">
+						<select id="kind" name="kind">
 						  <option value="">選択して下さい</option>
-							<option value="all"><?php if ($emp === 'all') { print 'selected'; } ?>全件検索</option>
-							<option value="date">日付検索</option>
-							<option value="time">日時</option>
+							<option value="1">全件検索</option>
+							<option value="2">日付検索</option>
+							<option value="3">日時</option>
 						</select><br><br>
+						<label>住所検索</label>
+						<select>
 						<?php
-						$emp = '';
-						$all = '';
-						if (isset($_POST['all']) === TRUE) {
-								$all = $_POST['all'];
-						}
-						
-						$emp_data = array();
-						$order = '';
-
-						$con = pg_connect(getenv("DATABASE_URL"));
+								$con = pg_connect(getenv("DATABASE_URL"));
 								if (!$con)  {
 									exit('データベースに接続できませんでした。');
 								}
-								if ($con) {
-									// 文字化け防止
-									pg_set_client_encoding($con, "UTF-8");
-							 
-									if (isset($_POST['all']) === TRUE) {
-											$query = "SELECT a.timestamp, h.belong_name, c.region_name, b.car_classify_num, b.car_classify_hiragana, b.car_number, e.fine_amount, f.afk_mode, a.is_payment FROM warn_info a INNER JOIN car_data b ON a.car_data_id=b.id INNER JOIN region_data c ON b.car_region_id=c.id INNER JOIN punish_data d ON a.punish_id=d.id INNER JOIN fine_data e ON d.fine_id=e.id INNER JOIN afk_mode_data f ON d.afk_mode_id=f.id INNER JOIN user_data g ON a.user_id=g.user_id INNER JOIN belong_data h ON g.belong_id = h.id ORDER BY a.id ASC";
+									$col = pg_query($con, "SELECT region_name FROM region_data ORDER BY region_name;");
+									while($data = pg_fetch_array($col)){
+									?>
+									<OPTION VALUE="<?php $data['region_name'] ?>"><?php echo $data['region_name'] ?></OPTION><?php
 									}
-									// クエリを実行します
-									$result = pg_query($con, $query);
-									// 1行ずつ結果を配列で取得します
-									while ($row = pg_fetch_array($result)) {
-											$emp_data[] = $row;
-									}
-									// 結果セットを開放します
-									pg_free_result($result);
-									// 接続を閉じます
-									pg_close($con);
-							 // 接続失敗した場合
-							 } else {
-									print 'DB接続失敗';
-							 }
-							 
-							 echo "<table border=1><tr><th>日時</th><th>所属名</th><th>地域名</th><th>分類番号(番号)</th><th>分類番号(ひらがな)</th><th>車番号</th><th>罰金額</th><th>違反態様</th><th>支払い状況</th></tr>";
-							 foreach($emp_data as $value){
-								printf("<td>" .$value['id']. "</td>\n");
-								printf("<td>" .$value['timestamp']. "</td>\n");
-								printf("<td>" .$value['belong_name']. "</td>\n");
-								printf("<td>" .$value['region_name']. "</td>\n");
-								printf("<td>" .$value['car_classify_num']. "</td>\n");
-								printf("<td>" .$value['car_classify_hiragana']. "</td>\n");
-								printf("<td>" .$value['car_number']. "</td>\n");
-								printf("<td>" .$value['fine_amount']. "</td>\n");
-								printf("<td>" .$value['afk_mode']. "</td>\n");
-							}
-							 echo "</table>\n";
-
-						   ?>
+									?>
+								</select><br><br>	
+								<label>日時検索</label>
+								<select>
+								<?php
+										$co = pg_query($con, "SELECT timestamp FROM warn_info ORDER BY timestamp;");
+										while($date = pg_fetch_array($co)){
+											?>
+											<OPTION VALUE="<?php $date['timestamp'] ?>"><?php echo $date['timestamp'] ?></OPTION><?php
+											}
+										?>
+								</select><br><br>	
 								<label>検索単語を入力してください。(空欄の場合は全検索をします。)</label>
 								<input type="text" id="search_text" name="word" placeholder="検索語を入力してください">
 								<br><br><br>
@@ -126,10 +99,12 @@
 					$arr = pg_fetch_all($result);
 
 					echo "<table border=1><tr><th>日時</th><th>所属名</th><th>地域名</th><th>分類番号(番号)</th><th>分類番号(ひらがな)</th><th>車番号</th><th>罰金額</th><th>違反態様</th><th>支払い状況</th></tr>";
+					//echo "<table border=1><tr><th>ID</th><th>userID</th><th>日時</th><th>車情報ID</th><th>刑罰ID</th><th>支払い状況</th><th>地方</th><th>地方（車）</th><th>分類ひらがな</th><th>分類番号</th><th>ナンバー</th></tr>";
+					//データの出力
 					foreach($arr as $rows){
 						echo "<tr>\n";
 						foreach($rows as $value){
-							printf("<td><center>" .$value. "</center></td>\n");
+							printf("<td>" .$value. "</td>\n");
 						}
 					}
 					echo "</table>\n";
