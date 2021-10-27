@@ -44,8 +44,8 @@
 						<select id="kind" name="emp">
 						  <option value="">選択して下さい</option>
 							<option value="all"><?php if ($emp === 'all') { print 'selected'; } ?>全件検索</option>
-							<option value="date"><?php if ($emp === 'date') { print 'selected'; } ?>日付検索</option>
-							<option value="time"><?php if ($emp === 'time') { print 'selected'; } ?>日時</option>
+							<option value="date">日付検索</option>
+							<option value="time">日時</option>
 						</select><br><br>
 						<?php
 						$emp = '';
