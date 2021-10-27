@@ -54,11 +54,6 @@
 								$all = $_POST['all'];
 						}
 						
-						if (isset($_POST['emp']) === TRUE) {
-								$emp = $_POST['emp'];
-						
-						}
-						
 						$emp_data = array();
 						$order = '';
 
