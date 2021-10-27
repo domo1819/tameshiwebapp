@@ -100,7 +100,6 @@
 								printf("<td>" .$value['fine_amount']. "</td>\n");
 								printf("<td>" .$value['afk_mode']. "</td>\n");
 							}
-							 }
 							 echo "</table>\n";
 
 						   ?>
