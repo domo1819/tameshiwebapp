@@ -62,7 +62,7 @@
 									?>
 								</select><br><br>	
 								<label>日時検索</label>
-								<select>
+								
 								<?php
 										$co = pg_query($con, "SELECT timestamp FROM warn_info ORDER BY timestamp;");
 										while($date = pg_fetch_array($co)){
