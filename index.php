@@ -48,7 +48,6 @@
 							<option value="3">日時</option>
 						</select><br><br>
 						<label>住所検索</label>
-						<label>日時検索</label>
 						<select>
 						<?php
 								$con = pg_connect(getenv("DATABASE_URL"));
@@ -60,12 +59,18 @@
 									?>
 									<OPTION VALUE="<?php $data['region_name'] ?>"><?php echo $data['region_name'] ?></OPTION><?php
 									}
-									$co = pg_query($con, "SELECT timestamp FROM warn_info ORDER BY timestamp;");
+									?>
+								</select><br><br>	
+								<label>日時検索</label>
+								<select>
+								<?php
+										$co = pg_query($con, "SELECT timestamp FROM warn_info ORDER BY timestamp;");
 										while($date = pg_fetch_array($co)){
 											?>
 											<OPTION VALUE="<?php $date['timestamp'] ?>"><?php echo $date['timestamp'] ?></OPTION><?php
 											}
-									?>
+										?>
+								</select><br><br>	
 								<label>検索単語を入力してください。(空欄の場合は全検索をします。)</label>
 								<input type="text" id="search_text" name="word" placeholder="検索語を入力してください">
 								<br><br><br>
