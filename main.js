@@ -1,28 +1,23 @@
 $(function(){
 	//.sampleをクリックしてajax通信を行う
-	$('.sample_btn').click(function(){
+	$('.search_button').click(function(){
+		var data = {request : $('#request').val()};
 			$.ajax({
 					url: 'index.php',
-					type: 'GET',
+					type: 'POST',
 					/* json形式で受け取るためdataTypeを変更 */
-					dataType: 'json',
-					data : {
-							gender : $('[name="region_name"]').val(),
-					}
-			}).done(function(data){
-					/* 通信成功時 */
-					var html_response = '<ul>';
-					//json形式で受け取った配列を.each()で繰り返し、ul > liリストにする
-					$.each(data, function(key, value){
-							html_response += '<li>' + value + '</li>';
-					});
-					html_response += '</ul>';
-					$('.result').html(html_response); //取得したHTMLを.resultに反映
-					
-			}).fail(function(data){
-					/* 通信失敗時 */
-					alert('通信失敗！');
-									
-			});
-	});
+					data: data,
+					//処理が成功したら
+					success : function(data, dataType) {
+						//HTMLファイル内の該当箇所にレスポンスデータを追加します。
+						$('#res').html(data);
+				},
+				//処理がエラーであれば
+				error : function() {
+						alert('通信エラー');
+				}
+ });
+ //submitによる画面リロードを防いでいます。
+ return false;
+});
 });

@@ -47,37 +47,47 @@
 							<option value="date">日付検索</option>
 							<option value="time">日時</option>
 						</select><br><br>
-						<select name="type">
-						<option value="human">人間</option>
-						<option value="robot">ロボット</option>
-						</select>
+						<select id="request" name="pref_name">
 						<?php
-						if(isset($_GET['region_name'])){
-							$name = $_GET['region_name']; //性別を取得
-							
 							$con = pg_connect(getenv("DATABASE_URL"));
 								if (!$con)  {
 									exit('データベースに接続できませんでした。');
 								}
-								$col = pg_query($con, "SELECT region_name FROM region_data WHERE region_name = :region_neme");
-							
-								$arr = pg_fetch_all($col);;
-							//データベースの取得結果配列をjson形式に変換
-							echo json_encode($arr);
-					}else{
-							echo [];
-					}
-								$con = pg_connect(getenv("DATABASE_URL"));
-								if (!$con)  {
-									exit('データベースに接続できませんでした。');
-								}
-									$col = pg_query($con, "SELECT region_name FROM region_data ORDER BY region_name;");
+								$col = pg_query($con, "SELECT region_name FROM region_data ORDER BY region_name;");
 									while($data = pg_fetch_array($col)){
 									?>
 									<OPTION VALUE="<?php $data['region_name'] ?>"><?php echo $data['region_name'] ?></OPTION><?php
 									}
 									?>
-								</select><br><br>	
+					</select>
+					<input id="search_button" class="submit-btn" type="submit" value="検索" />
+					<?php
+	         $ken = $_POST['request'];
+					//受け取ったデータが空でなければ
+					if (!empty($ken)) {
+							
+						$con = pg_connect(getenv("DATABASE_URL"));
+								if (!$con)  {
+									exit('データベースに接続できませんでした。');
+								}
+						//SQL文作成
+						$result = pg_query($conn, "SELECT a.timestamp, h.belong_name, c.region_name, b.car_classify_num, b.car_classify_hiragana, b.car_number, e.fine_amount, f.afk_mode, a.is_payment FROM warn_info a INNER JOIN car_data b ON a.car_data_id=b.id INNER JOIN region_data c ON b.car_region_id=c.id INNER JOIN punish_data d ON a.punish_id=d.id INNER JOIN fine_data e ON d.fine_id=e.id INNER JOIN afk_mode_data f ON d.afk_mode_id=f.id INNER JOIN user_data g ON a.user_id=g.user_id INNER JOIN belong_data h ON g.belong_id = h.id ORDER BY a.id ASC"); 
+						
+						echo "<table border=1><tr><th>日時</th><th>所属名</th><th>地域名</th><th>分類番号(番号)</th><th>分類番号(ひらがな)</th><th>車番号</th><th>罰金額</th><th>違反態様</th><th>支払い状況</th></tr>";
+						//データの出力
+						foreach($arr as $rows){
+							echo "<tr>\n";
+							foreach($rows as $value){
+								printf("<td>" .$value. "</td>\n");
+							}
+						}
+						echo "</table>\n";
+
+					//空だったら
+					} else {
+						echo '<p id="tekito">エラー：都道府県を選択して下さい。</p>';
+					}
+					?>
 								<label>検索単語を入力してください。(空欄の場合は全検索をします。)</label>
 								<input type="text" id="search_text" name="word" placeholder="検索語を入力してください">
 								<br><br><br>
@@ -104,7 +114,6 @@
 					$arr = pg_fetch_all($result);
 
 					echo "<table border=1><tr><th>日時</th><th>所属名</th><th>地域名</th><th>分類番号(番号)</th><th>分類番号(ひらがな)</th><th>車番号</th><th>罰金額</th><th>違反態様</th><th>支払い状況</th></tr>";
-					//echo "<table border=1><tr><th>ID</th><th>userID</th><th>日時</th><th>車情報ID</th><th>刑罰ID</th><th>支払い状況</th><th>地方</th><th>地方（車）</th><th>分類ひらがな</th><th>分類番号</th><th>ナンバー</th></tr>";
 					//データの出力
 					foreach($arr as $rows){
 						echo "<tr>\n";
