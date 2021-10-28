@@ -75,7 +75,7 @@
 						
 						echo "<table border=1><tr><th>日時</th><th>所属名</th><th>地域名</th><th>分類番号(番号)</th><th>分類番号(ひらがな)</th><th>車番号</th><th>罰金額</th><th>違反態様</th><th>支払い状況</th></tr>";
 						//データの出力
-						foreach($arr as $rows){
+						foreach($result as $rows){
 							echo "<tr>\n";
 							foreach($rows as $value){
 								printf("<td>" .$value. "</td>\n");
