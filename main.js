@@ -1,18 +1,28 @@
-
-function getTableData() {
-	//プルダウンで選択されたValueを取得
-	var selectVal = $("#team_id").val();
-	//getJSONで、別途用意している処理用PHPに必要な値を投げて受け取ります
-	$.getJSON("index.php"
-			, {"team_id": selectVal }			//team_idに取得したValue値を投げます
-			, function (data, status) {			
-				var playerList = $("#player_id");	//連動するプルダウンのID
-				playerList.children().remove();	//子要素は毎回全て削除します(初期化)
-				for (i in data) {
-					var row = data[i];
-					//取得したデータをAppendで1行ずつ追加
-					playerList.append(new Option(row['player_name'], row['player_id']));
-				}
-			 }
-	 );
-}
+$(function(){
+	//.sampleをクリックしてajax通信を行う
+	$('.sample_btn').click(function(){
+			$.ajax({
+					url: 'index.php',
+					type: 'GET',
+					/* json形式で受け取るためdataTypeを変更 */
+					dataType: 'json',
+					data : {
+							gender : $('[name="region_name"]').val(),
+					}
+			}).done(function(data){
+					/* 通信成功時 */
+					var html_response = '<ul>';
+					//json形式で受け取った配列を.each()で繰り返し、ul > liリストにする
+					$.each(data, function(key, value){
+							html_response += '<li>' + value + '</li>';
+					});
+					html_response += '</ul>';
+					$('.result').html(html_response); //取得したHTMLを.resultに反映
+					
+			}).fail(function(data){
+					/* 通信失敗時 */
+					alert('通信失敗！');
+									
+			});
+	});
+});

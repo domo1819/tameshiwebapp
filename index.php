@@ -7,36 +7,6 @@
 		検索サイト
 	</title>
     <script type="text/javascript" src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-		<script type="text/javascript">
-<!--
-function getTableData() {
-	//プルダウンで選択されたValueを取得
-	var selectVal = $("#team_id").val();
-	//getJSONで、別途用意している処理用PHPに必要な値を投げて受け取ります
-	$.getJSON("index.php"
-			, {"team_id": selectVal }			//team_idに取得したValue値を投げます
-			, function (data, status) {			
-				var playerList = $("#player_id");	//連動するプルダウンのID
-				playerList.children().remove();	//子要素は毎回全て削除します(初期化)
-				for (i in data) {
-					var row = data[i];
-					//取得したデータをAppendで1行ずつ追加
-					playerList.append(new Option(row['player_name'], row['player_id']));
-				}
-			 }
-			 /*****エラーハンドリング用
-			 ).success(function(json) {
-				console.log("成功");
-			}).error(function(jqXHR, textStatus, errorThrown) {
-				console.log("エラー：" + textStatus);
-				console.log("テキスト：" + jqXHR.responseText);
-			}).complete(function() {
-				console.log("完了");
-			}
-			 */
-	 );
-}
-</script>
 	<link rel="stylesheet" href="../css/style.css">
 </head>
 <body><!--  人間が見る内容を記述 -->
@@ -69,39 +39,50 @@ function getTableData() {
 				<h2 id="engine">データ検索</h2>
 				<p>検索したい項目を下記より選び、検索ボタンをクリックすると該当する結果が表示されます</p>
 				<form method="POST" action="index.php">
-					<div class="engine2">
+					<div class="result">
 						<label>検索項目</label>
-						<select class="kind" name="team_id" id="team_id" onchange="getTableData()">
+						<select id="kind" name="region_name">
 						  <option value="">選択して下さい</option>
-							<option value="1">全件検索</option>
-							<option value="2">日付検索</option>
-							<option value="3">日時</option>
+							<option value="all">全件検索</option>
+							<option value="date">日付検索</option>
+							<option value="time">日時</option>
 						</select><br><br>
-						<select id="player_id" name="player_id">
-						<option class="">選択して下さい</option>
-						</select><br><br>	
+						<select name="type">
+						<option value="human">人間</option>
+						<option value="robot">ロボット</option>
+						</select>
 						<?php
-							$team_id = $_GET['team_id'];
-	
-							//クライアントに返す検索結果はこいつに入れます
-							$response = array();
-
-							if (strlen($team_id) != 0) {$con = pg_connect(getenv("DATABASE_URL"));
-							if (!$con)  {
-								exit('データベースに接続できませんでした。');
-							}
-								$col = pg_query($con, "SELECT id, region_name FROM region_data WHERE team_id = '%s' ORDER BY region_name ASC;");
-								while($row = pg_fetch_array($col)){
-									array_push($response, $row);
+						if(isset($_GET['region_name'])){
+							$name = $_GET['region_name']; //性別を取得
+							
+							$con = pg_connect(getenv("DATABASE_URL"));
+								if (!$con)  {
+									exit('データベースに接続できませんでした。');
 								}
-							}
-							echo(json_encode($response));
-								?>
+								$col = pg_query($con, "SELECT region_name FROM region_data WHERE region_name = :region_neme");
+							
+								$arr = pg_fetch_all($col);;
+							//データベースの取得結果配列をjson形式に変換
+							echo json_encode($arr);
+					}else{
+							echo [];
+					}
+								$con = pg_connect(getenv("DATABASE_URL"));
+								if (!$con)  {
+									exit('データベースに接続できませんでした。');
+								}
+									$col = pg_query($con, "SELECT region_name FROM region_data ORDER BY region_name;");
+									while($data = pg_fetch_array($col)){
+									?>
+									<OPTION VALUE="<?php $data['region_name'] ?>"><?php echo $data['region_name'] ?></OPTION><?php
+									}
+									?>
+								</select><br><br>	
 								<label>検索単語を入力してください。(空欄の場合は全検索をします。)</label>
 								<input type="text" id="search_text" name="word" placeholder="検索語を入力してください">
 								<br><br><br>
 								<div class="engine">
-							<input type="submit"  name="submit" value="検索" style="width:10%;padding:10px;font-size:20px; background-color:#00c4ff; color:#FFF; margin-bottom:10px;">
+							<input type="submit"  name="submit" class="sample_btn" value="検索" style="width:10%;padding:10px;font-size:20px; background-color:#00c4ff; color:#FFF; margin-bottom:10px;">
 						</div>
 					</div>
 				</form>
@@ -168,6 +149,6 @@ function getTableData() {
         });
 	</script>
 		<script type="text/javascript" src="./jquery-3.6.0.min.js"></script>
-		
+		<script type="text/javascript" src="./main.js"></script>
 </body>
 </html>
