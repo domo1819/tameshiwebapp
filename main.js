@@ -7,6 +7,7 @@ $(function(){
 					type: 'POST',
 					/* json形式で受け取るためdataTypeを変更 */
 					data: data,
+
 					//処理が成功したら
 					success : function(data, dataType) {
 						//HTMLファイル内の該当箇所にレスポンスデータを追加します。
