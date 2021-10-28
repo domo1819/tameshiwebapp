@@ -7,6 +7,36 @@
 		検索サイト
 	</title>
     <script type="text/javascript" src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+		<script type="text/javascript">
+<!--
+function getTableData() {
+	//プルダウンで選択されたValueを取得
+	var selectVal = $("#team_id").val();
+	//getJSONで、別途用意している処理用PHPに必要な値を投げて受け取ります
+	$.getJSON("index.php"
+			, {"team_id": selectVal }			//team_idに取得したValue値を投げます
+			, function (data, status) {			
+				var playerList = $("#player_id");	//連動するプルダウンのID
+				playerList.children().remove();	//子要素は毎回全て削除します(初期化)
+				for (i in data) {
+					var row = data[i];
+					//取得したデータをAppendで1行ずつ追加
+					playerList.append(new Option(row['player_name'], row['player_id']));
+				}
+			 }
+			 /*****エラーハンドリング用
+			 ).success(function(json) {
+				console.log("成功");
+			}).error(function(jqXHR, textStatus, errorThrown) {
+				console.log("エラー：" + textStatus);
+				console.log("テキスト：" + jqXHR.responseText);
+			}).complete(function() {
+				console.log("完了");
+			}
+			 */
+	 );
+}
+</script>
 	<link rel="stylesheet" href="../css/style.css">
 </head>
 <body><!--  人間が見る内容を記述 -->
@@ -60,7 +90,7 @@
 							if (!$con)  {
 								exit('データベースに接続できませんでした。');
 							}
-								$col = pg_query($con, "SELECT id, region_name FROM region_data ORDER BY region_name ASC;");
+								$col = pg_query($con, "SELECT id, region_name FROM region_data WHERE team_id = '%s' ORDER BY region_name ASC;");
 								while($row = pg_fetch_array($col)){
 									array_push($response, $row);
 								}
@@ -138,6 +168,6 @@
         });
 	</script>
 		<script type="text/javascript" src="./jquery-3.6.0.min.js"></script>
-		<script type="text/javascript" src="./main.js"></script>
+		
 </body>
 </html>
