@@ -41,26 +41,32 @@
 				<form method="POST" action="index.php">
 					<div class="engine2">
 						<label>検索項目</label>
-						<select id="kind" name="kind">
+						<select class="kind" name="team_id" id="team_id" onchange="getTableData()">
 						  <option value="">選択して下さい</option>
 							<option value="1">全件検索</option>
 							<option value="2">日付検索</option>
 							<option value="3">日時</option>
 						</select><br><br>
-						<label>住所検索</label>
-						<select>
+						<select id="player_id" name="player_id">
+						<option class="">選択して下さい</option>
+						</select><br><br>	
 						<?php
-								$con = pg_connect(getenv("DATABASE_URL"));
-								if (!$con)  {
-									exit('データベースに接続できませんでした。');
+							$team_id = $_GET['team_id'];
+	
+							//クライアントに返す検索結果はこいつに入れます
+							$response = array();
+
+							if (strlen($team_id) != 0) {$con = pg_connect(getenv("DATABASE_URL"));
+							if (!$con)  {
+								exit('データベースに接続できませんでした。');
+							}
+								$col = pg_query($con, "SELECT id, region_name FROM region_data ORDER BY region_name ASC;");
+								while($row = pg_fetch_array($col)){
+									array_push($response, $row);
 								}
-									$col = pg_query($con, "SELECT region_name FROM region_data ORDER BY region_name;");
-									while($data = pg_fetch_array($col)){
-									?>
-									<OPTION VALUE="<?php $data['region_name'] ?>"><?php echo $data['region_name'] ?></OPTION><?php
-									}
-									?>
-								</select><br><br>	
+							}
+							echo(json_encode($response));
+								?>
 								<label>日時検索</label>
 								<select>
 								<?php
@@ -87,8 +93,6 @@
 					pg_set_client_encoding("UTF-8");
 
 					$result = pg_query($conn, "SELECT a.timestamp, h.belong_name, c.region_name, b.car_classify_num, b.car_classify_hiragana, b.car_number, e.fine_amount, f.afk_mode, a.is_payment FROM warn_info a INNER JOIN car_data b ON a.car_data_id=b.id INNER JOIN region_data c ON b.car_region_id=c.id INNER JOIN punish_data d ON a.punish_id=d.id INNER JOIN fine_data e ON d.fine_id=e.id INNER JOIN afk_mode_data f ON d.afk_mode_id=f.id INNER JOIN user_data g ON a.user_id=g.user_id INNER JOIN belong_data h ON g.belong_id = h.id ORDER BY a.id ASC"); 
-					
-
 					//stringの配列情報
 					while ($row = pg_fetch_row($result)) {
 						$region_name_result = $row[0];
