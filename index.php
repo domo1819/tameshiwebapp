@@ -7,8 +7,6 @@
 		検索サイト
 	</title>
     <script type="text/javascript" src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-		<script type="text/javascript" src="./jquery-3.6.0.min.js"></script>
-		<script type="text/javascript" src="./main.js"></script>
 	<link rel="stylesheet" href="../css/style.css">
 </head>
 <body><!--  人間が見る内容を記述 -->
@@ -42,14 +40,12 @@
 				<p>検索したい項目を下記より選び、検索ボタンをクリックすると該当する結果が表示されます</p>
 				<form method="POST" action="index.php">
 					<div class="engine2">
-						<label>検索項目</label>
-						<select id="" name="">
-						  <option value="">選択して下さい</option>
-							<option value="1">全件検索</option>
-							<option value="2">日付検索</option>
-							<option value="3">日時</option>
-						</select><br><br>
-						<select id="request" name="pref_name">
+					<table border="1" id="all_show_result">
+        	<tr>
+            <th>id</th><th>商品名</th><th>価格</th>
+        	</tr>
+    			</table>
+
 						<?php
 								$con = pg_connect(getenv("DATABASE_URL"));
 								if (!$con)  {
@@ -62,46 +58,24 @@
 									}
 									?>
 								</select><br><br>	
+								<label>日時検索</label>
+								<select>
 								<?php
-										//postデータを受け取る
-											$ken = $_POST['request'];
-											
-											//受け取ったデータが空でなければ
-											if (!empty($ken)) {
-											
-													//pdoインスタンス生成
-													$con = pg_connect(getenv("DATABASE_URL"));
-													if (!$con)  {
-														exit('データベースに接続できませんでした。');
-													}
-													//SQL文作成
-													$col = pg_query($con, "SELECT a.timestamp, h.belong_name, c.region_name, b.car_classify_num, b.car_classify_hiragana, b.car_number, e.fine_amount, f.afk_mode, a.is_payment FROM warn_info a INNER JOIN car_data b ON a.car_data_id=b.id INNER JOIN region_data c ON b.car_region_id=c.id INNER JOIN punish_data d ON a.punish_id=d.id INNER JOIN fine_data e ON d.fine_id=e.id INNER JOIN afk_mode_data f ON d.afk_mode_id=f.id INNER JOIN user_data g ON a.user_id=g.user_id INNER JOIN belong_data h ON g.belong_id = h.id where rigion_name = '".$ken."'");
-													//SQL実行
-													$arr = pg_fetch_all($col);
-													//出力ごにょごにょ
-													echo "<table border=1><tr><th>日時</th><th>所属名</th><th>地域名</th><th>分類番号(番号)</th><th>分類番号(ひらがな)</th><th>車番号</th><th>罰金額</th><th>違反態様</th><th>支払い状況</th></tr>";
-													//データベースより取得したデータを一行ずつ表示する
-													foreach ($arr as $result) {
-															echo "<tr>";
-															echo "<td>".$result."</td>";
-															echo "</tr>";
-													}
-													echo "</table>";
-											
-											//空だったら
-											} else {
-													echo '<p id="tekito">エラー：都道府県を選択して下さい。</p>';
+										$co = pg_query($con, "SELECT timestamp FROM warn_info ORDER BY timestamp;");
+										while($date = pg_fetch_array($co)){
+											?>
+											<OPTION VALUE="<?php $date['timestamp'] ?>"><?php echo $date['timestamp'] ?></OPTION><?php
 											}
 										?>
+								</select><br><br>	
 								<label>検索単語を入力してください。(空欄の場合は全検索をします。)</label>
 								<input type="text" id="search_text" name="word" placeholder="検索語を入力してください">
 								<br><br><br>
 								<div class="engine">
-							<input type="submit"  id="search_button" class="submit-btn" value="検索" style="width:10%;padding:10px;font-size:20px; background-color:#00c4ff; color:#FFF; margin-bottom:10px;">
+							<input type="submit"  name="submit" value="検索" style="width:10%;padding:10px;font-size:20px; background-color:#00c4ff; color:#FFF; margin-bottom:10px;">
 						</div>
 					</div>
 				</form>
-				<div id="res"></div>
 				<?php
 					$conn = pg_connect(getenv("DATABASE_URL"));
 					if (!$conn) {
@@ -164,5 +138,7 @@
                  return false; });
         });
 	</script>
+		<script type="text/javascript" src="./jquery-3.6.0.min.js"></script>
+		<script type="text/javascript" src="./main.js"></script>
 </body>
 </html>
