@@ -47,7 +47,15 @@
 							<option value="2">日付検索</option>
 							<option value="3">日時</option>
 						</select><br><br>
-						<table border="1" id="all_show_result">
+								<label>検索単語を入力してください。(空欄の場合は全検索をします。)</label>
+								<input type="text" id="search_text" name="word" placeholder="検索語を入力してください">
+								<br><br><br>
+								<div class="engine">
+							<input type="submit"  name="submit" value="検索" style="width:10%;padding:10px;font-size:20px; background-color:#00c4ff; color:#FFF; margin-bottom:10px;">
+						</div>
+					</div>
+				</form>
+				<table border="1" id="all_show_result">
 						<tr>
             <th>ID</th><th><tr><th>日時</th><th>所属名</th><th>地域名</th><th>分類番号(番号)</th><th>分類番号(ひらがな)</th><th>車番号</th><th>罰金額</th><th>違反態様</th><th>支払い状況</th><
        			 </tr>
@@ -72,14 +80,6 @@
 										// htmlへ渡す配列$productListをjsonに変換する
 										echo json_encode($productList);
 									?>
-								<label>検索単語を入力してください。(空欄の場合は全検索をします。)</label>
-								<input type="text" id="search_text" name="word" placeholder="検索語を入力してください">
-								<br><br><br>
-								<div class="engine">
-							<input type="submit"  name="submit" value="検索" style="width:10%;padding:10px;font-size:20px; background-color:#00c4ff; color:#FFF; margin-bottom:10px;">
-						</div>
-					</div>
-				</form>
 				<?php
 					$conn = pg_connect(getenv("DATABASE_URL"));
 					if (!$conn) {
