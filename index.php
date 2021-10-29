@@ -39,60 +39,96 @@
 				<h2 id="engine">データ検索</h2>
 				<p>検索したい項目を下記より選び、検索ボタンをクリックすると該当する結果が表示されます</p>
 				<form method="POST" action="index.php">
-					<div class="result">
+					<div class="engine2" id="res">
 						<label>検索項目</label>
-						<select id="kind" name="region_name">
+						<select id="" name="">
 						  <option value="">選択して下さい</option>
-							<option value="all">全件検索</option>
-							<option value="date">日付検索</option>
-							<option value="time">日時</option>
+							<option value="1">全件検索</option>
+							<option value="2">日付検索</option>
+							<option value="3">日時</option>
 						</select><br><br>
 						<select id="request" name="pref_name">
 						<?php
-							$con = pg_connect(getenv("DATABASE_URL"));
+								$con = pg_connect(getenv("DATABASE_URL"));
 								if (!$con)  {
 									exit('データベースに接続できませんでした。');
 								}
-								$col = pg_query($con, "SELECT region_name FROM region_data ORDER BY region_name;");
+									$col = pg_query($con, "SELECT region_name FROM region_data ORDER BY region_name;");
 									while($data = pg_fetch_array($col)){
 									?>
 									<OPTION VALUE="<?php $data['region_name'] ?>"><?php echo $data['region_name'] ?></OPTION><?php
 									}
 									?>
-					</select>
-					<input id="search_button" class="submit-btn" type="submit" value="検索" />
-					<?php
-	         $ken = $_POST['request'];
-					//受け取ったデータが空でなければ
-					if (!empty($ken)) {
-							
-						$con = pg_connect(getenv("DATABASE_URL"));
-								if (!$con)  {
-									exit('データベースに接続できませんでした。');
-								}
-						//SQL文作成
-						$results = pg_query($con, "SELECT a.timestamp, h.belong_name, c.region_name, b.car_classify_num, b.car_classify_hiragana, b.car_number, e.fine_amount, f.afk_mode, a.is_payment FROM warn_info a INNER JOIN car_data b ON a.car_data_id=b.id INNER JOIN region_data c ON b.car_region_id=c.id INNER JOIN punish_data d ON a.punish_id=d.id INNER JOIN fine_data e ON d.fine_id=e.id INNER JOIN afk_mode_data f ON d.afk_mode_id=f.id INNER JOIN user_data g ON a.user_id=g.user_id INNER JOIN belong_data h ON g.belong_id = h.id ORDER BY a.id ASC WHERE region_name = '".$ken."'"); 
-						
-						echo "<table border=1><tr><th>日時</th><th>所属名</th><th>地域名</th><th>分類番号(番号)</th><th>分類番号(ひらがな)</th><th>車番号</th><th>罰金額</th><th>違反態様</th><th>支払い状況</th></tr>";
-						//データの出力
-						foreach($results as $result){
-							echo "<td>".$result."</td>";
-						}
-						echo "</table>\n";
-
-					//空だったら
-					} else {
-						echo '<p id="tekito">エラー：都道府県を選択して下さい。</p>';
-					}
-					?>
+								</select><br><br>	
+								<?php
+										//postデータを受け取る
+											$ken = $_POST['request'];
+											
+											//受け取ったデータが空でなければ
+											if (!empty($ken)) {
+											
+													//pdoインスタンス生成
+													$con = pg_connect(getenv("DATABASE_URL"));
+													if (!$con)  {
+														exit('データベースに接続できませんでした。');
+													}
+													//SQL文作成
+													$col = pg_query($con, "SELECT a.timestamp, h.belong_name, c.region_name, b.car_classify_num, b.car_classify_hiragana, b.car_number, e.fine_amount, f.afk_mode, a.is_payment FROM warn_info a INNER JOIN car_data b ON a.car_data_id=b.id INNER JOIN region_data c ON b.car_region_id=c.id INNER JOIN punish_data d ON a.punish_id=d.id INNER JOIN fine_data e ON d.fine_id=e.id INNER JOIN afk_mode_data f ON d.afk_mode_id=f.id INNER JOIN user_data g ON a.user_id=g.user_id INNER JOIN belong_data h ON g.belong_id = h.id where rigion_name = '".$ken."'");
+													//SQL実行
+													$arr = pg_fetch_all($col);
+													//出力ごにょごにょ
+													echo "<table border=1><tr><th>日時</th><th>所属名</th><th>地域名</th><th>分類番号(番号)</th><th>分類番号(ひらがな)</th><th>車番号</th><th>罰金額</th><th>違反態様</th><th>支払い状況</th></tr>";
+													//データベースより取得したデータを一行ずつ表示する
+													foreach ($arr as $result) {
+															echo "<tr>";
+															echo "<td>".$result."</td>";
+															echo "</tr>";
+													}
+													echo "</table>";
+											
+											//空だったら
+											} else {
+													echo '<p id="tekito">エラー：都道府県を選択して下さい。</p>';
+											}
+										?>
 								<label>検索単語を入力してください。(空欄の場合は全検索をします。)</label>
 								<input type="text" id="search_text" name="word" placeholder="検索語を入力してください">
 								<br><br><br>
 								<div class="engine">
-							<input type="submit"  name="submit" class="sample_btn" value="検索" style="width:10%;padding:10px;font-size:20px; background-color:#00c4ff; color:#FFF; margin-bottom:10px;">
+							<input type="submit"  id="search_button" class="submit-btn" value="検索" style="width:10%;padding:10px;font-size:20px; background-color:#00c4ff; color:#FFF; margin-bottom:10px;">
 						</div>
 					</div>
 				</form>
+				<?php
+					$conn = pg_connect(getenv("DATABASE_URL"));
+					if (!$conn) {
+						exit('データベースに接続できませんでした。');
+					}
+					pg_set_client_encoding("UTF-8");
+
+					$result = pg_query($conn, "SELECT a.timestamp, h.belong_name, c.region_name, b.car_classify_num, b.car_classify_hiragana, b.car_number, e.fine_amount, f.afk_mode, a.is_payment FROM warn_info a INNER JOIN car_data b ON a.car_data_id=b.id INNER JOIN region_data c ON b.car_region_id=c.id INNER JOIN punish_data d ON a.punish_id=d.id INNER JOIN fine_data e ON d.fine_id=e.id INNER JOIN afk_mode_data f ON d.afk_mode_id=f.id INNER JOIN user_data g ON a.user_id=g.user_id INNER JOIN belong_data h ON g.belong_id = h.id ORDER BY a.id ASC"); 
+					//stringの配列情報
+					while ($row = pg_fetch_row($result)) {
+						$region_name_result = $row[0];
+					 }
+					 //string->array
+					 $region_name_result = explode("," , substr($region_name_result, 1, strlen($region_name_result)-2));
+
+					$arr = pg_fetch_all($result);
+
+					echo "<table border=1><tr><th>日時</th><th>所属名</th><th>地域名</th><th>分類番号(番号)</th><th>分類番号(ひらがな)</th><th>車番号</th><th>罰金額</th><th>違反態様</th><th>支払い状況</th></tr>";
+					//echo "<table border=1><tr><th>ID</th><th>userID</th><th>日時</th><th>車情報ID</th><th>刑罰ID</th><th>支払い状況</th><th>地方</th><th>地方（車）</th><th>分類ひらがな</th><th>分類番号</th><th>ナンバー</th></tr>";
+					//データの出力
+					foreach($arr as $rows){
+						echo "<tr>\n";
+						foreach($rows as $value){
+							printf("<td>" .$value. "</td>\n");
+						}
+					}
+					echo "</table>\n";
+
+					pg_close($conn);
+				?>
 			</div>
 			<div class = "pp3">
 			<h2 id = "pp">プライバシーポリシー</h2>
