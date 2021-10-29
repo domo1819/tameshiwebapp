@@ -41,7 +41,7 @@
 				<h2 id="engine">データ検索</h2>
 				<p>検索したい項目を下記より選び、検索ボタンをクリックすると該当する結果が表示されます</p>
 				<form method="POST" action="index.php">
-					<div class="engine2" id="res">
+					<div class="engine2">
 						<label>検索項目</label>
 						<select id="" name="">
 						  <option value="">選択して下さい</option>
@@ -101,6 +101,7 @@
 						</div>
 					</div>
 				</form>
+				<div id="res"></div>
 				<?php
 					$conn = pg_connect(getenv("DATABASE_URL"));
 					if (!$conn) {
