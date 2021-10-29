@@ -68,12 +68,14 @@
 											$productList[] = array(
 												'id'    => $row['id'],
 												'timestamp'  => $row['timestamp'],
+												'belong_name'  => $row['belong_name'],
 												'region_name' => $row['region_name'],
 												'car_classify_num' => $row['car_classify_num'],
 												'car_classify_hiragana' => $row['car_classify_hiragana'],
 												'car_number' => $row['car_number'],
 												'fine_amount' => $row['fine_amount'],
-												'afk_mode' => $row['is_payment']
+												'afk_mode' => $row['afk_mode'],
+												'is_payment' => $row['is_payment']
 											);
 										}
 										header('Content-type: application/json');
