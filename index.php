@@ -40,12 +40,13 @@
 				<p>検索したい項目を下記より選び、検索ボタンをクリックすると該当する結果が表示されます</p>
 				<form method="POST" action="index.php">
 					<div class="engine2">
-					<table border="1" id="all_show_result">
-        	<tr>
-            <th>id</th><th>商品名</th><th>価格</th>
-        	</tr>
-    			</table>
-
+						<label>検索項目</label>
+						<select id="kind" name="kind">
+						  <option value="">選択して下さい</option>
+							<option value="1">全件検索</option>
+							<option value="2">日付検索</option>
+							<option value="3">日時</option>
+						</select><br><br>
 						<?php
 								$con = pg_connect(getenv("DATABASE_URL"));
 								if (!$con)  {
