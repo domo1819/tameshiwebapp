@@ -62,7 +62,7 @@
     				</table>
 								<?php
 								  $con = pg_connect(getenv("DATABASE_URL"));
-										$co = pg_query($con, "SELECT timestamp FROM warn_info");
+										$co = pg_query($con, "SELECT id,timestamp,region_name,car_classify_num,car_classify_hiragana,car_number,fine_amount,afk_mode FROM warn_info");
 										$productList = array();
 										while($date = pg_fetch_array($co)){
 											$productList[] = array(
