@@ -47,6 +47,7 @@
 							<option value="2">日付検索</option>
 							<option value="3">日時</option>
 						</select><br><br>
+						<select>
 						<?php
 								$con = pg_connect(getenv("DATABASE_URL"));
 								if (!$con)  {
