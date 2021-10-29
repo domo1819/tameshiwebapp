@@ -47,28 +47,32 @@
 							<option value="2">日付検索</option>
 							<option value="3">日時</option>
 						</select><br><br>
-						<select>
-						<?php
-								$con = pg_connect(getenv("DATABASE_URL"));
-								if (!$con)  {
-									exit('データベースに接続できませんでした。');
-								}
-									$col = pg_query($con, "SELECT region_name FROM region_data ORDER BY region_name;");
-									while($data = pg_fetch_array($col)){
-									?>
-									<OPTION VALUE="<?php $data['region_name'] ?>"><?php echo $data['region_name'] ?></OPTION><?php
-									}
-									?>
-								</select><br><br>	
-								<label>日時検索</label>
-								<select>
+						<table border="1" id="all_show_result">
+						<tr>
+            <th>ID</th><th><tr><th>日時</th><th>所属名</th><th>地域名</th><th>分類番号(番号)</th><th>分類番号(ひらがな)</th><th>車番号</th><th>罰金額</th><th>違反態様</th><th>支払い状況</th><
+       			 </tr>
+    				</table>
 								<?php
-										$co = pg_query($con, "SELECT timestamp FROM warn_info ORDER BY timestamp;");
+								  $con = pg_connect(getenv("DATABASE_URL"));
+										$co = pg_query($con, "SELECT timestamp FROM warn_info");
+										$productList = array();
 										while($date = pg_fetch_array($co)){
+											$productList[] = array(
+												'id'    => $row['id'],
+												'timestamp'  => $row['timestamp'],
+												'region_name' => $row['region_name'],
+												'car_classify_num' => $row['car_classify_num'],
+												'car_classify_hiragana' => $row['car_classify_hiragana'],
+												'car_number' => $row['car_number'],
+												'fine_amount' => $row['fine_amount'],
+												'afk_mode' => $row['is_payment']
+											);
+										}
+										header('Content-type: application/json');
+										// htmlへ渡す配列$productListをjsonに変換する
+										echo json_encode($productList);
 											?>
-											<OPTION VALUE="<?php $date['timestamp'] ?>"><?php echo $date['timestamp'] ?></OPTION><?php
-											}
-										?>
+										
 								</select><br><br>	
 								<label>検索単語を入力してください。(空欄の場合は全検索をします。)</label>
 								<input type="text" id="search_text" name="word" placeholder="検索語を入力してください">
@@ -85,7 +89,7 @@
 					}
 					pg_set_client_encoding("UTF-8");
 
-					$result = pg_query($conn, "SELECT a.id, a.timestamp, h.belong_name, c.region_name, b.car_classify_num, b.car_classify_hiragana, b.car_number, e.fine_amount, f.afk_mode, a.is_payment FROM warn_info a INNER JOIN car_data b ON a.car_data_id=b.id INNER JOIN region_data c ON b.car_region_id=c.id INNER JOIN punish_data d ON a.punish_id=d.id INNER JOIN fine_data e ON d.fine_id=e.id INNER JOIN afk_mode_data f ON d.afk_mode_id=f.id INNER JOIN user_data g ON a.user_id=g.user_id INNER JOIN belong_data h ON g.belong_id = h.id WHERE a.id LIKE '%{$_POST['word']}%' ORDER BY a.id ASC"); 
+					$result = pg_query($conn, "SELECT a.id, a.timestamp, h.belong_name, c.region_name, b.car_classify_num, b.car_classify_hiragana, b.car_number, e.fine_amount, f.afk_mode, a.is_payment FROM warn_info a INNER JOIN car_data b ON a.car_data_id=b.id INNER JOIN region_data c ON b.car_region_id=c.id INNER JOIN punish_data d ON a.punish_id=d.id INNER JOIN fine_data e ON d.fine_id=e.id INNER JOIN afk_mode_data f ON d.afk_mode_id=f.id INNER JOIN user_data g ON a.user_id=g.user_id INNER JOIN belong_data h ON g.belong_id = h.id ORDER BY a.id ASC"); 
 					//stringの配列情報
 					while ($row = pg_fetch_row($result)) {
 						$region_name_result = $row[0];

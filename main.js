@@ -1,24 +1,25 @@
 $(function(){
-	//.sampleをクリックしてajax通信を行う
-	$('.search_button').click(function(){
-		var data = {request : $('#request').val()};
-			$.ajax({
-					url: 'index.php',
-					type: 'POST',
-					/* json形式で受け取るためdataTypeを変更 */
-					data: data,
+	function getAllData(){
+    $.ajax({
+        // 通信先ファイル名
+        url: "index.php",
+        // 通信が成功した時
+        success: function(data) {
+            // 取得したレコードをeachで順次取り出す
+            $.each(data, function(key, value){
+                // #all_show_result内にappendで追記していく
+                $('#all_show_result').append("<tr><td>" + value.id + "</td><td>" + value.timestamp + "</td><td>" + value.region_name + "</td></tr>"+ value.car_classify_num + "</td></tr>"+ value.car_classify_hiragana + "</td></tr>"+ value.car_number + "</td></tr>"+ value.fine_amount + "</td></tr>"+ value.afk_mode + "</td></tr>"+ value.is_payment + "</td></tr>");
+            });
 
-					//処理が成功したら
-					success : function(data, dataType) {
-						//HTMLファイル内の該当箇所にレスポンスデータを追加します。
-						$('#res').html(data);
-				},
-				//処理がエラーであれば
-				error : function() {
-						alert('通信エラー');
-				}
- });
- //submitによる画面リロードを防いでいます。
- return false;
-});
+            console.log("通信失敗");
+            console.log(data);
+        },
+
+        // 通信が失敗した時
+        error: function(){
+            console.log("通信失敗");
+            console.log(data);
+        }
+			});
+		}
 });
