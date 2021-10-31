@@ -50,8 +50,8 @@
 						
 						<select id="pref-select" class="form-control">
 						<option value="">都道府県で絞り込み</option>
-				    <option value="つくば">北海道</option>
-				    <option value="越谷">北海道</option>
+				    <option value="つくば">つくば</option>
+				    <option value="越谷">越谷</option>
 					  </select>
 								<label>検索単語を入力してください。(空欄の場合は全検索をします。)</label>
 								<input type="text" id="search_text" name="word" placeholder="検索語を入力してください">
