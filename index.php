@@ -48,18 +48,10 @@
 							<option value="3">日時</option>
 						</select><br><br>
 						<select id="request" name="pref_name">
-						<?php
-								$con = pg_connect(getenv("DATABASE_URL"));
-								if (!$con)  {
-									exit('データベースに接続できませんでした。');
-								}
-									$col = pg_query($con, "SELECT region_name FROM region_data ORDER BY region_name;");
-									while($data = pg_fetch_array($col)){
-									?>
-									<OPTION VALUE="<?php $data['region_name'] ?>"><?php echo $data['region_name'] ?></OPTION><?php
-									}
-									?>
-								</select><br><br>	
+						<option selected="selected" value=""></option>
+            <option value="つくば">つくば</option>
+            <option value="越谷">越谷</option>
+					  </select><br><br>	
 								<input id="search_button" class="submit-btn" type="submit" value="検索" />
 								<label>日時検索</label>
 								<select>
@@ -118,7 +110,7 @@
 			if (!empty($ken)) {
 			
         
-        $sql = pg_query($conn, "select id, timestamp, belong_name, region_name, car_classify_num, car_classify_hiragana, car_number, fine_amount, afk_mode, is_payment from warn_info,car_data,region_data,punish_data,fine_data,afk_mode_data,user_data,belong_data where rigion_name = '".$ken."'");
+        $sql = pg_query($conn, "select id from region_data,punish_data where rigion_name = '".$ken."'");
         //出力ごにょごにょ
 				echo "<table border=1><tr><th>ID</th><th>日時</th><th>所属名</th><th>地域名</th><th>分類番号(番号)</th><th>分類番号(ひらがな)</th><th>車番号</th><th>罰金額</th><th>違反態様</th><th>支払い状況</th></tr>";
         //データベースより取得したデータを一行ずつ表示する
