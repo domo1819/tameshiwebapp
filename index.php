@@ -56,6 +56,10 @@
 								<label>日時検索</label>
 								<select>
 								<?php
+								$con = pg_connect(getenv("DATABASE_URL"));
+								if (!$con) {
+									exit('データベースに接続できませんでした。');
+								}
 										$co = pg_query($con, "SELECT timestamp FROM warn_info ORDER BY timestamp;");
 										while($date = pg_fetch_array($co)){
 											?>
