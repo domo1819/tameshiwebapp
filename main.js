@@ -1,25 +1,30 @@
-$(function(){
-	function getAllData(){
-    $.ajax({
-        // 通信先ファイル名
-        url: "index.php",
-        // 通信が成功した時
-        success: function(data) {
-            // 取得したレコードをeachで順次取り出す
-            $.each(data, function(key, value){
-                // #all_show_result内にappendで追記していく
-                $('#all_show_result').append("<tr><td>" + value.id + "</td><td>" + value.timestamp + "</td><td>"+ value.belong_name + "</td><td>" + value.region_name + "</td></tr>"+ value.car_classify_num + "</td></tr>"+ value.car_classify_hiragana + "</td></tr>"+ value.car_number + "</td></tr>"+ value.fine_amount + "</td></tr>"+ value.afk_mode + "</td></tr>"+ value.is_payment + "</td></tr>");
-            });
+jQuery(function ($) {
+    // セレクトボックスが変更されたら処理をする
+    $('#pref-select').change(function () {
+    
+        // 選択した値を取得
+        var select_val = $('#pref-select option:selected').val();
+        
+        // tbodyのtr数回 処理をする
+        $.each($("#pref-table tbody tr"), function (index, element) {
+        
+            // 選択した値が空欄だったら、全ての行を表示する為の処理
+            if (select_val == "") {
+                $(element).css("display", "table-row");
+                return true; // 次のtrへ
+            }
+            
+            // 1行をテキストとして取り出し、セレクトボックスで選択した値があるかをチェック
+            var row_text = $(element).text();
+            
+            if (row_text.indexOf(select_val) != -1) {
+                // 見つかった場合は表示する
+                $(element).css("display", "table-row");
+            } else {
+                // 見つからなかった場合は非表示に
+                $(element).css("display", "none");
+            }
 
-            console.log("通信失敗");
-            console.log(data);
-        },
-
-        // 通信が失敗した時
-        error: function(){
-            console.log("通信失敗");
-            console.log(data);
-        }
-			});
-		}
+        });
+    });
 });
