@@ -7,6 +7,29 @@
 		検索サイト
 	</title>
     <script type="text/javascript" src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+		<script type="text/javascript" src="./jquery-3.6.0.min.js"></script>
+		<script type="text/javascript" src="./main.js"></script>
+		<script>
+		jQuery(function ($) {
+			$('#pref-select').change(function () {
+				var select_val = $('#pref-select option:selected').val();
+				$.each($("#pref-table table td"), function (index, element) {
+					if (select_val == "") {
+						$(element).css("display", "table-row");
+						return true;
+					}
+					var row_text = $(element).text();
+
+					if (row_text.indexOf(select_val) != -1) {
+						$(element).css("display", "table-row");
+					} else {
+						$(element).css("display", "none");
+					}
+
+				});
+			});
+		});
+	</script>
 	<link rel="stylesheet" href="../css/style.css">
 </head>
 <body><!--  人間が見る内容を記述 -->
@@ -133,7 +156,5 @@
                  return false; });
         });
 	</script>
-		<script type="text/javascript" src="./jquery-3.6.0.min.js"></script>
-		<script type="text/javascript" src="./main.js"></script>
 </body>
 </html>
