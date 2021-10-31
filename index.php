@@ -7,28 +7,6 @@
 		検索サイト
 	</title>
     <script type="text/javascript" src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-		<script type="text/javascript" src="./jquery-3.6.0.min.js"></script>
-		<script>
-		jQuery(function ($) {
-			$('#pref-select').change(function () {
-				var select_val = $('#pref-select option:selected').val();
-				$.each($("#pref-table table td"), function (index, element) {
-					if (select_val == "") {
-						$(element).css("display", "table-row");
-						return true;
-					}
-					var row_text = $(element).text();
-
-					if (row_text.indexOf(select_val) != -1) {
-						$(element).css("display", "table-row");
-					} else {
-						$(element).css("display", "none");
-					}
-
-				});
-			});
-		});
-	</script>
 	<link rel="stylesheet" href="../css/style.css">
 </head>
 <body><!--  人間が見る内容を記述 -->
@@ -64,17 +42,33 @@
 					<div class="engine2">
 						<label>検索項目</label>
 						<select id="kind" name="kind">
-						  <option value="disabled">選択して下さい</option>
+						  <option value="">選択して下さい</option>
 							<option value="1">全件検索</option>
 							<option value="2">日付検索</option>
 							<option value="3">日時</option>
 						</select><br><br>
-						
-						<select id="pref-select" class="form-control">
-						<option value="">都道府県で絞り込み</option>
-				    <option value="つくば">つくば</option>
-				    <option value="越谷">越谷</option>
-					  </select>
+						<select>
+						<?php
+								$con = pg_connect(getenv("DATABASE_URL"));
+								if (!$con)  {
+									exit('データベースに接続できませんでした。');
+								}
+									$col = pg_query($con, "SELECT region_name FROM region_data ORDER BY region_name;");
+									while($data = pg_fetch_array($col)){
+										echo "<option value=\"owner1\">" . $data['rigion_name'] . "</option>";
+									}
+									?>
+								</select><br><br>	
+								<label>日時検索</label>
+								<select>
+								<?php
+										$co = pg_query($con, "SELECT timestamp FROM warn_info ORDER BY timestamp;");
+										while($date = pg_fetch_array($co)){
+											?>
+											<OPTION VALUE="<?php $date['timestamp'] ?>"><?php echo $date['timestamp'] ?></OPTION><?php
+											}
+										?>
+								</select><br><br>	
 								<label>検索単語を入力してください。(空欄の場合は全検索をします。)</label>
 								<input type="text" id="search_text" name="word" placeholder="検索語を入力してください">
 								<br><br><br>
@@ -99,30 +93,20 @@
 					 $region_name_result = explode("," , substr($region_name_result, 1, strlen($region_name_result)-2));
 
 					$arr = pg_fetch_all($result);
+
+					echo "<table border=1><tr><th>ID</th><th>日時</th><th>所属名</th><th>地域名</th><th>分類番号(番号)</th><th>分類番号(ひらがな)</th><th>車番号</th><th>罰金額</th><th>違反態様</th><th>支払い状況</th></tr>";
+					//echo "<table border=1><tr><th>ID</th><th>userID</th><th>日時</th><th>車情報ID</th><th>刑罰ID</th><th>支払い状況</th><th>地方</th><th>地方（車）</th><th>分類ひらがな</th><th>分類番号</th><th>ナンバー</th></tr>";
+					//データの出力
+					foreach($arr as $rows){
+						echo "<tr>\n";
+						foreach($rows as $value){
+							printf("<td>" .$value. "</td>\n");
+						}
+					}
+					echo "</table>\n";
+
 					pg_close($conn);
 				?>
-				<table border=1 id="pref-table">
-				<tr>
-        <td>ID</td>
-        <td>日時</td>
-        <td>所属名</td>
-        <td>地域名</td>
-        <td>分類</td>
-				<td>分類番号</td>
-				<td>車番号</td>
-				<td>罰金額</td>
-				<td>違反形態</td>
-				<td>支払い状況</td>
-        </tr>
-				<?php
-				foreach($arr as $rows){
-					echo "<tr>\n";
-					foreach($rows as $value){
-						printf("<td>" .$value. "</td>\n");
-					}
-				}
-				?>
-				</table>
 			</div>
 			<div class = "pp3">
 			<h2 id = "pp">プライバシーポリシー</h2>
@@ -155,5 +139,7 @@
                  return false; });
         });
 	</script>
+		<script type="text/javascript" src="./jquery-3.6.0.min.js"></script>
+		<script type="text/javascript" src="./main.js"></script>
 </body>
 </html>
