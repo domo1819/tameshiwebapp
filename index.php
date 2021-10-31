@@ -77,21 +77,9 @@
 					 $region_name_result = explode("," , substr($region_name_result, 1, strlen($region_name_result)-2));
 
 					$arr = pg_fetch_all($result);
-
-					echo "<table id='pref-table' border=1><tr><th>ID</th><th>日時</th><th>所属名</th><th>地域名</th><th>分類番号(番号)</th><th>分類番号(ひらがな)</th><th>車番号</th><th>罰金額</th><th>違反態様</th><th>支払い状況</th></tr>";
-					//echo "<table border=1><tr><th>ID</th><th>userID</th><th>日時</th><th>車情報ID</th><th>刑罰ID</th><th>支払い状況</th><th>地方</th><th>地方（車）</th><th>分類ひらがな</th><th>分類番号</th><th>ナンバー</th></tr>";
-					//データの出力
-					foreach($arr as $rows){
-						echo "<tr>\n";
-						foreach($rows as $value){
-							printf("<td>" .$value. "</td>\n");
-						}
-					}
-					echo "</table>\n";
-
 					pg_close($conn);
 				?>
-				<table border=1>
+				<table border=1 id="pref-table">
 				<tr>
         <td>ID</td>
         <td>日時</td>
