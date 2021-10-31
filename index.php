@@ -38,7 +38,7 @@
 			<div class="engine2">
 				<h2 id="engine">データ検索</h2>
 				<p>検索したい項目を下記より選び、検索ボタンをクリックすると該当する結果が表示されます</p>
-				<form method="POST" action="index.php">
+				<form method="POST" action="index.php" id="searchform">
 					<div class="engine2">
 						<label>検索項目</label>
 						<select id="kind" name="kind">
@@ -47,7 +47,7 @@
 							<option value="2">日付検索</option>
 							<option value="3">日時</option>
 						</select><br><br>
-						<select>
+						<select id="request" name="pref_name">
 						<?php
 								$con = pg_connect(getenv("DATABASE_URL"));
 								if (!$con)  {
@@ -55,10 +55,12 @@
 								}
 									$col = pg_query($con, "SELECT region_name FROM region_data ORDER BY region_name;");
 									while($data = pg_fetch_array($col)){
-										echo "<option value=\"owner1\">" . $data['rigion_name'] . "</option>";
+									?>
+									<OPTION VALUE="<?php $data['region_name'] ?>"><?php echo $data['region_name'] ?></OPTION><?php
 									}
 									?>
 								</select><br><br>	
+								<input id="search_button" class="submit-btn" type="submit" value="検索" />
 								<label>日時検索</label>
 								<select>
 								<?php
@@ -77,6 +79,7 @@
 						</div>
 					</div>
 				</form>
+				<div id="res">
 				<?php
 					$conn = pg_connect(getenv("DATABASE_URL"));
 					if (!$conn) {
@@ -95,7 +98,6 @@
 					$arr = pg_fetch_all($result);
 
 					echo "<table border=1><tr><th>ID</th><th>日時</th><th>所属名</th><th>地域名</th><th>分類番号(番号)</th><th>分類番号(ひらがな)</th><th>車番号</th><th>罰金額</th><th>違反態様</th><th>支払い状況</th></tr>";
-					//echo "<table border=1><tr><th>ID</th><th>userID</th><th>日時</th><th>車情報ID</th><th>刑罰ID</th><th>支払い状況</th><th>地方</th><th>地方（車）</th><th>分類ひらがな</th><th>分類番号</th><th>ナンバー</th></tr>";
 					//データの出力
 					foreach($arr as $rows){
 						echo "<tr>\n";
@@ -108,6 +110,29 @@
 					pg_close($conn);
 				?>
 			</div>
+			<?php 
+			//postデータを受け取る
+			$ken = $_POST['request'];
+			
+			//受け取ったデータが空でなければ
+			if (!empty($ken)) {
+			
+        
+        $sql = pg_query($conn, "select id, timestamp, belong_name, region_name, car_classify_num, car_classify_hiragana, car_number, fine_amount, afk_mode, is_payment from warn_info,car_data,region_data,punish_data,fine_data,afk_mode_data,user_data,belong_data where rigion_name = '".$ken."'");
+        //出力ごにょごにょ
+				echo "<table border=1><tr><th>ID</th><th>日時</th><th>所属名</th><th>地域名</th><th>分類番号(番号)</th><th>分類番号(ひらがな)</th><th>車番号</th><th>罰金額</th><th>違反態様</th><th>支払い状況</th></tr>";
+        //データベースより取得したデータを一行ずつ表示する
+        foreach ($sql as $result) {
+            echo "<td>".$result."</td>";
+        }
+        echo "</table>";
+				
+				//空だったら
+				} else {
+						echo '<p id="tekito">エラー：都道府県を選択して下さい。</p>';
+				}
+				
+			?>
 			<div class = "pp3">
 			<h2 id = "pp">プライバシーポリシー</h2>
 				<p>
