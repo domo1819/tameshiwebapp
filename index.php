@@ -46,7 +46,7 @@
 							<option value="dealerB">日付検索</option>
 							<option value="dealerC">日時</option>
 						</select><br><br>
-						<select>
+						<select id="name" name="name">
 						<?php
 								$con = pg_connect(getenv("DATABASE_URL"));
 								if (!$con)  {
@@ -79,7 +79,6 @@
 				</form>
 			</div>
 			<div id="dealerA">
-			問屋Aが選ばれた場合に表示する内容
 			<?php
 					$conn = pg_connect(getenv("DATABASE_URL"));
 					if (!$conn) {
@@ -98,7 +97,6 @@
 					$arr = pg_fetch_all($result);
 
 					echo "<table border=1><tr><th>ID</th><th>日時</th><th>所属名</th><th>地域名</th><th>分類番号(番号)</th><th>分類番号(ひらがな)</th><th>車番号</th><th>罰金額</th><th>違反態様</th><th>支払い状況</th></tr>";
-					//echo "<table border=1><tr><th>ID</th><th>userID</th><th>日時</th><th>車情報ID</th><th>刑罰ID</th><th>支払い状況</th><th>地方</th><th>地方（車）</th><th>分類ひらがな</th><th>分類番号</th><th>ナンバー</th></tr>";
 					//データの出力
 					foreach($arr as $rows){
 						echo "<tr>\n";
@@ -108,14 +106,36 @@
 					}
 					echo "</table>\n";
 
+
+
 					pg_close($conn);
 				?>
 			</div>
 			<div id="dealerB">
-			問屋Bが選ばれた場合に表示する内容
+			<?php
+					$conn = pg_connect(getenv("DATABASE_URL"));
+					if (!$conn) {
+						exit('データベースに接続できませんでした。');
+					}
+					$results = pg_query($conn, "SELECT * FROM warn_info WHERE rigion_name LIKE '%{$_POST['name']}%'");
+
+					$arrr = pg_fetch_all($results);
+					echo "<table border=1><tr><th>ID</th><th>日時</th><th>所属名</th><th>地域名</th><th>分類番号(番号)</th><th>分類番号(ひらがな)</th><th>車番号</th><th>罰金額</th><th>違反態様</th><th>支払い状況</th></tr>";
+					//データの出力
+					foreach($arr as $rows){
+						echo "<tr>\n";
+						foreach($rows as $value){
+							printf("<td>" .$value. "</td>\n");
+						}
+					}
+					echo "</table>\n";
+					pg_close($conn);
+
+
+			?>
 			</div>
 			<div id="dealerC">
-			問屋Cが選ばれた場合に表示する内容
+			
 			</div>
 			<div class = "pp3">
 			<h2 id = "pp">プライバシーポリシー</h2>
