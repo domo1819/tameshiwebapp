@@ -46,7 +46,7 @@
 							<option value="dealerB">日付検索</option>
 							<option value="dealerC">日時</option>
 						</select><br><br>
-						<select id="name" name="name">
+						<select id="date" name="date">
 						<?php
 								$con = pg_connect(getenv("DATABASE_URL"));
 								if (!$con)  {
@@ -117,7 +117,7 @@
 					if (!$conn) {
 						exit('データベースに接続できませんでした。');
 					}
-					$results = pg_query($conn, "SELECT * FROM warn_info WHERE rigion_name LIKE '%{$_POST['name']}%'");
+					$results = pg_query($conn, "SELECT * FROM warn_info WHERE rigion_name LIKE '%{$_POST['dete']}%'");
 
 					$arrr = pg_fetch_all($results);
 					echo "<table border=1><tr><th>ID</th><th>日時</th><th>所属名</th><th>地域名</th><th>分類番号(番号)</th><th>分類番号(ひらがな)</th><th>車番号</th><th>罰金額</th><th>違反態様</th><th>支払い状況</th></tr>";
