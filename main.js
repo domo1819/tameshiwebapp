@@ -1,26 +1,14 @@
-$(function() {
-    //検索ボタンがクリックされたら処理が走ります。
-    $('#search_button').click(function() {
-                  //HTMLから受け取るデータです。
-                  var data = {request : $('#request').val()};
-                  //ここからajaxの処理です。          
-                  $.ajax({
-                          //POST通信
-                          type: "POST",
-                          //ここでデータの送信先URLを指定します。
-                          url: "index.php",
-                          data: data,
-                          //処理が成功したら
-                          success : function(data, dataType) {
-                              //HTMLファイル内の該当箇所にレスポンスデータを追加します。
-                              $('#res').html(data);
-                          },
-                          //処理がエラーであれば
-                          error : function() {
-                              alert('通信エラー');
-                          }
-                   });
-                   //submitによる画面リロードを防いでいます。
-                   return false;
-      });
-    });
+$(function(id) {
+    function change(s) {
+    var i, n, sel = s.selectedIndex;
+    for (i = 0; i<s.options.length; i++) {
+    n = document.getElementById(s.options[i].value);
+    if (n) n.style.display = i == sel?"block":"none";
+    }
+    }
+    
+    var a = document.getElementById(id);
+    change(a);
+    a.onchange = function() { change(this); };
+    
+    })("dealer");

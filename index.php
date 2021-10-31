@@ -38,20 +38,49 @@
 			<div class="engine2">
 				<h2 id="engine">データ検索</h2>
 				<p>検索したい項目を下記より選び、検索ボタンをクリックすると該当する結果が表示されます</p>
-				<form method="POST" action="index.php" id="searchform">
+				<form method="POST" action="index.php">
 					<div class="engine2">
 						<label>検索項目</label>
-						<select id="request" name="pref_name">
-						<option selected="selected" value=""></option>
-            <option value="つくば">つくば</option>
-            <option value="越谷">越谷</option>
-					  </select><br><br>	
-								<input id="search_button" class="submit-btn" type="submit" value="検索" />
+						<select name="dealer" id="dealer">
+							<option value="dealerA">全件検索</option>
+							<option value="dealerB">日付検索</option>
+							<option value="dealerC">日時</option>
+						</select><br><br>
+						<select>
+						<?php
+								$con = pg_connect(getenv("DATABASE_URL"));
+								if (!$con)  {
+									exit('データベースに接続できませんでした。');
+								}
+									$col = pg_query($con, "SELECT region_name FROM region_data ORDER BY region_name;");
+									while($data = pg_fetch_array($col)){
+									?>
+									<OPTION VALUE="<?php $data['region_name'] ?>"><?php echo $data['region_name'] ?></OPTION><?php
+									}
+									?>
+								</select><br><br>	
+								<label>日時検索</label>
+								<select>
+								<?php
+										$co = pg_query($con, "SELECT timestamp FROM warn_info ORDER BY timestamp;");
+										while($date = pg_fetch_array($co)){
+											?>
+											<OPTION VALUE="<?php $date['timestamp'] ?>"><?php echo $date['timestamp'] ?></OPTION><?php
+											}
+										?>
+								</select><br><br>	
+								<label>検索単語を入力してください。(空欄の場合は全検索をします。)</label>
+								<input type="text" id="search_text" name="word" placeholder="検索語を入力してください">
+								<br><br><br>
+								<div class="engine">
+							<input type="submit"  name="submit" value="検索" style="width:10%;padding:10px;font-size:20px; background-color:#00c4ff; color:#FFF; margin-bottom:10px;">
 						</div>
 					</div>
 				</form>
-				<div id="res">
-				<?php
+			</div>
+			<div id="dealerA">
+			問屋Aが選ばれた場合に表示する内容
+			<?php
 					$conn = pg_connect(getenv("DATABASE_URL"));
 					if (!$conn) {
 						exit('データベースに接続できませんでした。');
@@ -69,6 +98,7 @@
 					$arr = pg_fetch_all($result);
 
 					echo "<table border=1><tr><th>ID</th><th>日時</th><th>所属名</th><th>地域名</th><th>分類番号(番号)</th><th>分類番号(ひらがな)</th><th>車番号</th><th>罰金額</th><th>違反態様</th><th>支払い状況</th></tr>";
+					//echo "<table border=1><tr><th>ID</th><th>userID</th><th>日時</th><th>車情報ID</th><th>刑罰ID</th><th>支払い状況</th><th>地方</th><th>地方（車）</th><th>分類ひらがな</th><th>分類番号</th><th>ナンバー</th></tr>";
 					//データの出力
 					foreach($arr as $rows){
 						echo "<tr>\n";
@@ -81,29 +111,12 @@
 					pg_close($conn);
 				?>
 			</div>
-			<?php 
-			//postデータを受け取る
-			$ken = $_POST['request'];
-			
-			//受け取ったデータが空でなければ
-			if (!empty($ken)) {
-			
-        
-        $sql = pg_query($conn, "select id from region_data,punish_data where rigion_name = '".$ken."'");
-        //出力ごにょごにょ
-				echo "<table border=1><tr><th>ID</th><th>日時</th><th>所属名</th><th>地域名</th><th>分類番号(番号)</th><th>分類番号(ひらがな)</th><th>車番号</th><th>罰金額</th><th>違反態様</th><th>支払い状況</th></tr>";
-        //データベースより取得したデータを一行ずつ表示する
-        foreach ($sql as $result) {
-            echo "<td>".$result."</td>";
-        }
-        echo "</table>";
-				
-				//空だったら
-				} else {
-						echo '<p id="tekito">エラー：都道府県を選択して下さい。</p>';
-				}
-				
-			?>
+			<div id="dealerB">
+			問屋Bが選ばれた場合に表示する内容
+			</div>
+			<div id="dealerC">
+			問屋Cが選ばれた場合に表示する内容
+			</div>
 			<div class = "pp3">
 			<h2 id = "pp">プライバシーポリシー</h2>
 				<p>
