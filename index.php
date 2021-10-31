@@ -8,7 +8,6 @@
 	</title>
     <script type="text/javascript" src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 		<script type="text/javascript" src="./jquery-3.6.0.min.js"></script>
-		<script type="text/javascript" src="./main.js"></script>
 		<script>
 		jQuery(function ($) {
 			$('#pref-select').change(function () {

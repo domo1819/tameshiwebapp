@@ -6,7 +6,7 @@ jQuery(function ($) {
         var select_val = $('#pref-select option:selected').val();
         
         // tbodyのtr数回 処理をする
-        $.each($("#pref-table table tr"), function (index, element) {
+        $.each($("#pref-table table t"), function (index, element) {
         
             // 選択した値が空欄だったら、全ての行を表示する為の処理
             if (select_val == "") {
