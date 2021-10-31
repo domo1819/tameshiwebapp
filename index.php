@@ -41,37 +41,12 @@
 				<form method="POST" action="index.php" id="searchform">
 					<div class="engine2">
 						<label>検索項目</label>
-						<select id="kind" name="kind">
-						  <option value="">選択して下さい</option>
-							<option value="1">全件検索</option>
-							<option value="2">日付検索</option>
-							<option value="3">日時</option>
-						</select><br><br>
 						<select id="request" name="pref_name">
 						<option selected="selected" value=""></option>
             <option value="つくば">つくば</option>
             <option value="越谷">越谷</option>
 					  </select><br><br>	
 								<input id="search_button" class="submit-btn" type="submit" value="検索" />
-								<label>日時検索</label>
-								<select>
-								<?php
-								$con = pg_connect(getenv("DATABASE_URL"));
-								if (!$con) {
-									exit('データベースに接続できませんでした。');
-								}
-										$co = pg_query($con, "SELECT timestamp FROM warn_info ORDER BY timestamp;");
-										while($date = pg_fetch_array($co)){
-											?>
-											<OPTION VALUE="<?php $date['timestamp'] ?>"><?php echo $date['timestamp'] ?></OPTION><?php
-											}
-										?>
-								</select><br><br>	
-								<label>検索単語を入力してください。(空欄の場合は全検索をします。)</label>
-								<input type="text" id="search_text" name="word" placeholder="検索語を入力してください">
-								<br><br><br>
-								<div class="engine">
-							<input type="submit"  name="submit" value="検索" style="width:10%;padding:10px;font-size:20px; background-color:#00c4ff; color:#FFF; margin-bottom:10px;">
 						</div>
 					</div>
 				</form>
