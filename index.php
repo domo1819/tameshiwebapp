@@ -42,8 +42,8 @@
 					<div class="engine2">
 						<label>検索項目</label>
 						<select name="emp">
-							<option value="選択してください"></option>
-							<optgroup label="">
+							<option value="">選択してください</option>
+							<optgroup label="項目">
 							<option value="all">全件</option>
 							<option value="date">日付</option>
 							</optgroup>
