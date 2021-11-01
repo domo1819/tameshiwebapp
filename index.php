@@ -50,6 +50,7 @@
 									?>
 									<OPTION VALUE="<?php $data['region_name'] ?>"><?php echo $data['region_name'] ?></OPTION><?php
 									}
+									pg_close($con);
 									?>
 						</select><br><br>
 								<label>検索単語を入力してください。(空欄の場合は全検索をします。)</label>
