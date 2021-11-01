@@ -82,9 +82,6 @@
 					}
 					var_dump($result);
 					// 1行ずつ結果を配列で取得します
-					while ($row = pg_fetch_array($result)) {
-							$emp_data[] = $row;
-					}
 					$arr = pg_fetch_all($result);
 					// 結果セットを開放します
 					pg_free_result($result);
