@@ -46,7 +46,7 @@
 							<option value="dealerB">日付検索</option>
 							<option value="dealerC">日時</option>
 						</select><br><br>
-						<select id="date" name="date">
+						<select>
 						<?php
 								$con = pg_connect(getenv("DATABASE_URL"));
 								if (!$con)  {
@@ -106,36 +106,16 @@
 					}
 					echo "</table>\n";
 
-
+					
 
 					pg_close($conn);
 				?>
 			</div>
 			<div id="dealerB">
-			<?php
-					$conn = pg_connect(getenv("DATABASE_URL"));
-					if (!$conn) {
-						exit('データベースに接続できませんでした。');
-					}
-					$results = pg_query($conn, "SELECT a.id, a.timestamp, h.belong_name, c.region_name, b.car_classify_num, b.car_classify_hiragana, b.car_number, e.fine_amount, f.afk_mode, a.is_payment FROM warn_info a INNER JOIN car_data b ON a.car_data_id=b.id INNER JOIN region_data c ON b.car_region_id=c.id INNER JOIN punish_data d ON a.punish_id=d.id INNER JOIN fine_data e ON d.fine_id=e.id INNER JOIN afk_mode_data f ON d.afk_mode_id=f.id INNER JOIN user_data g ON a.user_id=g.user_id INNER JOIN belong_data h ON g.belong_id = h.id WHERE c.rigion_name LIKE '%{$_POST['dete']}%'");
-
-					$arrr = pg_fetch_all($results);
-					echo "<table border=1><tr><th>ID</th><th>日時</th><th>所属名</th><th>地域名</th><th>分類番号(番号)</th><th>分類番号(ひらがな)</th><th>車番号</th><th>罰金額</th><th>違反態様</th><th>支払い状況</th></tr>";
-					//データの出力
-					foreach($arr as $rows){
-						echo "<tr>\n";
-						foreach($rows as $value){
-							printf("<td>" .$value. "</td>\n");
-						}
-					}
-					echo "</table>\n";
-					pg_close($conn);
-
-
-			?>
+			問屋Bが選ばれた場合に表示する内容
 			</div>
 			<div id="dealerC">
-			
+			問屋Cが選ばれた場合に表示する内容
 			</div>
 			<div class = "pp3">
 			<h2 id = "pp">プライバシーポリシー</h2>
