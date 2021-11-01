@@ -42,9 +42,9 @@
 					<div class="engine2">
 						<label>検索項目</label>
 						<select name="emp">
-						<option value=""></option>
-						<option value="">日付</option>
-							<option value="all">全県</option>
+							<option value="選択してください"></option>	
+							<option value="all">全件</option>
+							<option value="">日付</option>
 							<option value="つくば">つくば</option>
 							<option value="越谷">越谷</option>
 						</select><br><br>
