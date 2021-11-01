@@ -63,7 +63,7 @@
 				</form>
 			</div>
 			<?php
-				$emp = 'all';
+				$emp = '';
 				$data = '';
 				if (isset($_POST['emp']) === TRUE) {
 						$emp = $_POST['emp'];
