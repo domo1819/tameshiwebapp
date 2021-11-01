@@ -42,7 +42,7 @@
 					<div class="engine2">
 						<label>検索項目</label>
 						<select name="emp">
-							<option value="all"<?php if ($emp === 'all'){ print 'selected'; } ?>>全件検索</option>
+							<option value="all"<?php if ($all === 'all'){ print 'selected'; } ?>>全件検索</option>
 							<option value="つくば"<?php if ($emp === 'つくば') { print 'selected'; } ?>>つくば</option>
 							<option value="越谷"<?php if ($emp === '越谷') { print 'selected'; } ?>>越谷</option>
 						</select><br><br>
