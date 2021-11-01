@@ -48,7 +48,7 @@
 							<option value="越谷">越谷</option>
 						</select><br><br>
 						<label>日付検索</label>
-						<input type="date" id="today" name="date" >
+						<input type="date" id="today" name="da" >
 						<input type="submit"  name="submit" value="検索">
 								<label>検索単語を入力してください。(空欄の場合は全検索をします。)</label>
 								<input type="text" id="search_text" name="word" placeholder="検索語を入力してください">
@@ -65,8 +65,8 @@
 				if (isset($_POST['emp']) === TRUE) {
 						$emp = $_POST['emp'];
 				}
-				if(isset($_POST['date']) === TRUE) {
-					$date = $_POST['date'];
+				if(isset($_POST['da']) === TRUE) {
+					$date = $_POST['da'];
 			}
 				$emp_data = array();
 				$conn = pg_connect(getenv("DATABASE_URL"));
