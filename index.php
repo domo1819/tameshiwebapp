@@ -42,9 +42,9 @@
 					<div class="engine2">
 						<label>検索項目</label>
 						<select name="emp">
-							<option value="">全件検索</option>
-							<option value="つくば">つくば</option>
-							<option value="越谷">越谷</option>
+							<option <?= $row['all'] == 'all' ? 'selected' : "" ?>>全件検索</option>
+							<option <?= $row['emp'] == 'つくば' ? 'selected' : "" ?>>つくば</option>
+							<option <?= $row['emp'] == '越谷' ? 'selected' : "" ?>>越谷</option>
 						</select><br><br>
 								<label>検索単語を入力してください。(空欄の場合は全検索をします。)</label>
 								<input type="text" id="search_text" name="word" placeholder="検索語を入力してください">
