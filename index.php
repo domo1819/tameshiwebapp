@@ -43,14 +43,12 @@
 						<label>地域検索項目</label>
 						<select name="emp">
 							<option value="all">全件検索</option>
-							<option VALUE="<?php $data['region_name'] ?>">
-						  </option>	
 							<?php
 							    $con = pg_connect(getenv("DATABASE_URL"));
 									$col = pg_query($con, "SELECT region_name FROM region_data ORDER BY region_name;");
 									while($data = pg_fetch_array($col)){
 										?>
-										<OPTION VALUE="<?php $data['region_name'] ?>"><?php echo $data['region_name'] ?></OPTION><?php
+										<option VALUE="region_name"><?php echo $data['region_name'] ?></option><?php
 									}
 									pg_close($con);
 									?>
