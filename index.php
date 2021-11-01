@@ -43,8 +43,8 @@
 						<label>検索項目</label>
 						<select name="emp">
 							<option value="all"<?php if ($emp === 'all'){ print 'selected'; } ?>>全件検索</option>
-							<option value="つくば"<?php if ($emp === 'つくば') { print 'selected'; } ?>>日付検索</option>
-							<option value="越谷"<?php if ($emp === '越谷') { print 'selected'; } ?>>日時</option>
+							<option value="つくば"<?php if ($emp === 'つくば') { print 'selected'; } ?>>つくば</option>
+							<option value="越谷"<?php if ($emp === '越谷') { print 'selected'; } ?>>越谷</option>
 						</select><br><br>
 								<label>検索単語を入力してください。(空欄の場合は全検索をします。)</label>
 								<input type="text" id="search_text" name="word" placeholder="検索語を入力してください">
@@ -87,6 +87,7 @@
 					while ($row = pg_fetch_array($result)) {
 							$emp_data[] = $row;
 					}
+					$arr = pg_fetch_all($result);
 					// 結果セットを開放します
 					pg_free_result($result);
 					// 接続を閉じます
@@ -111,9 +112,12 @@
 			 <th>支払い状況</th>
        </tr>
 			 <?php
-			 foreach ($emp_data as $value) {
-				printf("<td>" .$value. "</td>\n");
-			 }
+			 foreach($arr as $rows){
+				echo "<tr>\n";
+				foreach($rows as $value){
+					printf("<td>" .$value. "</td>\n");
+				}
+			}
 			 ?>
    </table>
 			<div id="dealerA">
