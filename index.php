@@ -43,15 +43,15 @@
 						<label>地域検索項目</label>
 						<select name="emp">
 							<option value="all">全件検索</option>
+							<option VALUE="<?php $data['region_name'] ?>">
+						  </option>	
 							<?php
 							    $conn = pg_connect(getenv("DATABASE_URL"));
 									$col = pg_query($conn, "SELECT region_name FROM region_data ORDER BY region_name;");
 									while($data = pg_fetch_array($col)){
-									?>
-									<OPTION VALUE="<?php $data['region_name'] ?>"><?php echo $data['region_name'] ?></OPTION><?php
 									}
 									pg_close($conn);
-									?>
+								?>
 						</select><br><br>
 								<label>検索単語を入力してください。(空欄の場合は全検索をします。)</label>
 								<input type="text" id="search_text" name="word" placeholder="検索語を入力してください">
