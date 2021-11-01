@@ -47,7 +47,7 @@
 							<option value="越谷">越谷</option>
 						</select><br><br>
 						<label>日付検索</label>
-						<input type="date" name="date" >
+						<input type="date" id="today" name="date" >
 						<input type="submit"  name="submit" value="検索">
 								<label>検索単語を入力してください。(空欄の場合は全検索をします。)</label>
 								<input type="text" id="search_text" name="word" placeholder="検索語を入力してください">
@@ -145,6 +145,31 @@
                  return false; });
         });
 	</script>
+	<script type="text/javascript">
+    //今日の日時を表示
+        window.onload = function () {
+            //今日の日時を表示
+            var date = new Date()
+            var year = date.getFullYear()
+            var month = date.getMonth() + 1
+            var day = date.getDate()
+          
+            var toTwoDigits = function (num, digit) {
+              num += ''
+              if (num.length < digit) {
+                num = '0' + num
+              }
+              return num
+            }
+            
+            var yyyy = toTwoDigits(year, 4)
+            var mm = toTwoDigits(month, 2)
+            var dd = toTwoDigits(day, 2)
+            var ymd = yyyy + "-" + mm + "-" + dd;
+            
+            document.getElementById("today").value = ymd;
+        }
+</script>
 		<script type="text/javascript" src="./jquery-3.6.0.min.js"></script>
 		<script type="text/javascript" src="./main.js"></script>
 </body>
