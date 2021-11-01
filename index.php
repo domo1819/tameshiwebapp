@@ -66,7 +66,7 @@
 						$emp = $_POST['emp'];
 				}
 				if(isset($_POST['da']) === TRUE) {
-					$date = $_POST['da'];
+					$da = $_POST['da'];
 			}
 				$emp_data = array();
 				$conn = pg_connect(getenv("DATABASE_URL"));
