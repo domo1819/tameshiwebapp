@@ -45,6 +45,7 @@
 							<option value="all">全件検索</option>
 						</select>
 						<select name="emp">
+						<option value=""></option>
 							<option value="つくば">つくば</option>
 							<option value="越谷">越谷</option>
 						</select><br><br>
