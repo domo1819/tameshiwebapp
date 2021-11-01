@@ -42,11 +42,15 @@
 					<div class="engine2">
 						<label>検索項目</label>
 						<select name="emp">
-							<option value="選択してください"></option>	
+							<option value="選択してください"></option>
+							<optgroup label="">
 							<option value="all">全件</option>
 							<option value="date">日付</option>
+							</optgroup>
+							<optgroup label="地方">
 							<option value="つくば">つくば</option>
 							<option value="越谷">越谷</option>
+							</optgroup>
 						</select><br><br>
 						<label>日付検索</label>
 						<input type="date" id="today" name="data"><br><br>
