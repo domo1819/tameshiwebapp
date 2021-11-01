@@ -49,9 +49,10 @@
 							    $conn = pg_connect(getenv("DATABASE_URL"));
 									$col = pg_query($conn, "SELECT region_name FROM region_data ORDER BY region_name;");
 									while($data = pg_fetch_array($col)){
+										echo ($data['region_name']);
 									}
 									pg_close($conn);
-								?>
+									?>
 						</select><br><br>
 								<label>検索単語を入力してください。(空欄の場合は全検索をします。)</label>
 								<input type="text" id="search_text" name="word" placeholder="検索語を入力してください">
