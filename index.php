@@ -60,8 +60,8 @@
 				</form>
 			</div>
 			<?php
-				$emp = 'all';
-				$data = '';
+				$emp = '';
+				$data = 'date';
 				if (isset($_POST['emp']) === TRUE) {
 						$emp = $_POST['emp'];
 				}
