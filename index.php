@@ -70,7 +70,7 @@
 				$conn = pg_connect(getenv("DATABASE_URL"));
 					
 				// 接続成功した場合
-				if ($link) {
+				if ($conn) {
 					// 文字化け防止
 					pg_set_client_encoding("UTF-8");
 
