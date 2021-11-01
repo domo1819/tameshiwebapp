@@ -42,7 +42,7 @@
 					<div class="engine2">
 						<label>地域検索項目</label>
 						<select name="emp">
-							<option value="all">全件検索</option>
+							<option value="all"></option>
 							<?php
 							    $con = pg_connect(getenv("DATABASE_URL"));
 									$col = pg_query($con, "SELECT region_name FROM region_data ORDER BY region_name;");
