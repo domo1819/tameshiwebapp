@@ -41,14 +41,12 @@
 				<form method="POST" action="index.php">
 					<div class="engine2">
 						<label>検索項目</label>
-						<select name="emp">
-						<optgroup name="all">
+						<select name="all">
 							<option value="all">全件検索</option>
-						</optgroup>
-						<optgroup name="emp">
+						</select>
+						<select name="emp">
 							<option value="つくば">つくば</option>
 							<option value="越谷">越谷</option>
-						</optgroup>
 						</select><br><br>
 								<label>検索単語を入力してください。(空欄の場合は全検索をします。)</label>
 								<input type="text" id="search_text" name="word" placeholder="検索語を入力してください">
