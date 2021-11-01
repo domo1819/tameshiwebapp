@@ -43,6 +43,7 @@
 						<label>地域検索項目</label>
 						<select name="emp">
 						<option value=""></option>
+						 <option value="">日付</option>
 							<option value="all">全県</option>
 							<option value="つくば">つくば</option>
 							<option value="越谷">越谷</option>
@@ -61,7 +62,7 @@
 			</div>
 			<?php
 				$emp = 'all';
-				$date = [];
+				$date = '';
 				if (isset($_POST['emp']) === TRUE) {
 						$emp = $_POST['emp'];
 				}
