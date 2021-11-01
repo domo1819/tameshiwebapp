@@ -61,7 +61,7 @@
 			</div>
 			<?php
 				$emp = '';
-				$data = 'date';
+				$data = '';
 				if (isset($_POST['emp']) === TRUE) {
 						$emp = $_POST['emp'];
 				}
