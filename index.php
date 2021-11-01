@@ -41,11 +41,8 @@
 				<form method="POST" action="index.php">
 					<div class="engine2">
 						<label>検索項目</label>
-						<select name="all">
-							<option value="all">全件検索</option>
-						</select>
 						<select name="emp">
-						<option value=""></option>
+							<option value="">全件検索</option>
 							<option value="つくば">つくば</option>
 							<option value="越谷">越谷</option>
 						</select><br><br>
@@ -77,7 +74,7 @@
 					// 文字化け防止
 					pg_set_client_encoding("UTF-8");
 
-					if (isset($_POST['all']) === TRUE) {
+					if (isset($_POST['emp']) === NULL) {
 						$result = pg_query($conn, "SELECT a.id, a.timestamp, h.belong_name, c.region_name, b.car_classify_num, b.car_classify_hiragana, b.car_number, e.fine_amount, f.afk_mode, a.is_payment FROM warn_info a INNER JOIN car_data b ON a.car_data_id=b.id INNER JOIN region_data c ON b.car_region_id=c.id INNER JOIN punish_data d ON a.punish_id=d.id INNER JOIN fine_data e ON d.fine_id=e.id INNER JOIN afk_mode_data f ON d.afk_mode_id=f.id INNER JOIN user_data g ON a.user_id=g.user_id INNER JOIN belong_data h ON g.belong_id = h.id ORDER BY a.id ASC"); 
 					}
 
