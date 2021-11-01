@@ -43,13 +43,16 @@
 						<label>地域検索項目</label>
 						<select name="emp">
 						<option value=""></option>
+						<option value="">日付</option>
 							<option value="all">全県</option>
 							<option value="つくば">つくば</option>
 							<option value="越谷">越谷</option>
 						</select><br><br>
+					  <from>
 						<label>日付検索</label>
-						<input type="date" id="today" name="da" >
+						<input type="date" id="today" name="data" >
 						<input type="submit"  name="submit" value="検索">
+						</from>
 								<label>検索単語を入力してください。(空欄の場合は全検索をします。)</label>
 								<input type="text" id="search_text" name="word" placeholder="検索語を入力してください">
 								<br><br><br>
@@ -61,12 +64,12 @@
 			</div>
 			<?php
 				$emp = 'all';
-				$da = '';
+				$data = '';
 				if (isset($_POST['emp']) === TRUE) {
 						$emp = $_POST['emp'];
 				}
-				if(isset($_POST['da']) === TRUE) {
-					$da = $_POST['da'];
+				if(isset($_POST['data']) === TRUE) {
+					$data = $_POST['data'];
 			  }
 				$emp_data = array();
 				$conn = pg_connect(getenv("DATABASE_URL"));
@@ -82,7 +85,7 @@
 						$result = pg_query($conn, "SELECT a.id, a.timestamp, h.belong_name, c.region_name, b.car_classify_num, b.car_classify_hiragana, b.car_number, e.fine_amount, f.afk_mode, a.is_payment FROM warn_info a INNER JOIN car_data b ON a.car_data_id=b.id INNER JOIN region_data c ON b.car_region_id=c.id INNER JOIN punish_data d ON a.punish_id=d.id INNER JOIN fine_data e ON d.fine_id=e.id INNER JOIN afk_mode_data f ON d.afk_mode_id=f.id INNER JOIN user_data g ON a.user_id=g.user_id INNER JOIN belong_data h ON g.belong_id = h.id WHERE c.region_name = '$emp'");
 					} 
 					if (is_null($emp) and !is_null($da)){
-						$result = pg_query($conn, "SELECT a.id, a.timestamp, h.belong_name, c.region_name, b.car_classify_num, b.car_classify_hiragana, b.car_number, e.fine_amount, f.afk_mode, a.is_payment FROM warn_info a INNER JOIN car_data b ON a.car_data_id=b.id INNER JOIN region_data c ON b.car_region_id=c.id INNER JOIN punish_data d ON a.punish_id=d.id INNER JOIN fine_data e ON d.fine_id=e.id INNER JOIN afk_mode_data f ON d.afk_mode_id=f.id INNER JOIN user_data g ON a.user_id=g.user_id INNER JOIN belong_data h ON g.belong_id = h.id WHERE a.timestamp = TO_DATE('$da', 'YYYY-MM-DD')");
+						$result = pg_query($conn, "SELECT a.id, a.timestamp, h.belong_name, c.region_name, b.car_classify_num, b.car_classify_hiragana, b.car_number, e.fine_amount, f.afk_mode, a.is_payment FROM warn_info a INNER JOIN car_data b ON a.car_data_id=b.id INNER JOIN region_data c ON b.car_region_id=c.id INNER JOIN punish_data d ON a.punish_id=d.id INNER JOIN fine_data e ON d.fine_id=e.id INNER JOIN afk_mode_data f ON d.afk_mode_id=f.id INNER JOIN user_data g ON a.user_id=g.user_id INNER JOIN belong_data h ON g.belong_id = h.id WHERE a.timestamp ='$data'");
 					} 
 					var_dump($result);
 					// 1行ずつ結果を配列で取得します
