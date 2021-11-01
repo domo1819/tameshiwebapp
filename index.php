@@ -43,8 +43,7 @@
 						<label>検索項目</label>
 						<select name="emp">
 							<option value="all">全件検索</option>
-							<option value="つくば">つくば</option>
-							<option value="越谷">越谷</option>
+							<option value="<?php $data['region_name'] ?>"><?php echo $data['region_name'] ?></option>
 						</select><br><br>
 								<label>検索単語を入力してください。(空欄の場合は全検索をします。)</label>
 								<input type="text" id="search_text" name="word" placeholder="検索語を入力してください">
