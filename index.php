@@ -42,10 +42,10 @@
 					<div class="engine2">
 						<label>検索項目</label>
 						<select>
-						<optgroup name="all">
+						<optgroup id="all">
 							<option value="all">全件検索</option>
 						</optgroup>
-						<optgroup name="emp">
+						<optgroup id="emp">
 							<option value="つくば">つくば</option>
 							<option value="越谷">越谷</option>
 						</optgroup>
