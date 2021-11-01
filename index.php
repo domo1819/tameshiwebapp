@@ -57,10 +57,6 @@
 			</div>
 			<?php
 				$emp = '';
-				$all = '';
-				if (isset($_POST['all']) === TRUE) {
-						$all = $_POST['all'];
-				}
 				if (isset($_POST['emp']) === TRUE) {
 						$emp = $_POST['emp'];
 				}
