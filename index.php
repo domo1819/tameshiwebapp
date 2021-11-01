@@ -40,7 +40,7 @@
 				<p>検索したい項目を下記より選び、検索ボタンをクリックすると該当する結果が表示されます</p>
 				<form method="POST" action="index.php">
 					<div class="engine2">
-						<label>地域検索項目</label>
+						<label>検索項目</label>
 						<select name="emp">
 						<option value=""></option>
 						<option value="">日付</option>
@@ -48,11 +48,8 @@
 							<option value="つくば">つくば</option>
 							<option value="越谷">越谷</option>
 						</select><br><br>
-					  <from>
 						<label>日付検索</label>
-						<input type="date" id="today" name="data" >
-						<input type="submit"  name="submit" value="検索">
-						</from>
+						<input type="date" id="today" name="data"><br><br>
 								<label>検索単語を入力してください。(空欄の場合は全検索をします。)</label>
 								<input type="text" id="search_text" name="word" placeholder="検索語を入力してください">
 								<br><br><br>
