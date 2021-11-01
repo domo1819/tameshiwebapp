@@ -42,10 +42,12 @@
 					<div class="engine2">
 						<label>地域検索項目</label>
 						<select name="emp">
-							<option value="all">全件検索</option>
+							<option value="all"></option>
 							<option value="つくば">つくば</option>
 							<option value="越谷">越谷</option>
 						</select><br><br>
+						<label>日付検索</label>
+						<input type="date" name="emp">
 								<label>検索単語を入力してください。(空欄の場合は全検索をします。)</label>
 								<input type="text" id="search_text" name="word" placeholder="検索語を入力してください">
 								<br><br><br>
@@ -71,7 +73,7 @@
 					
 
 					if ($emp !== 'all'){
-						$result = pg_query($conn, "SELECT a.id, a.timestamp, h.belong_name, c.region_name, b.car_classify_num, b.car_classify_hiragana, b.car_number, e.fine_amount, f.afk_mode, a.is_payment FROM warn_info a INNER JOIN car_data b ON a.car_data_id=b.id INNER JOIN region_data c ON b.car_region_id=c.id INNER JOIN punish_data d ON a.punish_id=d.id INNER JOIN fine_data e ON d.fine_id=e.id INNER JOIN afk_mode_data f ON d.afk_mode_id=f.id INNER JOIN user_data g ON a.user_id=g.user_id INNER JOIN belong_data h ON g.belong_id = h.id WHERE region_name = '$emp'");
+						$result = pg_query($conn, "SELECT a.id, a.timestamp, h.belong_name, c.region_name, b.car_classify_num, b.car_classify_hiragana, b.car_number, e.fine_amount, f.afk_mode, a.is_payment FROM warn_info a INNER JOIN car_data b ON a.car_data_id=b.id INNER JOIN region_data c ON b.car_region_id=c.id INNER JOIN punish_data d ON a.punish_id=d.id INNER JOIN fine_data e ON d.fine_id=e.id INNER JOIN afk_mode_data f ON d.afk_mode_id=f.id INNER JOIN user_data g ON a.user_id=g.user_id INNER JOIN belong_data h ON g.belong_id = h.id WHERE region_name = '$emp' OR timestamp = '$emp'");
 					} 
 					var_dump($result);
 					// 1行ずつ結果を配列で取得します
