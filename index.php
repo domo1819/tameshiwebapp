@@ -72,6 +72,7 @@
 						if(isset($_POST['data']) === TRUE) {
 							$data = $_POST['data'];
 						}
+				                var_dump($data);
 						$emp_data = array();
 						$conn = pg_connect(getenv("DATABASE_URL"));
 						// 接続成功した場合
