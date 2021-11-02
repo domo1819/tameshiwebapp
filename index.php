@@ -51,11 +51,12 @@
 									<optgroup label="地方項目">
 										<option value="つくば">つくば</option>
 										<option value="越谷">越谷</option>
+										<option value="東京">東京</option>
 									</optgroup>
 							</select><br><br>
 							<label>日付検索(検索項目の日付検索を選択してから日付を指定してください)</label>
 							<input type="date" id="data" name="data"><br><br>
-									<label>検索単語を入力してください(検索項目の単語検索を選択してから入力してください)</label>
+									<label>単語検索(検索項目の単語検索を選択してから入力してください)</label>
 									<input type="text" id="search_text" name="word" placeholder="検索語を入力してください">
 									<br><br><br>
 									<div class="engine">
@@ -79,7 +80,7 @@
 				    var_dump($emp);
 						var_dump($data);
 						var_dump($word);
-
+						
 						$emp_data = array();
 						$conn = pg_connect(getenv("DATABASE_URL"));
 						// 接続成功した場合
@@ -93,12 +94,21 @@
 							if ($emp !== 'all'){
 								$result = pg_query($conn, "SELECT a.id, a.timestamp, h.belong_name, c.region_name, b.car_classify_num, b.car_classify_hiragana, b.car_number, a.longitude, a.latitude, e.fine_amount, f.afk_mode, a.is_payment FROM warn_info a INNER JOIN car_data b ON a.car_data_id=b.id INNER JOIN region_data c ON b.car_region_id=c.id INNER JOIN punish_data d ON a.punish_id=d.id INNER JOIN fine_data e ON d.fine_id=e.id INNER JOIN afk_mode_data f ON d.afk_mode_id=f.id INNER JOIN user_data g ON a.user_id=g.user_id INNER JOIN belong_data h ON g.belong_id = h.id WHERE c.region_name = '$emp'");
 							} 
+							else{
+								print '該当する値がありません';
+							}
 							if ($emp == 'date'){
 								$result = pg_query($conn, "SELECT a.id, a.timestamp, h.belong_name, c.region_name, b.car_classify_num, b.car_classify_hiragana, b.car_number, a.longitude, a.latitude, e.fine_amount, f.afk_mode, a.is_payment FROM warn_info a INNER JOIN car_data b ON a.car_data_id=b.id INNER JOIN region_data c ON b.car_region_id=c.id INNER JOIN punish_data d ON a.punish_id=d.id INNER JOIN fine_data e ON d.fine_id=e.id INNER JOIN afk_mode_data f ON d.afk_mode_id=f.id INNER JOIN user_data g ON a.user_id=g.user_id INNER JOIN belong_data h ON g.belong_id = h.id WHERE a.timestamp LIKE '%$data%' ");
 							} 
+							else{
+								print '該当する値がありません';
+							}
 							if($emp == 'word'){
 								$result = pg_query($conn, "SELECT a.id, a.timestamp, h.belong_name, c.region_name, b.car_classify_num, b.car_classify_hiragana, b.car_number, a.longitude, a.latitude, e.fine_amount, f.afk_mode, a.is_payment FROM warn_info a INNER JOIN car_data b ON a.car_data_id=b.id INNER JOIN region_data c ON b.car_region_id=c.id INNER JOIN punish_data d ON a.punish_id=d.id INNER JOIN fine_data e ON d.fine_id=e.id INNER JOIN afk_mode_data f ON d.afk_mode_id=f.id INNER JOIN user_data g ON a.user_id=g.user_id INNER JOIN belong_data h ON g.belong_id = h.id WHERE a.timestamp LIKE '%$word%' OR h.belong_name LIKE '%$word%' OR c.region_name LIKE '%$word%' OR b.car_classify_hiragana LIKE '%$word%' OR b.car_number LIKE '%$word%' OR f.afk_mode LIKE '%$word%'");
 							} 
+							else{
+								print '該当する値がありません';
+							}
 							var_dump($result);
 							
 							$arr = pg_fetch_all($result);
@@ -111,8 +121,7 @@
 								print 'DB接続失敗';
 							}
 					?>
-					<?php
-					 echo "<table border=1>
+					<table border=1>
 						<tr>
 							<th>ID</th>
 							<th>日時</th>
@@ -126,15 +135,14 @@
 							<th>罰金額</th>
 							<th>違反態様</th>
 							<th>支払い状況</th>
-						</tr>";
-						
+						</tr>
+						<?php
 						foreach($arr as $rows){
 							echo "<tr>\n";
 							foreach($rows as $value){
 								printf("<td>" .$value. "</td>\n");
 							}
 						}
-						echo "</table>\n";
 						?>
 			    </table>
 				<div class = "pp3">
