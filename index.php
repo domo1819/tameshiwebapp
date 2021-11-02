@@ -77,9 +77,6 @@
 						if(isset($_POST['word']) === TRUE) {
 							$word = $_POST['word'];
 						}
-				    var_dump($emp);
-						var_dump($data);
-						var_dump($word);
 						
 						$emp_data = array();
 						$conn = pg_connect(getenv("DATABASE_URL"));
@@ -109,7 +106,6 @@
 							else{
 								print '該当する値がありません';
 							}
-							var_dump($result);
 							
 							$arr = pg_fetch_all($result);
 							// 結果セットを開放します
