@@ -79,7 +79,7 @@
 				    var_dump($emp);
 						var_dump($data);
 						var_dump($word);
-						
+
 						$emp_data = array();
 						$conn = pg_connect(getenv("DATABASE_URL"));
 						// 接続成功した場合
@@ -111,7 +111,8 @@
 								print 'DB接続失敗';
 							}
 					?>
-					<table border=1>
+					<?php
+					 echo "<table border=1>
 						<tr>
 							<th>ID</th>
 							<th>日時</th>
@@ -125,14 +126,15 @@
 							<th>罰金額</th>
 							<th>違反態様</th>
 							<th>支払い状況</th>
-						</tr>
-						<?php
+						</tr>";
+						
 						foreach($arr as $rows){
 							echo "<tr>\n";
 							foreach($rows as $value){
 								printf("<td>" .$value. "</td>\n");
 							}
 						}
+						echo "</table>\n";
 						?>
 			    </table>
 				<div class = "pp3">
