@@ -52,9 +52,9 @@
 										<option value="越谷">越谷</option>
 									</optgroup>
 							</select><br><br>
-							<label>日付検索(検索項目の日付検索を選択してから日付を入力してください)</label>
+							<label>日付検索(検索項目の日付検索を選択してから日付を指定してください)</label>
 							<input type="date" id="data" name="data"><br><br>
-									<label>検索単語を入力してください。(空欄の場合は全検索をします。)</label>
+									<label>検索単語を入力してください。</label>
 									<input type="text" id="search_text" name="word" placeholder="検索語を入力してください">
 									<br><br><br>
 									<div class="engine">
