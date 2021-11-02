@@ -55,7 +55,7 @@
 							</select><br><br>
 							<label>日付検索(検索項目の日付検索を選択してから日付を指定してください)</label>
 							<input type="date" id="data" name="data"><br><br>
-									<label>検索単語を入力してください。</label>
+									<label>検索単語を入力してください(検索項目の単語検索を選択してから入力してください)</label>
 									<input type="text" id="search_text" name="word" placeholder="検索語を入力してください">
 									<br><br><br>
 									<div class="engine">
@@ -117,9 +117,9 @@
 							<th>地域名</th>
 							<th>分類番号(番号)</th>
 							<th>分類番号(ひらがな)</th>
+							<th>車番号</th>
 							<th>緯度</th>
 							<th>経度</th>
-							<th>車番号</th>
 							<th>罰金額</th>
 							<th>違反態様</th>
 							<th>支払い状況</th>
