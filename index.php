@@ -131,7 +131,7 @@
 
 							$(function() {
 									$('submit').click(function(){
-											$('table').hide();
+											$('table').show();
 									});
 							});
 							</script>
