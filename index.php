@@ -110,7 +110,7 @@
 								print 'DB接続失敗';
 							}
 					?>
-					<table border=1 id="table" style="display: none;">
+					<table border=1 style="display: none;">
 						<tr>
 							<th>ID</th>
 							<th>日時</th>
@@ -127,7 +127,7 @@
 						</tr>
 						<script>
 							$(function() {
-									$('submit').click(function(){
+									$('from').click(function(){
 											$('table').show();
 									});
 							});
