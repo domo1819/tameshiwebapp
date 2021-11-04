@@ -132,8 +132,12 @@
 						function clickBtn1(){
 							const table = document.getElementById("table");
 
-							if(table.style.display=="table"){
-								p1.style.display ="block";
+							if(table.style.display=="block"){
+								// noneで非表示
+								table.style.display ="none";
+							}else{
+								// blockで表示
+								table.style.display ="block";
 							}
 						}
 						</script>
