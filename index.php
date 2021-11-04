@@ -44,16 +44,15 @@
 						<div class="engine2">
 							<label>検索項目</label>
 							<select name="emp" id="selbox" onchange="change();">
-								<option value="">選択してください</option>
+								<option value="disable" <?php if(empty($_POST['emp'])) echo 'selected'; ?>>選択してください</option>
 									<optgroup label="検索項目">
-										<option value="all">全件検索</option>
-										<option value="date">日付検索</option>
-										<option value="word">単語検索</option>
+										<option value="all" <?php echo array_key_exists('emp', $_POST) && $_POST['emp'] == 'all' ? 'selected' : ''; ?>>全件検索</option>
+										<option value="date" <?php echo array_key_exists('emp', $_POST) && $_POST['emp'] == 'date' ? 'selected' : ''; ?>>日付検索</option>
+										<option value="word" <?php echo array_key_exists('emp', $_POST) && $_POST['emp'] == 'word' ? 'selected' : ''; ?>>単語検索</option>
 									</optgroup>
 									<optgroup label="地方項目">
-										<option value="つくば">つくば</option>
-										<option value="越谷">越谷</option>
-										<option value="東京">東京</option>
+										<option value="つくば" <?php echo array_key_exists('emp', $_POST) && $_POST['emp'] == 'つくば' ? 'selected' : ''; ?>>つくば</option>
+										<option value="越谷" <?php echo array_key_exists('emp', $_POST) && $_POST['emp'] == '越谷' ? 'selected' : ''; ?>>越谷</option>
 									</optgroup>
 							</select><br><br>
 							<label id="txt1" style="display:none">日付検索(検索項目の日付検索を選択してから日付を指定してください)</label>
