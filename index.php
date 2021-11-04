@@ -133,8 +133,7 @@
 							const table = document.getElementById("table");
 
 							if(table.style.display=="table"){
-								// noneで非表示
-								table.style.display ="none";
+								p1.style.display ="block";
 							}
 						}
 						</script>
