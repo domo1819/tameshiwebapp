@@ -126,9 +126,6 @@
 							<th>支払い状況</th>
 						</tr>
 						<script>
-							//初期表示は非表示
-							document.getElementById("table").style.display ="none";
-
 							$(function() {
 									$('submit').click(function(){
 											$('table').show();
