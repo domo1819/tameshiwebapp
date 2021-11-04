@@ -130,11 +130,11 @@
 						document.getElementById("table").style.display ="none";
 
 						function clickBtn1(){
-							const p1 = document.getElementById("p1");
+							const table = document.getElementById("table");
 
-							if(p1.style.display=="block"){
+							if(table.style.display=="table"){
 								// noneで非表示
-								p1.style.display ="none";
+								table.style.display ="none";
 							}
 						}
 						</script>
