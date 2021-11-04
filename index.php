@@ -110,7 +110,7 @@
 								print 'DB接続失敗';
 							}
 					?>
-					<table border=1 style="display: none;">
+					<table border=1>
 						<tr>
 							<th>ID</th>
 							<th>日時</th>
