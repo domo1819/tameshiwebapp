@@ -60,7 +60,7 @@
 									<input type="text" id="search_text" name="word" placeholder="検索語を入力してください">
 									<br><br><br>
 									<div class="engine">
-							<input type="submit"  name="submit" value="検索" onclick="clickBtn1()" style="width:10%;padding:10px;font-size:20px; background-color:#00c4ff; color:#FFF; margin-bottom:10px;">
+							<input type="submit"  name="submit" value="検索" onclick="clickBtn1(0)" style="width:10%;padding:10px;font-size:20px; background-color:#00c4ff; color:#FFF; margin-bottom:10px;">
 							</div>
 						</div>
 					</form>
@@ -126,19 +126,10 @@
 							<th>支払い状況</th>
 						</tr>
 						<script>
-						//初期表示は非表示
-						document.getElementById("table").style.display ="none";
-
-						function clickBtn1(){
-							const table = document.getElementById("table");
-
-							if(table.style.display=="block"){
-								// noneで非表示
-								table.style.display ="none";
-							}else{
-								// blockで表示
-								table.style.display ="block";
-							}
+						function hyoji1(num){
+						if (num == 0)
+						{
+							document.getElementById("table").style.display="block";
 						}
 						</script>
 						<?php
