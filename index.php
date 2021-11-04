@@ -60,7 +60,7 @@
 									<input type="text" id="search_text" name="word" placeholder="検索語を入力してください">
 									<br><br><br>
 									<div class="engine">
-							<input type="submit"  name="submit" value="検索" id="submit" style="width:10%;padding:10px;font-size:20px; background-color:#00c4ff; color:#FFF; margin-bottom:10px;">
+							<input type="submit"  name="submit" value="検索" onclick="clickBtn1()" style="width:10%;padding:10px;font-size:20px; background-color:#00c4ff; color:#FFF; margin-bottom:10px;">
 							</div>
 						</div>
 					</form>
@@ -110,7 +110,7 @@
 								print 'DB接続失敗';
 							}
 					?>
-					<table border=1>
+					<table border=1 id="table">
 						<tr>
 							<th>ID</th>
 							<th>日時</th>
@@ -125,6 +125,19 @@
 							<th>違反態様</th>
 							<th>支払い状況</th>
 						</tr>
+						<script>
+						//初期表示は非表示
+						document.getElementById("table").style.display ="none";
+
+						function clickBtn1(){
+							const p1 = document.getElementById("p1");
+
+							if(p1.style.display=="block"){
+								// noneで非表示
+								p1.style.display ="none";
+							}
+						}
+						</script>
 						<?php
 						foreach($arr as $rows){
 							echo "<tr>\n";
