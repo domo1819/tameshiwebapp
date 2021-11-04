@@ -60,7 +60,7 @@
 									<input type="text" id="search_text" name="word" placeholder="検索語を入力してください">
 									<br><br><br>
 									<div class="engine">
-							<input type="submit"  name="submit" value="検索" onclick="clickBtn1(0)" style="width:10%;padding:10px;font-size:20px; background-color:#00c4ff; color:#FFF; margin-bottom:10px;">
+							<input type="submit"  name="submit" value="検索" onclick="hyoji1(0)" style="width:10%;padding:10px;font-size:20px; background-color:#00c4ff; color:#FFF; margin-bottom:10px;">
 							</div>
 						</div>
 					</form>
@@ -110,7 +110,7 @@
 								print 'DB接続失敗';
 							}
 					?>
-					<table border=1 id="table" style.display ="none">
+					<table border=1 id="table" style="display: none;">
 						<tr>
 							<th>ID</th>
 							<th>日時</th>
