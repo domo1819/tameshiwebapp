@@ -125,13 +125,6 @@
 							<th>違反態様</th>
 							<th>支払い状況</th>
 						</tr>
-						<script>
-							$(function() {
-									$('submit').click(function(){
-											$('table').show();
-									});
-							});
-							</script>
 						<?php
 						foreach($arr as $rows){
 							echo "<tr>\n";
