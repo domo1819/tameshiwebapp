@@ -114,7 +114,7 @@
 								print 'DB接続失敗';
 							}
 					?>
-					<table border=1 id="ta" style="display:none">
+					<table border=1 id="ta">
 						<tr>
 							<th>ID</th>
 							<th>日時</th>
@@ -142,9 +142,6 @@
 					function change() {
 							if (document.getElementById("selbox")) {
 									selboxValue = document.getElementById("selbox").value;
-									if(selboxValue !== null){
-										document.getElementById("ta").style.display = "";
-									}
 									if (selboxValue == "date") {
 											//文字1を表示
 											document.getElementById("txt1").style.display = "";
