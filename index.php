@@ -70,7 +70,7 @@
 					function change() {
 							if (document.getElementById("selbox")) {
 									selboxValue = document.getElementById("selbox").value;
-									if(selboxValue == "all" AND =="date" AND == "word"){
+									if(selboxValue == "all" OR =="date" OR == "word"){
 
 									}
 									if (selboxValue == "date") {
