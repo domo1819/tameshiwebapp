@@ -71,7 +71,7 @@
 							if (document.getElementById("selbox")) {
 									selboxValue = document.getElementById("selbox").value;
 									if(selboxValue == "all" OR =="date" OR == "word"){
-
+										document.getElementById("table").style.display = "";
 									}
 									if (selboxValue == "date") {
 											//文字1を表示
@@ -141,7 +141,7 @@
 								print 'DB接続失敗';
 							}
 					?>
-					<table border=1 style="display:none">
+					<table border=1 id="table" style="display:none">
 						<tr>
 							<th>ID</th>
 							<th>日時</th>
