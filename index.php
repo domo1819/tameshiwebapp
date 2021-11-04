@@ -57,9 +57,9 @@
 									</optgroup>
 							</select><br><br>
 							<label id="txt1">日付検索(検索項目の日付検索を選択してから日付を指定してください)</label>
-							<input type="date" id="data" name="data"><br><br>
-									<label id="txt2" style="display:none">単語検索(検索項目の単語検索を選択してから入力してください)</label>
-									<input type="text" id="search_text" name="word" id="word" placeholder="検索語を入力してください" style="display:none">
+							<input type="date" id="da" name="data"><br><br>
+									<label id="txt2">単語検索(検索項目の単語検索を選択してから入力してください)</label>
+									<input type="text" id="search_text" name="word" id="wo" placeholder="検索語を入力してください">
 									<br><br><br>
 									<div class="engine">
 							<input type="submit"  name="submit" value="検索" id="submit" style="width:10%;padding:10px;font-size:20px; background-color:#00c4ff; color:#FFF; margin-bottom:10px;">
@@ -74,20 +74,20 @@
 											//文字1を表示
 											document.getElementById("txt1").style.display = "";
 											//input1を表示
-											document.getElementById("data").style.display = "";
+											document.getElementById("da").style.display = "";
 											//文字2を非表示
 											document.getElementById("txt2").style.display = "none";
 											//input2を非表示
-											document.getElementById("word").style.display = "none";
+											document.getElementById("wo").style.display = "none";
 									} else if (selboxValue == "word") {
 											//文字2を表示
 											document.getElementById("txt2").style.display = "";
 											//input2を表示
-											document.getElementById("word").style.display = "";
+											document.getElementById("wo").style.display = "";
 											//文字1を非表示
 											document.getElementById("txt1").style.display = "none";
 											//input1を非表示
-											document.getElementById("data").style.display = "none";
+											document.getElementById("da").style.display = "none";
 									}
 							}
 					}
