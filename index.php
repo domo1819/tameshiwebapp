@@ -46,7 +46,7 @@
 							<select name="emp" id="selbox" onchange="change();">
 								<option value="disable" >選択してください</option>
 									<optgroup label="検索項目">
-										<option value="all">全件検索</option>
+										<option value="all" <?php if ( ! empty( $clean['emp'] ) ) { if ( 'all' === $clean['emp'] ) { echo 'selected'; } } ?>>全件検索</option>
 										<option value="date">日付検索</option>
 										<option value="word">単語検索</option>
 									</optgroup>
