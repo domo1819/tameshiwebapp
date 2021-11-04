@@ -43,7 +43,7 @@
 					<form method="POST" action="index.php">
 						<div class="engine2">
 							<label>検索項目</label>
-							<select name="emp">
+							<select name="emp" id="selbox" onchange="change();">
 								<option value="">選択してください</option>
 									<optgroup label="検索項目">
 										<option value="all">全件検索</option>
@@ -56,9 +56,9 @@
 										<option value="東京">東京</option>
 									</optgroup>
 							</select><br><br>
-							<label>日付検索(検索項目の日付検索を選択してから日付を指定してください)</label>
+							<label id="txt1">日付検索(検索項目の日付検索を選択してから日付を指定してください)</label>
 							<input type="date" id="data" name="data"><br><br>
-									<label>単語検索(検索項目の単語検索を選択してから入力してください)</label>
+									<label id="txt2">単語検索(検索項目の単語検索を選択してから入力してください)</label>
 									<input type="text" id="search_text" name="word" placeholder="検索語を入力してください">
 									<br><br><br>
 									<div class="engine">
@@ -66,6 +66,32 @@
 							</div>
 						</div>
 					</form>
+					<script type="text/javascript">
+					function change() {
+							if (document.getElementById("selbox")) {
+									selboxValue = document.getElementById("selbox").value;
+									if (selboxValue == "date") {
+											//文字1を表示
+											document.getElementById("txt1").style.display = "";
+											//input1を表示
+											document.getElementById("data").style.display = "";
+											//文字2を非表示
+											document.getElementById("txt2").style.display = "none";
+											//input2を非表示
+											document.getElementById("word").style.display = "none";
+									} else if (selboxValue == "word") {
+											//文字2を表示
+											document.getElementById("txt2").style.display = "";
+											//input2を表示
+											document.getElementById("word").style.display = "";
+											//文字1を非表示
+											document.getElementById("txt1").style.display = "none";
+											//input1を非表示
+											document.getElementById("data").style.display = "none";
+									}
+							}
+					}
+					</script>
 				</div>
 				<?php
 						$emp = '';
