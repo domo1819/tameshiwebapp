@@ -60,7 +60,7 @@
 									<input type="text" id="search_text" name="word" placeholder="検索語を入力してください">
 									<br><br><br>
 									<div class="engine">
-							<input type="submit"  name="submit" value="検索" style="width:10%;padding:10px;font-size:20px; background-color:#00c4ff; color:#FFF; margin-bottom:10px;">
+							<input type="submit"  name="submit" value="検索" id="submit" style="width:10%;padding:10px;font-size:20px; background-color:#00c4ff; color:#FFF; margin-bottom:10px;">
 							</div>
 						</div>
 					</form>
@@ -127,7 +127,7 @@
 						</tr>
 						<script>
 							$(function() {
-									$('from').click(function(){
+									$('submit').click(function(){
 											$('table').show();
 									});
 							});
