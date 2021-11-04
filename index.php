@@ -68,35 +68,6 @@
 							</div>
 						</div>
 					</form>
-					<script type="text/javascript">
-					function change() {
-							if (document.getElementById("selbox")) {
-									selboxValue = document.getElementById("selbox").value;
-									if(selboxValue !== null){
-										document.getElementById("ta").style.display = "";
-									}
-									if (selboxValue == "date") {
-											//文字1を表示
-											document.getElementById("txt1").style.display = "";
-											//input1を表示
-											document.getElementById("da").style.display = "";
-											//文字2を非表示
-											document.getElementById("txt2").style.display = "none";
-											//input2を非表示
-											document.getElementById("search_text").style.display = "none";
-									} else if (selboxValue == "word") {
-											//文字2を表示
-											document.getElementById("txt2").style.display = "";
-											//input2を表示
-											document.getElementById("search_text").style.display = "";
-											//文字1を非表示
-											document.getElementById("txt1").style.display = "none";
-											//input1を非表示
-											document.getElementById("da").style.display = "none";
-									}
-							}
-					}
-					</script>
 				</div>
 				<?php
 						$emp = '';
@@ -167,6 +138,35 @@
 						}
 						?>
 			    </table>
+					<script type="text/javascript">
+					function change() {
+							if (document.getElementById("selbox")) {
+									selboxValue = document.getElementById("selbox").value;
+									if(selboxValue !== null){
+										document.getElementById("ta").style.display = "";
+									}
+									if (selboxValue == "date") {
+											//文字1を表示
+											document.getElementById("txt1").style.display = "";
+											//input1を表示
+											document.getElementById("da").style.display = "";
+											//文字2を非表示
+											document.getElementById("txt2").style.display = "none";
+											//input2を非表示
+											document.getElementById("search_text").style.display = "none";
+									} else if (selboxValue == "word") {
+											//文字2を表示
+											document.getElementById("txt2").style.display = "";
+											//input2を表示
+											document.getElementById("search_text").style.display = "";
+											//文字1を非表示
+											document.getElementById("txt1").style.display = "none";
+											//input1を非表示
+											document.getElementById("da").style.display = "none";
+									}
+							}
+					}
+					</script>
 				<div class = "pp3">
 				<h2 id = "pp">プライバシーポリシー</h2>
 					<p>
