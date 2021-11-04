@@ -58,8 +58,8 @@
 							</select><br><br>
 							<label id="txt1">日付検索(検索項目の日付検索を選択してから日付を指定してください)</label>
 							<input type="date" id="data" name="data"><br><br>
-									<label id="txt2">単語検索(検索項目の単語検索を選択してから入力してください)</label>
-									<input type="text" id="search_text" name="word" id="word" placeholder="検索語を入力してください">
+									<label id="txt2" style="display:none">単語検索(検索項目の単語検索を選択してから入力してください)</label>
+									<input type="text" id="search_text" name="word" id="word" placeholder="検索語を入力してください" style="display:none">
 									<br><br><br>
 									<div class="engine">
 							<input type="submit"  name="submit" value="検索" id="submit" style="width:10%;padding:10px;font-size:20px; background-color:#00c4ff; color:#FFF; margin-bottom:10px;">
