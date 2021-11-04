@@ -42,17 +42,20 @@
 					<p>検索したい項目を下記より選び、検索ボタンをクリックすると該当する結果が表示されます</p>
 					<form method="POST" action="index.php">
 						<div class="engine2">
+						<?php
+						$sel = isset($_POST['emp']) ? $_POST['emp'] : '';
+						?>
 							<label>検索項目</label>
 							<select name="emp" id="selbox" onchange="change();">
 								<option value="disable" >選択してください</option>
 									<optgroup label="検索項目">
-										<option value="all" <?php if ( ! empty( $clean['emp'] ) ) { if ( 'all' === $clean['emp'] ) { echo 'selected'; } } ?>>全件検索</option>
-										<option value="date" <?php if ( ! empty( $clean['emp'] ) ) { if ( 'date' === $clean['emp'] ) { echo 'selected'; } } ?>>日付検索</option>
-										<option value="word" <?php if ( ! empty( $clean['emp'] ) ) { if ( 'word' === $clean['emp'] ) { echo 'selected'; } } ?>>単語検索</option>
+										<option value="all" <?= $sel === 'all' ? ' selected' : ''; ?>>全件検索</option>
+										<option value="date" <?= $sel === 'date' ? ' selected' : ''; ?>>日付検索</option>
+										<option value="word" <?= $sel === 'word' ? ' selected' : ''; ?>>単語検索</option>
 									</optgroup>
 									<optgroup label="地方項目">
-										<option value="つくば" <?php if ( ! empty( $clean['emp'] ) ) { if ( 'つくば' === $clean['emp'] ) { echo 'selected'; } } ?>>つくば</option>
-										<option value="越谷" <?php if ( ! empty( $clean['emp'] ) ) { if ( '越谷' === $clean['emp'] ) { echo 'selected'; } } ?>>越谷</option>
+										<option value="つくば" <?= $sel === 'つくば' ? ' selected' : ''; ?>>つくば</option>
+										<option value="越谷" <?= $sel === '越谷' ? ' selected' : ''; ?>>越谷</option>
 									</optgroup>
 							</select><br><br>
 							<label id="txt1" style="display:none">日付検索(検索項目の日付検索を選択してから日付を指定してください)</label>
