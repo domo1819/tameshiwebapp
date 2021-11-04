@@ -110,8 +110,7 @@
 								print 'DB接続失敗';
 							}
 					?>
-					<input type="button" value="ボタン1" onclick="clickBtn1()" />
-					<table border=1 id="table">
+					<table border=1 style="display: none;">
 						<tr>
 							<th>ID</th>
 							<th>日時</th>
@@ -126,18 +125,6 @@
 							<th>違反態様</th>
 							<th>支払い状況</th>
 						</tr>
-						<script>
-						//初期表示は非表示
-						document.getElementById("table").style.display ="none";
-
-						function clickBtn1(){
-							const table = document.getElementById("table");
-
-							if(table.style.display=="none"){
-								table.style.display ="block";
-							}
-						}
-						</script>
 						<?php
 						foreach($arr as $rows){
 							echo "<tr>\n";
