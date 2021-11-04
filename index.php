@@ -70,6 +70,9 @@
 					function change() {
 							if (document.getElementById("selbox")) {
 									selboxValue = document.getElementById("selbox").value;
+									if(selboxValue == "all" AND =="date" AND == "word"){
+
+									}
 									if (selboxValue == "date") {
 											//文字1を表示
 											document.getElementById("txt1").style.display = "";
@@ -138,7 +141,7 @@
 								print 'DB接続失敗';
 							}
 					?>
-					<table border=1>
+					<table border=1 style="display:none">
 						<tr>
 							<th>ID</th>
 							<th>日時</th>
