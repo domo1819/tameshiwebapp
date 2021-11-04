@@ -70,7 +70,7 @@
 					function change() {
 							if (document.getElementById("selbox")) {
 									selboxValue = document.getElementById("selbox").value;
-									if(selboxValue == !null){
+									if(selboxValue !== null){
 										document.getElementById("ta").style.display = "";
 									}
 									if (selboxValue == "date") {
