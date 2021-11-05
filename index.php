@@ -112,9 +112,13 @@
 					?>
 					<script>
 						$(function(){
+							if (document.getElementById("selbox")) {
+									selboxValue = document.getElementById("selbox").value;
+							if(selboxValue !== null){
 								$('.btn_ex11').click(function(){
 										$('table').show();
 								});
+							}
 						});
 						</script>
 					<table border=1 id="ta" style="display:none">
