@@ -81,10 +81,6 @@
 						if(isset($_POST['word']) === TRUE) {
 							$word = $_POST['word'];
 						}
-				    var_dump($emp);
-						var_dump($data);
-						var_dump($word);
-						
 						$emp_data = array();
 						$conn = pg_connect(getenv("DATABASE_URL"));
 						// 接続成功した場合
@@ -114,7 +110,7 @@
 								print 'DB接続失敗';
 							}
 					?>
-					<input type="button" class="btn_ex11" value="表示">
+					<input type="button" class="btn_ex11" value="表を表示" style="width:10%;padding:10px;font-size:20px; background-color:#00c4ff; color:#FFF; margin-bottom:10px;">
 					<script>
 						$(function(){
 								$('.btn_ex11').click(function(){
