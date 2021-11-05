@@ -114,7 +114,7 @@
 								print 'DB接続失敗';
 							}
 					?>
-					<table border=1 id="ta">
+					<table border=1 id="ta" style="display:none">
 						<tr>
 							<th>ID</th>
 							<th>日時</th>
@@ -160,6 +160,9 @@
 											document.getElementById("txt1").style.display = "none";
 											//input1を非表示
 											document.getElementById("da").style.display = "none";
+									}
+									if(selboxValue !== null){
+										document.getElementById("ta").style.display = "";
 									}
 							}
 					}
