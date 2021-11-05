@@ -69,7 +69,6 @@
 						</div>
 					</form>
 				</div>
-				<input type="button" class="btn_ex11" value="表を表示" style="width:10%;padding:10px;font-size:18px; background-color:#00c4ff; color:#FFF; margin-bottom:10px;">
 				<?php
 						$emp = '';
 						$data = '';
@@ -112,13 +111,19 @@
 							}
 					?>
 					<script>
-						$(function(){
-								$('.btn_ex11').click(function(){
-										$('table').show();
-								});
-						});
-						</script>
-					<table border=1 id="ta" style="display:none">
+								//初期表示は非表示
+								document.getElementById("ta").style.display ="none";
+
+								function submit(){
+									const ta = document.getElementById("ta");
+
+									if(ta.style.display=="none"){
+										// noneで非表示
+										ta.style.display ="block";
+									}
+								}
+								</script>
+					<table border=1 id="ta">
 						<tr>
 							<th>ID</th>
 							<th>日時</th>
