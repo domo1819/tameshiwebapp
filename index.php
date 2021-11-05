@@ -120,6 +120,9 @@
 									if(ta.style.display=="none"){
 										// noneで非表示
 										ta.style.display ="block";
+									}else{
+										// blockで表示
+										ta.style.display ="block";
 									}
 								}
 								</script>
