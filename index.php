@@ -64,7 +64,7 @@
 									<input type="text" id="search_text" name="word" placeholder="検索語を入力してください" style="display:none">
 									<br><br><br>
 									<div class="engine">
-							<input type="submit"  name="submit" value="検索" id="submit" style="width:10%;padding:10px;font-size:20px; background-color:#00c4ff; color:#FFF; margin-bottom:10px;">
+							<input type="submit"  name="submit" value="検索" id="submit" onclick="clickBtn1()" style="width:10%;padding:10px;font-size:20px; background-color:#00c4ff; color:#FFF; margin-bottom:10px;">
 							</div>
 						</div>
 					</form>
@@ -114,7 +114,7 @@
 								//初期表示は非表示
 								document.getElementById("ta").style.display ="none";
 
-								function submit(){
+								function clickBtn1(){
 									const ta = document.getElementById("ta");
 
 									if(ta.style.display=="none"){
