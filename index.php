@@ -64,7 +64,7 @@
 									<input type="text" id="search_text" name="word" placeholder="検索語を入力してください" style="display:none">
 									<br><br><br>
 									<div class="engine">
-							<input type="submit"  name="submit" value="検索" id="submit" style="width:10%;padding:10px;font-size:20px; background-color:#00c4ff; color:#FFF; margin-bottom:10px;">
+							<input type="submit"  name="submit" value="検索" id="submit" class="btn_ex11" style="width:10%;padding:10px;font-size:20px; background-color:#00c4ff; color:#FFF; margin-bottom:10px;">
 							</div>
 						</div>
 					</form>
@@ -110,7 +110,6 @@
 								print 'DB接続失敗';
 							}
 					?>
-					<input type="button" class="btn_ex11" value="表を表示"  style="width:10%;padding:10px;font-size:18px; background-color:#00c4ff; color:#FFF; margin-bottom:10px;">
 					<script>
 						$(function(){
 								$('.btn_ex11').click(function(){
