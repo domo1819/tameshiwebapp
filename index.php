@@ -64,7 +64,7 @@
 									<input type="text" id="search_text" name="word" placeholder="検索語を入力してください" style="display:none">
 									<br><br><br>
 									<div class="engine">
-							<input type="submit"  name="submit" value="検索" id="submit" onclick="clickBtn1()" style="width:10%;padding:10px;font-size:20px; background-color:#00c4ff; color:#FFF; margin-bottom:10px;">
+							<input type="submit"  name="submit" value="検索" id="submit" style="width:10%;padding:10px;font-size:20px; background-color:#00c4ff; color:#FFF; margin-bottom:10px;">
 							</div>
 						</div>
 					</form>
@@ -110,23 +110,15 @@
 								print 'DB接続失敗';
 							}
 					?>
+					<input type="button" class="btn_ex11" value="表を表示"  style="width:10%;padding:10px;font-size:20px; background-color:#00c4ff; color:#FFF; margin-bottom:10px;">
 					<script>
-								//初期表示は非表示
-								document.getElementById("ta").style.display ="none";
-
-								function clickBtn1(){
-									const ta = document.getElementById("ta");
-
-									if(ta.style.display=="none"){
-										// noneで非表示
-										ta.style.display ="block";
-									}else{
-										// blockで表示
-										ta.style.display ="block";
-									}
-								}
-								</script>
-					<table border=1 id="ta">
+						$(function(){
+								$('.btn_ex11').click(function(){
+										$('table').show();
+								});
+						});
+						</script>
+					<table border=1 id="ta" style="display:none">
 						<tr>
 							<th>ID</th>
 							<th>日時</th>
