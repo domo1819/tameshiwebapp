@@ -69,6 +69,7 @@
 						</div>
 					</form>
 				</div>
+				<input type="button" class="btn_ex11" value="表を表示" style="width:10%;padding:10px;font-size:18px; background-color:#00c4ff; color:#FFF; margin-bottom:10px;">
 				<?php
 						$emp = '';
 						$data = '';
@@ -110,7 +111,6 @@
 								print 'DB接続失敗';
 							}
 					?>
-					<input type="button" class="btn_ex11" value="表を表示" style="width:10%;padding:10px;font-size:20px; background-color:#00c4ff; color:#FFF; margin-bottom:10px;">
 					<script>
 						$(function(){
 								$('.btn_ex11').click(function(){
