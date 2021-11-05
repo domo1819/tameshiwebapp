@@ -49,13 +49,13 @@
 							<select name="emp" id="selbox" onchange="change();">
 								<option value="disable" >選択してください</option>
 									<optgroup label="検索項目">
-										<option value="all"<?= $sel === 'all' ? ' selected' : ''; ?> >全件検索</option>
-										<option value="date"<?= $sel === 'date' ? ' selected' : ''; ?>>日付検索</option>
-										<option value="word" <?= $sel === 'word' ? ' selected' : ''; ?>>単語検索</option>
+										<option value="all" >全件検索</option>
+										<option value="date">日付検索</option>
+										<option value="word" >単語検索</option>
 									</optgroup>
 									<optgroup label="地方項目">
-										<option value="つくば"<?= $sel === 'つくば' ? ' selected' : ''; ?> >つくば</option>
-										<option value="越谷"<?= $sel === '越谷' ? ' selected' : ''; ?> >越谷</option>
+										<option value="つくば" >つくば</option>
+										<option value="越谷" >越谷</option>
 									</optgroup>
 							</select><br><br>
 							<label id="txt1" style="display:none">日付検索(検索項目の日付検索を選択してから日付を指定してください)</label>
@@ -110,13 +110,12 @@
 								print 'DB接続失敗';
 							}
 					?>
+					<input type="button" class="btn_ex11" value="表を表示"  style="width:10%;padding:10px;font-size:18px; background-color:#00c4ff; color:#FFF; margin-bottom:10px;">
 					<script>
 						$(function(){
-							if (document.getElementById("selbox")) {
-									selboxValue = document.getElementById("selbox").value;
-							if(selboxValue !== null){
-								document.getElementById("ta").style.display = "";
-							}
+								$('.btn_ex11').click(function(){
+										$('table').show();
+								});
 						});
 						</script>
 					<table border=1 id="ta" style="display:none">
