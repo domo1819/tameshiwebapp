@@ -114,6 +114,14 @@
 								print 'DB接続失敗';
 							}
 					?>
+					<input type="button" class="btn_ex11" value="表示">
+					<script>
+						$(function(){
+								$('.btn_ex11').click(function(){
+										$('table').show();
+								});
+						});
+						</script>
 					<table border=1 id="ta" style="display:none">
 						<tr>
 							<th>ID</th>
@@ -160,9 +168,6 @@
 											document.getElementById("txt1").style.display = "none";
 											//input1を非表示
 											document.getElementById("da").style.display = "none";
-									}
-									if(selboxValue !== null){
-										document.getElementById("ta").style.display = "";
 									}
 							}
 					}
