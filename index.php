@@ -65,7 +65,7 @@
 								});
 						});
 						</script>
-		<div class="wrapper" id='hoge' style = 'display:none'>
+		<div class="wrapper" id='hoge' >
 			<header>
 					<?php
 					header("Cache-Control:no-cache,no-store,must-revalidate,max-age=0");
