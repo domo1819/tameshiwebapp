@@ -58,7 +58,7 @@
 		?>
 		<script>
 						$(function(){
-								$('.btn_ex12').click(function(){
+								$('.btn_ex12').one("click",function(){
 										$('#hoge').show();
 									  $('#ho').hide();
 										$('#h').hide();
@@ -93,10 +93,10 @@
 				<div class="engine2">
 					<h2 id="engine">データ検索</h2>
 					<p>検索したい項目を下記より選び、検索ボタンをクリックすると該当する結果が表示されます</p>
-					<form method="GET" action="index.php">
+					<form method="POST" action="index.php">
 						<div class="engine2">
 						<?php
-						$sel = isset($_GET['emp']) ? $_GET['emp'] : '';
+						$sel = isset($_POST['emp']) ? $_POST['emp'] : '';
 						?>
 							<label>検索項目</label>
 							<select name="emp" id="selbox" onchange="change();">
@@ -125,14 +125,14 @@
 				<?php
 						$emp = '';
 						$data = '';
-						if (isset($_GET['emp']) === TRUE) {
-								$emp = $_GET['emp'];
+						if (isset($_POST['emp']) === TRUE) {
+								$emp = $_POST['emp'];
 						}
-						if(isset($_GET['data']) === TRUE) {
-							$data = $_GET['data'];
+						if(isset($_POST['data']) === TRUE) {
+							$data = $_POST['data'];
 						}
-						if(isset($_GET['word']) === TRUE) {
-							$word = $_GET['word'];
+						if(isset($_POST['word']) === TRUE) {
+							$word = $_POST['word'];
 						}
 						$emp_data = array();
 						$conn = pg_connect(getenv("DATABASE_URL"));
