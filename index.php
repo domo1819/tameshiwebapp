@@ -12,8 +12,7 @@
 		<link rel="stylesheet" href="../css/style.css">
 	</head>
 	<body><!--  人間が見る内容を記述 -->
-	<p>ログイン機能</p>
-	 <div class="sign-up">
+	 <div class="sign-up" id='ho'>
 	   <form action="" method="POST">
 				<div>
 				<label for="signup-id">アカウント名</label>
@@ -61,6 +60,7 @@
 						$(function(){
 								$('.btn_ex12').click(function(){
 										$('#hoge').show();
+									  $('#ho').hide();
 								});
 						});
 						</script>
