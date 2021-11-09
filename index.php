@@ -18,7 +18,7 @@
 				<div>
 				<label for="signup-id">アカウント名</label>
 					<div>
-						<input name="username" id="signup-id" placeholder="IDを入力してください">
+						<input name="user_name" id="signup-id" placeholder="IDを入力してください">
 					</div>
 				</div>
 				<div>
@@ -35,13 +35,13 @@
 		<?php
 		 $err_msg = "";
 
-		 if (isset($_POST['login'])) {
+		 if (isset($_POST['signup'])) {
 			$username = $_POST['user_name'];
 			$password = $_POST['password'];
 		//③データが渡ってきた場合の処理
 			try {
 				$conn = pg_connect(getenv("DATABASE_URL"));
-				$sql = pg_query($conn, "SELECT user_name, password FROM user_data where username=? and password=?");
+				$sql = pg_query($conn, "SELECT user_name, password FROM user_data where username=? AND password=?");
 				$result = pg_fetch_all($sql);
 		//④ログイン認証ができたときの処理
 				if ($result[0] != 0){
