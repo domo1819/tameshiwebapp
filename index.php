@@ -110,7 +110,9 @@
 								print 'DB接続失敗';
 							}
 					?>
-					<input type="button" class="btn_ex11" value="表を表示"  style="width:10%;padding:10px;font-size:18px; background-color:#00c4ff; color:#FFF; margin-bottom:10px;">
+					<br>
+					<p>検索結果を表示するには「表示」を押してください</p>
+					<input type="button" class="btn_ex11" value="表示"  style="width:10%;padding:10px;font-size:18px; background-color:#00c4ff; color:#FFF; margin-bottom:10px;">
 					<script>
 						$(function(){
 								$('.btn_ex11').click(function(){
