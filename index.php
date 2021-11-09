@@ -29,7 +29,7 @@
 				</div>
        </form>
 			 <div class="form-footer">
-       <p><a href="$err_msg"></a></p>
+       <p><?php echo $err_msg ?></p>
   </div>
     </div>	
 		<?php
