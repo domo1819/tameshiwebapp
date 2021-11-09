@@ -28,7 +28,7 @@
 						</div>
 				</div>
 				<div>
-				<button name="signup" type="submit" onClick="btn_ex12")>Submit</button>
+				<button name="signup" type="submit">Submit</button>
 				</div>
        </form>
     </div>	
@@ -58,15 +58,7 @@
 			}
 		}
 		?>
-		<script>
-						
-							function btn_ex12(){
-								const elem1 = document.getElementById("disp");if($result[0] != 0){							
-								    elem1.style.display = "block";
-							}
-						}
-						</script>
-		<div class="wrapper" id="disp" style="display:none">
+		<div class="wrapper">
 			<header>
 					<?php
 					header("Cache-Control:no-cache,no-store,must-revalidate,max-age=0");
