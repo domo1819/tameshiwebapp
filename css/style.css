@@ -18,7 +18,9 @@ html  {
 	max-width: 960px;
 }
 
-
+label{
+  margin-left: 15px;
+}
 
 
 h1{
