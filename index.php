@@ -24,7 +24,7 @@
 					header('Location: php/home.php');
 		//⑤アカウント情報が間違っていたときの処理
 				}else{
-					$err_msg = "入力内容に誤りがあります";
+					$err_msg = "入力内容に誤りがあります。";
 				}
 		//⑥データが渡って来なかったときの処理
 			}catch (PDOExeption $e) {
