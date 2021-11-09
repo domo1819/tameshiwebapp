@@ -21,7 +21,7 @@
 				$result = pg_fetch_all($sql);
 		//④ログイン認証ができたときの処理
 				if ($result[0] != 0){
-					header('Location: php/home.php');
+					header('Location: main/home.php');
 		//⑤アカウント情報が間違っていたときの処理
 				}else{
 					$err_msg = "入力内容に誤りがあります。";

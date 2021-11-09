@@ -38,7 +38,7 @@
 				</div>
 				<div class="engine2">
 					<h2 id="engine">データ検索</h2>
-					<p>検索したい項目を下記より選び、検索ボタンをクリックすると該当する結果が表示されます</p>
+					<p>検索したい項目を下記より選び、検索ボタンをクリックすると該当する結果が検索されます</p>
 					<form method="POST" action="home.php">
 						<div class="engine2">
 						<?php
