@@ -60,7 +60,7 @@
 		?>
 		<script>
 			function clickBtn1(){
-				const p1 = document.getElementById("p1");
+				const p1 = document.getElementById("header");
 
 				if(p1.style.display=="none"){
 					p1.style.display ="block";
