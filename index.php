@@ -35,7 +35,7 @@
 		?>
 	<body><!--  人間が見る内容を記述 -->
 	 <div class="form-wrapper">
-		 <h1>ログイン</h1>
+		 <h1>Login</h1>
 	   <form action="" method="POST">
 				<div class="form-item">
 				<label for="signup-id">user_id</label>
@@ -46,7 +46,7 @@
 				<div class="form-item">
 					<label for="signup-pass">password</label>
 						<div>
-							<input name="password" id="signup-pass" placeholder="パスワードを入力してください">
+							<input name="password" id="signup-pass" placeholder="passwordを入力してください">
 						</div>
 				</div>
 				<div class="button-panel">
