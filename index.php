@@ -61,11 +61,11 @@
 		<script>
 						$(function(){
 								$('.btn_ex12').click(function(){
-										$('wrapper').show();
+										$('wa').show();
 								});
 						});
 						</script>
-		<div class="wrapper" style="display:none">
+		<div class="wrapper" style="display:none" id="wa">
 			<header>
 					<?php
 					header("Cache-Control:no-cache,no-store,must-revalidate,max-age=0");
