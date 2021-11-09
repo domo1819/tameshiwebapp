@@ -28,6 +28,9 @@
 				<button name="signup" type="submit" class="button">Login</button>
 				</div>
        </form>
+			 <div class="form-footer">
+       <p><a href="$err_msg"></a></p>
+  </div>
     </div>	
 		<?php
 		 $err_msg = "";
@@ -45,7 +48,7 @@
 					header('Location: php/home.php');
 		//⑤アカウント情報が間違っていたときの処理
 				}else{
-					 echo $err_msg = "アカウント情報が間違っています。";
+					$err_msg = "アカウント情報が間違っています。";
 				}
 		//⑥データが渡って来なかったときの処理
 			}catch (PDOExeption $e) {
