@@ -27,7 +27,7 @@
 						</div>
 				</div>
 				<div>
-				<button name="signup" type="submit">ログイン</button>
+				<button name="signup" type="submit" class="btn_ex11">ログイン</button>
 				</div>
        </form>
     </div>	
@@ -59,7 +59,7 @@
 		?>
 		<script>
 						$(function(){
-								$('.btn_ex12').click(function(){
+								$('.btn_ex11').click(function(){
 										$('#hoge').show();
 									  $('#ho').hide();
 										$('#h').hide();
