@@ -14,7 +14,7 @@
 	<body><!--  人間が見る内容を記述 -->
 	<p>ログイン機能</p>
 	 <div class="sign-up">
-	   <form action="" method="POST">
+	   <form action="index.php" method="POST">
 				<div>
 				<label for="signup-id">アカウント名</label>
 					<div>
