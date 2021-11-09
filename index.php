@@ -27,7 +27,7 @@
 						</div>
 				</div>
 				<div>
-				<button name="signup" type="submit" class="btn_ex11">ログイン</button>
+				<button name="signup" type="submit">ログイン</button>
 				</div>
        </form>
     </div>	
@@ -44,7 +44,6 @@
 				$result = pg_fetch_all($sql);
 		//④ログイン認証ができたときの処理
 				if ($result[0] != 0){
-					header('Location: index.php');
 					echo '<input type="button" class="btn_ex12" id="h" value="表示"  style="width:10%;padding:10px;font-size:18px; background-color:#00c4ff; color:#FFF; margin-bottom:10px; margin-left: 15px;">';
 		//⑤アカウント情報が間違っていたときの処理
 				}else{
@@ -59,7 +58,7 @@
 		?>
 		<script>
 						$(function(){
-								$('.btn_ex11').click(function(){
+								$('.btn_ex12').click(function(){
 										$('#hoge').show();
 									  $('#ho').hide();
 										$('#h').hide();
