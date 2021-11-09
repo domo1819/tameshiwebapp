@@ -25,7 +25,7 @@
 						</div>
 				</div>
 				<div class="button-panel">
-				<button name="signup" type="submit">Login</button>
+				<button name="signup" type="submit" class="button">Login</button>
 				</div>
        </form>
     </div>	
