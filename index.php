@@ -45,7 +45,6 @@
 				$result = pg_fetch_all($sql);
 		//④ログイン認証ができたときの処理
 				if ($result[0] != 0){
-					echo '<input type="submit" value="検索" ">';
 					header('Location: index.php');
 		//⑤アカウント情報が間違っていたときの処理
 				}else{
@@ -58,8 +57,15 @@
 			}
 		}
 		?>
-		<input type="checkbox" id="label1"/>
-		<div class="wrapper">
+		<input type="button" class="btn_ex12" value="表示"  style="width:10%;padding:10px;font-size:18px; background-color:#00c4ff; color:#FFF; margin-bottom:10px; margin-left: 15px;">
+		<script>
+						$(function(){
+								$('.btn_ex12').click(function(){
+										$('#hoge').show();
+								});
+						});
+						</script>
+		<div class="wrapper" id='hoge' hidden>
 			<header>
 					<?php
 					header("Cache-Control:no-cache,no-store,must-revalidate,max-age=0");
