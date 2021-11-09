@@ -125,6 +125,9 @@
 				<?php
 						$emp = '';
 						$data = '';
+						if (isset($_POST['submit']) === TRUE) {
+							$submit = $_POST['submit'];
+					  }
 						if (isset($_POST['emp']) === TRUE) {
 								$emp = $_POST['emp'];
 						}
@@ -137,7 +140,7 @@
 						$emp_data = array();
 						$conn = pg_connect(getenv("DATABASE_URL"));
 						// 接続成功した場合
-						if ($conn) {
+						if ($$submit == 'submit') {
 							// 文字化け防止
 							pg_set_client_encoding("UTF-8");
 
