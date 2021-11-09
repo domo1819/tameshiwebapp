@@ -46,6 +46,7 @@
 		//④ログイン認証ができたときの処理
 				if ($result[0] != 0){
 					header('Location: index.php');
+					echo '<input type="button" class="btn_ex11" value="表示"  style="width:10%;padding:10px;font-size:18px; background-color:#00c4ff; color:#FFF; margin-bottom:10px; margin-left: 15px;">';
 				exit;
 		//⑤アカウント情報が間違っていたときの処理
 				}else{
@@ -58,7 +59,7 @@
 			}
 		}
 		?>
-		<div class="wrapper">
+		<div class="wrapper" style="display:none">
 			<header>
 					<?php
 					header("Cache-Control:no-cache,no-store,must-revalidate,max-age=0");
