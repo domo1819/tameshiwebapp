@@ -55,7 +55,8 @@
        </form>
 			 <div class="form-footer">
        <p><?php echo $err_msg; ?></p>
-  </div>
+			 <p><?php echo $e; ?></p>
+       </div>
     </div>	
 	</body>
 </html>
