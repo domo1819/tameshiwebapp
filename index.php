@@ -93,7 +93,7 @@
 				<div class="engine2">
 					<h2 id="engine">データ検索</h2>
 					<p>検索したい項目を下記より選び、検索ボタンをクリックすると該当する結果が表示されます</p>
-					<form method="POST" action="">
+					<form method="POST" action="index.php">
 						<div class="engine2">
 						<?php
 						$sel = isset($_POST['emp']) ? $_POST['emp'] : '';
@@ -125,9 +125,6 @@
 				<?php
 						$emp = '';
 						$data = '';
-						if (isset($_POST['submit']) === TRUE) {
-							$submit = $_POST['submit'];
-					  }
 						if (isset($_POST['emp']) === TRUE) {
 								$emp = $_POST['emp'];
 						}
@@ -140,7 +137,7 @@
 						$emp_data = array();
 						$conn = pg_connect(getenv("DATABASE_URL"));
 						// 接続成功した場合
-						if ($$submit == 'submit') {
+						if ($conn) {
 							// 文字化け防止
 							pg_set_client_encoding("UTF-8");
 
