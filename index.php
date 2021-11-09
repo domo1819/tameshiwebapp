@@ -61,7 +61,7 @@
 		<script>
 						$(function(){
 								$('.btn_ex12').click(function(){
-										$('wa').show();
+										$('main').show();
 								});
 						});
 						</script>
