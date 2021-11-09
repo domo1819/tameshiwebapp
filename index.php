@@ -45,6 +45,7 @@
 				$result = pg_fetch_all($sql);
 		//④ログイン認証ができたときの処理
 				if ($result[0] != 0){
+					echo '<input type="submit" value="検索" ">';
 					header('Location: index.php');
 				exit;
 		//⑤アカウント情報が間違っていたときの処理
@@ -58,6 +59,7 @@
 			}
 		}
 		?>
+		<input type="checkbox" id="label1"/>
 		<div class="wrapper">
 			<header>
 					<?php
