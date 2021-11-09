@@ -51,7 +51,7 @@ form {
 }
 
 .button-panel .button {
-  background: #f16272;
+  background: aqua;
   border: none;
   color: #fff;
   cursor: pointer;
@@ -66,7 +66,7 @@ form {
 }
 
 .button:hover {
-  background: #ee3e52;
+  background: aqua;
 }
 
 .form-footer {
