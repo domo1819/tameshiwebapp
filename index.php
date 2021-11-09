@@ -6,25 +6,26 @@
 		<title>
 		ログイン機能
 		</title>
-		<link rel="stylesheet" href="../css/style.css">
+		<link rel="stylesheet" href="css/login.css">
 	</head>
 	<body><!--  人間が見る内容を記述 -->
-	 <div class="sign-up">
+	 <div class="form-wrapper">
+		 <h1>ログイン</h1>
 	   <form action="" method="POST">
-				<div>
-				<label for="signup-id">アカウント名</label>
+				<div class="form-item">
+				<label for="signup-id">user_id</label>
 					<div>
 						<input name="user_name" id="signup-id" placeholder="IDを入力してください">
 					</div>
 				</div>
-				<div>
-					<label for="signup-pass">パスワード</label>
+				<div class="form-item">
+					<label for="signup-pass">password</label>
 						<div>
 							<input name="password" id="signup-pass" placeholder="パスワードを入力してください">
 						</div>
 				</div>
-				<div>
-				<button name="signup" type="submit">ログイン</button>
+				<div class="button-panel">
+				<button name="signup" type="submit">Login</button>
 				</div>
        </form>
     </div>	
