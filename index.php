@@ -28,7 +28,7 @@
 						</div>
 				</div>
 				<div>
-				<button name="signup" type="submit">Submit</button>
+				<button name="signup" type="submit" onClick="btn_ex12")>Submit</button>
 				</div>
        </form>
     </div>	
@@ -46,7 +46,6 @@
 		//④ログイン認証ができたときの処理
 				if ($result[0] != 0){
 					header('Location: index.php');
-					echo '<input type="button" class="btn_ex11" value="表示"  style="width:10%;padding:10px;font-size:18px; background-color:#00c4ff; color:#FFF; margin-bottom:10px; margin-left: 15px;">';
 				exit;
 		//⑤アカウント情報が間違っていたときの処理
 				}else{
@@ -59,7 +58,15 @@
 			}
 		}
 		?>
-		<div class="wrapper" style="display:none">
+		<script>
+						
+							function btn_ex12(){
+								const elem1 = document.getElementById("disp");if($result[0] != 0){							
+								    elem1.style.display = "block";
+							}
+						}
+						</script>
+		<div class="wrapper" id="disp" style="display:none">
 			<header>
 					<?php
 					header("Cache-Control:no-cache,no-store,must-revalidate,max-age=0");
