@@ -59,7 +59,7 @@
 			}
 		}
 		?>
-		<div class="wrapper" style="display:none">
+		<div class="wrapper">
 			<header>
 					<?php
 					header("Cache-Control:no-cache,no-store,must-revalidate,max-age=0");
