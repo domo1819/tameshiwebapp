@@ -47,7 +47,6 @@
 				if ($result[0] != 0){
 					echo '<input type="submit" value="検索" ">';
 					header('Location: index.php');
-				exit;
 		//⑤アカウント情報が間違っていたときの処理
 				}else{
 					 echo $err_msg = "アカウント情報が間違っています。";
