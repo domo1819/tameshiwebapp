@@ -9,6 +9,13 @@
 			<script type="text/javascript" src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 			<script type="text/javascript" src="./jquery-3.6.0.min.js"></script>
 			<script type="text/javascript" src="./main.js"></script>
+			<script>
+						$(function(){
+								$('.btn_ex12').click(function(){
+										$('main').show();
+								});
+						});
+						</script>
 		<link rel="stylesheet" href="../css/style.css">
 	</head>
 	<body><!--  人間が見る内容を記述 -->
@@ -58,13 +65,6 @@
 			}
 		}
 		?>
-		<script>
-						$(function(){
-								$('.btn_ex12').click(function(){
-										$('main').show();
-								});
-						});
-						</script>
 		<div class="wrapper" style="display:none" id="wa">
 			<header>
 					<?php
