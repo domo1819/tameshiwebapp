@@ -45,7 +45,7 @@
 				$result = pg_fetch_all($sql);
 		//④ログイン認証ができたときの処理
 				if ($result[0] != 0){
-					echo '<input type="button" value="ボタン1" onclick="clickBtn1()" />';
+					echo '<input type="button" value="ボタン1" onclick="btn_ex2" />';
 				exit;
 		//⑤アカウント情報が間違っていたときの処理
 				}else{
@@ -59,14 +59,12 @@
 		}
 		?>
 		<script>
-			function clickBtn1(){
-				const p1 = document.getElementById("header");
-
-				if(p1.style.display=="none"){
-					p1.style.display ="block";
-				}
-			}
-			</script>
+						$(function(){
+								$('.btn_ex2').click(function(){
+										$('main').show();
+								});
+						});
+						</script>
 		<div class="wrapper" id="p1" style="display:none">
 			<header>
 					<?php
