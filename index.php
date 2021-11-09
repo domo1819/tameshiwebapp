@@ -9,13 +9,6 @@
 			<script type="text/javascript" src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 			<script type="text/javascript" src="./jquery-3.6.0.min.js"></script>
 			<script type="text/javascript" src="./main.js"></script>
-			<script>
-						$(function(){
-								$('.btn_ex12').click(function(){
-										$('main').show();
-								});
-						});
-						</script>
 		<link rel="stylesheet" href="../css/style.css">
 	</head>
 	<body><!--  人間が見る内容を記述 -->
@@ -52,7 +45,7 @@
 				$result = pg_fetch_all($sql);
 		//④ログイン認証ができたときの処理
 				if ($result[0] != 0){
-					echo '<input type = "button" class="btn_ex12" value="表示"  style="width:10%;padding:10px;font-size:18px; background-color:#00c4ff; color:#FFF; margin-bottom:10px; margin-left:15px;">';
+					echo '<input type="button" value="ボタン1" onclick="clickBtn1()" />';
 				exit;
 		//⑤アカウント情報が間違っていたときの処理
 				}else{
@@ -65,7 +58,16 @@
 			}
 		}
 		?>
-		<div class="wrapper" style="display:none" id="wa">
+		<script>
+			function clickBtn1(){
+				const p1 = document.getElementById("p1");
+
+				if(p1.style.display=="none"){
+					p1.style.display ="block";
+				}
+			}
+			</script>
+		<div class="wrapper" id="p1" style="display:none">
 			<header>
 					<?php
 					header("Cache-Control:no-cache,no-store,must-revalidate,max-age=0");
