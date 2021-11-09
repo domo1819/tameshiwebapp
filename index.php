@@ -14,7 +14,7 @@
 	<body><!--  人間が見る内容を記述 -->
 	<p>ログイン機能</p>
 	 <div class="sign-up">
-	   <form action="index.php" method="POST">
+	   <form action="" method="POST">
 				<div>
 				<label for="signup-id">アカウント名</label>
 					<div>
@@ -58,21 +58,7 @@
 			}
 		}
 		?>
-		<script>
-//初期表示は非表示
-document.getElementById("p1").style.display ="none";
 
-function clickBtn1(){
-	const p1 = document.getElementById("p1");
-
-	if(p1.style.display=="block"){
-		// noneで非表示
-		p1.style.display ="none";
-	}else{
-		// blockで表示
-		p1.style.display ="block";
-	}
-}
 </script>
 		<div class="wrapper" id="p1">
 			<header>
