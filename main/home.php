@@ -222,14 +222,10 @@
 						}
 						if(isset($_POST['word']) === TRUE) {
 							$word = $_POST['word'];
-						}
-						var_dump($emp);
-						var_dump($data);
-						var_dump($word);
-
+						};
 						$emp_data = array();
 						$conn = pg_connect(getenv("DATABASE_URL"));
-						$re = pg_query($conn, "SELECT a.timestamp FROM warn_info a");
+						
 						// 接続成功した場合
 						if ($conn) {
 							// 文字化け防止
@@ -247,9 +243,6 @@
 							if($emp == 'word'){
 								$result = pg_query($conn, "SELECT a.id, a.timestamp, h.belong_name, c.region_name, b.car_classify_num, b.car_classify_hiragana, b.car_number, a.longitude, a.latitude, e.fine_amount, f.afk_mode, a.is_payment FROM warn_info a INNER JOIN car_data b ON a.car_data_id=b.id INNER JOIN region_data c ON b.car_region_id=c.id INNER JOIN punish_data d ON a.punish_id=d.id INNER JOIN fine_data e ON d.fine_id=e.id INNER JOIN afk_mode_data f ON d.afk_mode_id=f.id INNER JOIN user_data g ON a.user_id=g.user_id INNER JOIN belong_data h ON g.belong_id = h.id WHERE a.timestamp LIKE '%$word%' OR h.belong_name LIKE '%$word%' OR c.region_name LIKE '%$word%' OR b.car_classify_hiragana LIKE '%$word%' OR b.car_number LIKE '%$word%' OR f.afk_mode LIKE '%$word%'");
 							} 
-							if($re !== $data){
-								echo '値がありません';
-							}
 							$arr = pg_fetch_all($result);
 							// 結果セットを開放します
 							pg_free_result($result);
@@ -259,6 +252,28 @@
 							} else {
 								print 'DB接続失敗';
 							}
+							echo "<table border=1>
+							<tr>
+								<th>ID</th>
+								<th>日時</th>
+								<th>所属名</th>
+								<th>地域名</th>
+								<th>分類番号(番号)</th>
+								<th>分類番号(ひらがな)</th>
+								<th>車番号</th>
+								<th>緯度</th>
+								<th>経度</th>
+								<th>罰金額</th>
+								<th>違反態様</th>
+								<th>支払い状況</th>
+							</tr>";
+							foreach($arr as $rows){
+								echo "<tr>\n";
+								foreach($rows as $value){
+									printf("<td>" .$value. "</td>\n");
+								}
+							}
+							echo "</table>/n";
 					?>
 					<p>検索結果を表示するには「表示」を押してください</p>
 					<input type="button" class="btn_ex11" value="表示"  style="width:10%;padding:10px;font-size:18px; background-color:#00c4ff; color:#FFF; margin-bottom:10px; margin-left: 15px;">
@@ -269,30 +284,6 @@
 								});
 						});
 						</script>
-					<table border=1 id="ta" style="display:none">
-						<tr>
-							<th>ID</th>
-							<th>日時</th>
-							<th>所属名</th>
-							<th>地域名</th>
-							<th>分類番号(番号)</th>
-							<th>分類番号(ひらがな)</th>
-							<th>車番号</th>
-							<th>緯度</th>
-							<th>経度</th>
-							<th>罰金額</th>
-							<th>違反態様</th>
-							<th>支払い状況</th>
-						</tr>
-						<?php
-						foreach($arr as $rows){
-							echo "<tr>\n";
-							foreach($rows as $value){
-								printf("<td>" .$value. "</td>\n");
-							}
-						}
-						?>
-			    </table>
 					<script type="text/javascript">
 					function change() {
 							if (document.getElementById("selbox")) {
