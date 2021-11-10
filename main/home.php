@@ -42,7 +42,7 @@
 						?>
 							<label>検索項目</label>
 							<select name="emp" id="selbox" onchange="change();">
-								<option value="disable" >選択してください</option>
+								<option value="" >選択してください</option>
 									<optgroup label="検索項目">
 										<option value="all" >全件検索</option>
 										<option value="date">日付検索</option>
