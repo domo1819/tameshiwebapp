@@ -42,7 +42,7 @@
 						?>
 							<label>検索項目</label>
 							<select name="emp" id="selbox" onchange="change();">
-								<option value="" >選択してください</option>
+								<option value="disable" >選択してください</option>
 									<optgroup label="検索項目">
 										<option value="all" >全件検索</option>
 										<option value="date">日付検索</option>
@@ -252,42 +252,42 @@
 							} else {
 								print 'DB接続失敗';
 							}
-							if($emp !== null){
-							echo "<table border=1>
-							<tr>
-								<th>ID</th>
-								<th>日時</th>
-								<th>所属名</th>
-								<th>地域名</th>
-								<th>分類番号(番号)</th>
-								<th>分類番号(ひらがな)</th>
-								<th>車番号</th>
-								<th>緯度</th>
-								<th>経度</th>
-								<th>罰金額</th>
-								<th>違反態様</th>
-								<th>支払い状況</th>
-							</tr>";
-							foreach($arr as $rows){
-								echo "<tr>\n";
-								foreach($rows as $value){
-									printf("<td>" .$value. "</td>\n");
-								}
-							}
-							echo "</table>";
-						}
-
-
 					?>
 					<p>検索結果を表示するには「表示」を押してください</p>
 					<input type="button" class="btn_ex11" value="表示"  style="width:10%;padding:10px;font-size:18px; background-color:#00c4ff; color:#FFF; margin-bottom:10px; margin-left: 15px;">
 					<script>
-						$(function(){
-								$('.btn_ex11').click(function(){
-										$('table').show();
-								});
-						});
+						function change(){
+							if (document.getElementById("selbox")) {
+									selboxValue = document.getElementById ("selbox").value;
+							if(selboxValue !== null){
+								document.getElementById("ta").style.display = "";
+							}}
+						};
 						</script>
+					<table border=1 id="ta" style="display:none">
+						<tr>
+							<th>ID</th>
+							<th>日時</th>
+							<th>所属名</th>
+							<th>地域名</th>
+							<th>分類番号(番号)</th>
+							<th>分類番号(ひらがな)</th>
+							<th>車番号</th>
+							<th>緯度</th>
+							<th>経度</th>
+							<th>罰金額</th>
+							<th>違反態様</th>
+							<th>支払い状況</th>
+						</tr>
+						<?php
+						foreach($arr as $rows){
+							echo "<tr>\n";
+							foreach($rows as $value){
+								printf("<td>" .$value. "</td>\n");
+							}
+						}
+						?>
+			    </table>
 					<script type="text/javascript">
 					function change() {
 							if (document.getElementById("selbox")) {
