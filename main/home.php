@@ -17,11 +17,11 @@
 					header("Cache-Control:no-cache,no-store,must-revalidate,max-age=0");
 					header("Pragma:no-cache");
 				?>
-				<h1 id="top">違反検索サイト</h1>
+				<h1 id="top">駐車違反情報検索サイト</h1>
 				<ul>
 					<li>
 						<a href="#engine">
-							検索エンジン</a>
+							データ検索</a>
 					</li>
 					<li>
 						<a href="#pp">プライバシーポリシー</a>
@@ -32,10 +32,6 @@
 				</ul>
 			</header>
 			<main>
-				<div class="top1">
-					<h2>違反検索サイトのトップページです。</h2>
-					<p>上部メニューの『検索エンジン』からデータの検索が行えます</p>
-				</div>
 				<div class="engine2">
 					<h2 id="engine">データ検索</h2>
 					<p>検索したい項目を下記より選び、検索ボタンをクリックすると該当する結果が検索されます</p>
@@ -80,6 +76,10 @@
 						if(isset($_POST['word']) === TRUE) {
 							$word = $_POST['word'];
 						}
+						var_dump($emp);
+						var_dump($data);
+						var_dump($word);
+
 						$emp_data = array();
 						$conn = pg_connect(getenv("DATABASE_URL"));
 						// 接続成功した場合
@@ -99,6 +99,9 @@
 							if($emp == 'word'){
 								$result = pg_query($conn, "SELECT a.id, a.timestamp, h.belong_name, c.region_name, b.car_classify_num, b.car_classify_hiragana, b.car_number, a.longitude, a.latitude, e.fine_amount, f.afk_mode, a.is_payment FROM warn_info a INNER JOIN car_data b ON a.car_data_id=b.id INNER JOIN region_data c ON b.car_region_id=c.id INNER JOIN punish_data d ON a.punish_id=d.id INNER JOIN fine_data e ON d.fine_id=e.id INNER JOIN afk_mode_data f ON d.afk_mode_id=f.id INNER JOIN user_data g ON a.user_id=g.user_id INNER JOIN belong_data h ON g.belong_id = h.id WHERE a.timestamp LIKE '%$word%' OR h.belong_name LIKE '%$word%' OR c.region_name LIKE '%$word%' OR b.car_classify_hiragana LIKE '%$word%' OR b.car_number LIKE '%$word%' OR f.afk_mode LIKE '%$word%'");
 							} 
+							if ($emp == null){
+
+							}
 							$arr = pg_fetch_all($result);
 							// 結果セットを開放します
 							pg_free_result($result);
