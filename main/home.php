@@ -255,14 +255,12 @@
 					?>
 					<p>検索結果を表示するには「表示」を押してください</p>
 					<input type="button" class="btn_ex11" value="表示"  style="width:10%;padding:10px;font-size:18px; background-color:#00c4ff; color:#FFF; margin-bottom:10px; margin-left: 15px;">
-					<script type="text/javascript">
-						function change(){
-							if (document.getElementById("selbox")) {
-									selboxValue = document.getElementById ("selbox").value;
-							if(selboxValue !== null){
-								document.getElementById("ta").style.display = "";
-							}}
-						};
+					<script>
+						$(function(){
+								$('.btn_ex11').click(function(){
+										$('table').show();
+								});
+						});
 						</script>
 					<table border=1 id="ta" style="display:none">
 						<tr>
