@@ -263,15 +263,9 @@
 					<input type="button" class="btn_ex11" value="表示"  style="width:10%;padding:10px;font-size:18px; background-color:#00c4ff; color:#FFF; margin-bottom:10px; margin-left: 15px;">
 					<script>
 						$(function(){
-							if($result == $data){
 								$('.btn_ex11').click(function(){
 										$('table').show();
 								});
-						}else{
-							$('.btn_ex11').click(function(){
-								console.log('該当する値がありません。');
-								});
-						}
 						});
 						</script>
 					<table border=1 id="ta" style="display:none">
