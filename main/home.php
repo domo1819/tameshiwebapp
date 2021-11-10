@@ -241,7 +241,7 @@
 								$result = pg_query($conn, "SELECT a.id, a.timestamp, h.belong_name, c.region_name, b.car_classify_num, b.car_classify_hiragana, b.car_number, a.longitude, a.latitude, e.fine_amount, f.afk_mode, a.is_payment FROM warn_info a INNER JOIN car_data b ON a.car_data_id=b.id INNER JOIN region_data c ON b.car_region_id=c.id INNER JOIN punish_data d ON a.punish_id=d.id INNER JOIN fine_data e ON d.fine_id=e.id INNER JOIN afk_mode_data f ON d.afk_mode_id=f.id INNER JOIN user_data g ON a.user_id=g.user_id INNER JOIN belong_data h ON g.belong_id = h.id WHERE c.region_name = '$emp'");
 							} 
 							if ($emp == 'date'){
-								$result = pg_query($conn, "SELECT a.id, a.timestamp, h.belong_name, c.region_name, b.car_classify_num, b.car_classify_hiragana, b.car_number, a.longitude, a.latitude, e.fine_amount, f.afk_mode, a.is_payment FROM warn_info a INNER JOIN car_data b ON a.car_data_id=b.id INNER JOIN region_data c ON b.car_region_id=c.id INNER JOIN punish_data d ON a.punish_id=d.id INNER JOIN fine_data e ON d.fine_id=e.id INNER JOIN afk_mode_data f ON d.afk_mode_id=f.id INNER JOIN user_data g ON a.user_id=g.user_id INNER JOIN belong_data h ON g.belong_id = h.id WHERE a.timestamp = '%$data%'");
+								$result = pg_query($conn, "SELECT a.id, a.timestamp, h.belong_name, c.region_name, b.car_classify_num, b.car_classify_hiragana, b.car_number, a.longitude, a.latitude, e.fine_amount, f.afk_mode, a.is_payment FROM warn_info a INNER JOIN car_data b ON a.car_data_id=b.id INNER JOIN region_data c ON b.car_region_id=c.id INNER JOIN punish_data d ON a.punish_id=d.id INNER JOIN fine_data e ON d.fine_id=e.id INNER JOIN afk_mode_data f ON d.afk_mode_id=f.id INNER JOIN user_data g ON a.user_id=g.user_id INNER JOIN belong_data h ON g.belong_id = h.id WHERE a.timestamp LIKE '%$data%'");
 							} 
 							else{
 								echo "見つかりました！";
@@ -263,9 +263,15 @@
 					<input type="button" class="btn_ex11" value="表示"  style="width:10%;padding:10px;font-size:18px; background-color:#00c4ff; color:#FFF; margin-bottom:10px; margin-left: 15px;">
 					<script>
 						$(function(){
+							if($result = $data){
 								$('.btn_ex11').click(function(){
 										$('table').show();
 								});
+						}else{
+							$('.btn_ex11').click(function(){
+								console.log('該当する値がありません。');
+								});
+						}
 						});
 						</script>
 					<table border=1 id="ta" style="display:none">
