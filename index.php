@@ -17,7 +17,7 @@
 		//③データが渡ってきた場合の処理
 			try {
 				$conn = pg_connect(getenv("DATABASE_URL"));
-				$sql = pg_query($conn, "SELECT user_name, password FROM user_data WHERE user_name = '$username' AND password = '$password'");
+				$sql = pg_query($conn, "SELECT user_id, password FROM user_data WHERE user_id = '$username' AND password = '$password'");
 				$result = pg_fetch_all($sql);
 		//④ログイン認証ができたときの処理
 				if ($result[0] != 0){
