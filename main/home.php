@@ -288,20 +288,23 @@
 							<th>支払い状況</th>
 						</tr>
 						<?php
-						$kara ='該当データはありません';
 						foreach($arr as $rows){
+							var_dump($arr);
 							var_dump($rows);
               var_dump($value);
 							echo "<tr>\n";
 							foreach($rows as $value){
-								if($value == 0){
-									printf ("<td>" .$kara. "</td>\n");
-								}else{
-									printf("<td>" .$value. "</td>\n");
-								}}
+								printf("<td>" .$value. "</td>\n");
 							}
+						}
 						?>
 			    </table>
+					<?php
+					 if($arr == 0){
+						echo "該当データはありません";
+						exit;
+					 }
+					?>
 					</div>
 					<script type="text/javascript">
 					function change() {
