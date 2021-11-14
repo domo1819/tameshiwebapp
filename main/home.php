@@ -229,7 +229,6 @@
 						};
 						$emp_data = array();
 						$conn = pg_connect(getenv("DATABASE_URL"));
-						$re = pg_query($conn, "SELECT timestamp FROM warn_info");
 						// 接続成功した場合
 						if ($conn) {
 							// 文字化け防止
