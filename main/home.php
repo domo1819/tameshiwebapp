@@ -49,9 +49,9 @@
 							<select class="form-select" aria-label="Default select example" name="emp" id="selbox" onchange="change();">
 								<option value="disable" >選択してください</option>
 									<optgroup label="検索項目">
-										<option value="all" >全件検索</option>
-										<option value="date">日付検索</option>
-										<option value="word" >単語検索</option>
+										<option value="all"<?= $sel === 'all' ? ' selected' : ''; ?>>全件検索</option>
+										<option value="date"<?= $sel === 'date' ? ' selected' : ''; ?>>日付検索</option>
+										<option value="word"<?= $sel === 'word' ? ' selected' : ''; ?>>単語検索</option>
 									</optgroup>
 									<optgroup label="地方項目">
 										<option value="いわき" >いわき</option>
