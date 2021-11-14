@@ -261,7 +261,7 @@
 							}
 					?>
 					<p>検索結果を表示するには「表示」を押してください</p>
-					<input type="button" id="btn_ex11" class="btn btn-outline-info" value="表示">
+					<input type="button" id="btn_ex11" class="btn btn-outline-info" value="表示"  style="text-align: center; margin-left: 15px; font-size:18px;">
 					<script>
 						$(function(){
 								$('#btn_ex11').click(function(){
