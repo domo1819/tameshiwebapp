@@ -53,7 +53,8 @@
 									<label id="txt2" style="display:none">単語検索(検索項目の単語検索を選択してから入力してください)</label>
 									<input type="text" id="search_text" name="word" placeholder="検索語を入力してください" style="display:none">
 									<label id="txt3" style="display:none">検索したい地域を選択してください</label>
-									<select name="toshi" id="to" style="display:none">
+									<select name="tosh" id="to" style="display:none">
+									<option value="disable" >選択してください</option>
 										<option value="いわき" >いわき</option>
 										<option value="つくば" >つくば</option>
 										<option value="とちぎ" >とちぎ</option>
@@ -186,8 +187,8 @@
 										<option value="高知" >高知</option>
 										<option value="鳥取" >鳥取</option>
 										<option value="鹿児島" >鹿児島</option>
-							</select><br><br>
-									<br><br><br>
+							</select>
+									<br>
 									<div class="engine">
 							<input type="submit"  name="submit" value="検索" id="submit" style="width:10%;padding:10px;font-size:20px; background-color:#00c4ff; color:#FFF; margin-bottom:10px; margin-left: 15px;">
 							</div>
@@ -218,8 +219,8 @@
 						if (isset($_POST['emp']) === TRUE) {
 								$emp = $_POST['emp'];
 						}
-						if(isset($_POST['toshi']) === TRUE) {
-							$toshi = $_POST['toshi'];
+						if(isset($_POST['tosh']) === TRUE) {
+							$toshi = $_POST['tosh'];
 						};
 						if(isset($_POST['data']) === TRUE) {
 							$data = $_POST['data'];
