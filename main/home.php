@@ -46,7 +46,7 @@
 						$sel = isset($_POST['emp']) ? $_POST['emp'] : '';
 						?>
 							<label>検索項目</label>
-							<select name="emp" id="selbox" onchange="change();">
+							<select class="form-select" aria-label="Default select example" name="emp" id="selbox" onchange="change();">
 								<option value="disable" >選択してください</option>
 									<optgroup label="検索項目">
 										<option value="all" >全件検索</option>
