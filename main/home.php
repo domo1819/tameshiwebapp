@@ -259,8 +259,8 @@
 					<input type="button" class="btn_ex11" value="表示"  style="width:10%;padding:10px;font-size:18px; background-color:#00c4ff; color:#FFF; margin-bottom:10px; margin-left: 15px;">
 					<script>
 						$(function(){
-								$('.btn_ex11').click(function(){
-										$('table').toggle();
+								$('#selbox').click(function(){
+										$('table').show();
 								});
 						});
 						</script>
