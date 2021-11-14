@@ -303,6 +303,7 @@
 					?>
 					</div>
 					</div>
+					<br><br>
 					<script type="text/javascript">
 					function change() {
 							if (document.getElementById("selbox")) {
