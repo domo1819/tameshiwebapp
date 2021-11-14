@@ -2,10 +2,14 @@
 <html lang="ja"><!--  htmlでここから記述する -->
 	<head><!--  コンピューターが見る内容を記述 -->
 		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>
 			検索サイト
 		</title>
+		<link href="../css/bootstrap.min.css" rel="stylesheet">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+		<script src="../js/bootstrap.min.js"></script>
 			<script type="text/javascript" src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 			<script type="text/javascript" src="./jquery-3.6.0.min.js"></script>
 		<link rel="stylesheet" href="../css/style.css">
@@ -264,6 +268,7 @@
 								});
 						});
 						</script>
+					<div class="table-responsive">
 					<table border=1 id="ta" style="display:none">
 						<tr>
 							<th>ID</th>
@@ -288,6 +293,7 @@
 						}
 						?>
 			    </table>
+					</div>
 					<script type="text/javascript">
 					function change() {
 							if (document.getElementById("selbox")) {
