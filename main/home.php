@@ -193,7 +193,7 @@
 									<input type="text" id="search_text" name="word" placeholder="検索語を入力してください" style="display:none">
 									<br><br><br>
 									<div class="engine">
-							<input type="submit"  name="submit" value="検索" id="submit" style="width:10%;padding:10px;font-size:20px; background-color:#00c4ff; color:#FFF; margin-bottom:10px; margin-left: 15px;">
+							<input type="submit"  name="submit" value="検索" id="submit" class="btn btn-info">
 							</div>
 						</div>
 					</form>
@@ -260,10 +260,10 @@
 							}
 					?>
 					<p>検索結果を表示するには「表示」を押してください</p>
-					<input type="button" class="btn_ex11" value="表示"  style="width:10%;padding:10px;font-size:18px; background-color:#00c4ff; color:#FFF; margin-bottom:10px; margin-left: 15px;">
+					<input type="button" id="btn_ex11" class="btn btn-info" value="表示"  style="width:10%;padding:10px;font-size:18px; background-color:#00c4ff; color:#FFF; margin-bottom:10px; margin-left: 15px;">
 					<script>
 						$(function(){
-								$('.btn_ex11').click(function(){
+								$('#btn_ex11').click(function(){
 										$('table').toggle();
 								});
 						});
