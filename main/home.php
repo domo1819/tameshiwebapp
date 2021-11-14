@@ -318,7 +318,7 @@
 											//input1を非表示
 											document.getElementById("da").style.display = "none";
 									}
-									if(selboxValue != "date" AND != "word"){
+									if(selboxValue !== "date" AND !== "word"){
                       //文字1を非表示
 											document.getElementById("txt1").style.display = "none";
 											//input1を非表示
