@@ -288,13 +288,14 @@
 							<th>支払い状況</th>
 						</tr>
 						<?php
+						$kara ='該当データはありません';
 						foreach($arr as $rows){
 							var_dump($rows);
               var_dump($value);
 							echo "<tr>\n";
 							foreach($rows as $value){
 								if($value == 0){
-									printf ("<td>" .該当データはありません. "</td>\n");
+									printf ("<td>" .$kara. "</td>\n");
 								}else{
 									printf("<td>" .$value. "</td>\n");
 								}}
