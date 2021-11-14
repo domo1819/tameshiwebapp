@@ -266,6 +266,7 @@
 						$(function(){
 								$('#btn_ex11').click(function(){
 										$('table').toggle();
+										$('.na').show();
 								});
 						});
 						</script>
@@ -287,9 +288,6 @@
 						</tr>
 						<?php
 						foreach($arr as $rows){
-							var_dump($arr);
-							var_dump($rows);
-              var_dump($value);
 							echo "<tr>\n";
 							foreach($rows as $value){
 								printf("<td>" .$value. "</td>\n");
@@ -297,11 +295,13 @@
 						}
 						?>
 			    </table>
+					<div class="na">
 					<?php
 					if($row==0){
 						echo '<p>該当データはありません</p>';
 					}
 					?>
+					</div>
 					</div>
 					<script type="text/javascript">
 					function change() {
