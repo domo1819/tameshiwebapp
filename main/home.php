@@ -269,7 +269,7 @@
 						});
 						</script>
 					<div class="table-responsive">
-					<table border=1 id="ta" style="display:none">
+					<table class="table table-bordered" id="ta" style="display:none">
 						<tr>
 							<th>ID</th>
 							<th>日時</th>
