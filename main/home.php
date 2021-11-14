@@ -36,6 +36,7 @@
 				</ul>
 			</header>
 			<main>
+				<br>
 				<div class="engine2">
 					<h2 id="engine">データ検索</h2>
 					<p>検索したい項目を下記より選び、検索ボタンをクリックすると該当する結果が検索されます</p>
@@ -269,7 +270,7 @@
 						});
 						</script>
 					<div class="table-responsive">
-					<table  class="table table-striped" id="ta" style="display:none">
+					<table class="table table-bordered" id="ta" style="display:none">
 						<tr>
 							<th>ID</th>
 							<th>日時</th>
