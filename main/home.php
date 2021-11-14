@@ -295,7 +295,7 @@
 						}
 						?>
 			    </table>
-					<div class="na">
+					<div class="na" style="display:none">
 					<?php
 					if($row==0){
 						echo '<p>該当データはありません</p>';
