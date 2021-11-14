@@ -289,8 +289,8 @@
 						</tr>
 						<?php
 						foreach($arr as $rows){
-							var_dump($arr);
-              var_dump($rows);
+							var_dump($rows);
+              var_dump($value);
 							echo "<tr>\n";
 							foreach($rows as $value){
 								if($value == 0){
