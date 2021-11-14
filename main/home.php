@@ -294,7 +294,7 @@
 							echo "<tr>\n";
 							foreach($rows as $value){
 								if($value == 0){
-									printf ("該当データはありません");
+									printf ("<td>" .該当データはありません. "</td>\n");
 								}else{
 									printf("<td>" .$value. "</td>\n");
 								}}
