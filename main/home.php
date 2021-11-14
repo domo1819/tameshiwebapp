@@ -260,7 +260,7 @@
 					<script>
 						$(function(){
 								$('.btn_ex11').click(function(){
-										$('table').show();
+										$('table').toggle();
 								});
 						});
 						</script>
