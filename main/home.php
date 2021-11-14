@@ -293,10 +293,10 @@
               var_dump($rows);
 							echo "<tr>\n";
 							foreach($rows as $value){
-								if($value != 0){
-									printf("<td>" .$value. "</td>\n");
+								if($value == 0){
+									printf ("該当データはありません");
 								}else{
-									echo "該当データはありません";
+									printf("<td>" .$value. "</td>\n");
 								}}
 							}
 						?>
