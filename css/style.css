@@ -55,17 +55,7 @@ p{
   margin: 30px 0px 20px;
 }
 
-table{
-  width: auto;
-  table-layout: fixed;
-}
 
-@media screen and (max-width: 480px) {
-	.table {width: auto;}
-}
-@media screen and (min-width:481px) and (max-width:780px) {
-	.table {width: auto;}
-}
 
 li{
   display: inline;
