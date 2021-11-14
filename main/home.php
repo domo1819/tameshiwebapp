@@ -43,12 +43,17 @@
 							<label>検索項目</label>
 							<select name="emp" id="selbox" onchange="change();">
 								<option value="disable" >選択してください</option>
-									<optgroup label="検索項目">
-										<option value="all" >全件検索</option>
-										<option value="date">日付検索</option>
-										<option value="word" >単語検索</option>
-									</optgroup>
-									<optgroup label="地方項目">
+								<option value="all" >全件検索</option>
+								<option value="date">日付検索</option>
+								<option value="word" >単語検索</option>
+								<option value="toshi" >地域検索</option>
+								</select><br><br>
+							<label id="txt1" style="display:none">日付検索(検索項目の日付検索を選択してから日付を指定してください)</label>
+							<input type="date" id="da" name="data" style="display:none"><br><br>
+									<label id="txt2" style="display:none">単語検索(検索項目の単語検索を選択してから入力してください)</label>
+									<input type="text" id="search_text" name="word" placeholder="検索語を入力してください" style="display:none">
+									<label id="txt3" style="display:none">検索したい地域を選択してください</label>
+									<select name="toshi" id="to" style="display:none">
 										<option value="いわき" >いわき</option>
 										<option value="つくば" >つくば</option>
 										<option value="とちぎ" >とちぎ</option>
@@ -181,12 +186,7 @@
 										<option value="高知" >高知</option>
 										<option value="鳥取" >鳥取</option>
 										<option value="鹿児島" >鹿児島</option>
-									</optgroup>
 							</select><br><br>
-							<label id="txt1" style="display:none">日付検索(検索項目の日付検索を選択してから日付を指定してください)</label>
-							<input type="date" id="da" name="data" style="display:none"><br><br>
-									<label id="txt2" style="display:none">単語検索(検索項目の単語検索を選択してから入力してください)</label>
-									<input type="text" id="search_text" name="word" placeholder="検索語を入力してください" style="display:none">
 									<br><br><br>
 									<div class="engine">
 							<input type="submit"  name="submit" value="検索" id="submit" style="width:10%;padding:10px;font-size:20px; background-color:#00c4ff; color:#FFF; margin-bottom:10px; margin-left: 15px;">
@@ -195,7 +195,7 @@
 					</form>
 				</div>
 				<script>
-				var slc_elm = document.querySelector("#selbox");
+				var slc_elm = document.querySelector("#to");
 
 				slc_elm.addEventListener("focus", function(elm){
 						if(elm.currentTarget.options.length >= 11){
@@ -214,9 +214,13 @@
 				<?php
 						$emp = '';
 						$data = '';
+						$toshi = '';
 						if (isset($_POST['emp']) === TRUE) {
 								$emp = $_POST['emp'];
 						}
+						if(isset($_POST['toshi']) === TRUE) {
+							$toshi = $_POST['toshi'];
+						};
 						if(isset($_POST['data']) === TRUE) {
 							$data = $_POST['data'];
 						}
@@ -235,10 +239,10 @@
 							$result = pg_query($conn, "SELECT a.id, a.timestamp, h.belong_name, c.region_name, b.car_classify_num, b.car_classify_hiragana, b.car_number, a.longitude, a.latitude, e.fine_amount, f.afk_mode, a.is_payment FROM warn_info a INNER JOIN car_data b ON a.car_data_id=b.id INNER JOIN region_data c ON b.car_region_id=c.id INNER JOIN punish_data d ON a.punish_id=d.id INNER JOIN fine_data e ON d.fine_id=e.id INNER JOIN afk_mode_data f ON d.afk_mode_id=f.id INNER JOIN user_data g ON a.user_id=g.user_id INNER JOIN belong_data h ON g.belong_id = h.id ORDER BY a.id ASC"); 
 							}
 
-							else if ($emp !== 'all'){
-								$result = pg_query($conn, "SELECT a.id, a.timestamp, h.belong_name, c.region_name, b.car_classify_num, b.car_classify_hiragana, b.car_number, a.longitude, a.latitude, e.fine_amount, f.afk_mode, a.is_payment FROM warn_info a INNER JOIN car_data b ON a.car_data_id=b.id INNER JOIN region_data c ON b.car_region_id=c.id INNER JOIN punish_data d ON a.punish_id=d.id INNER JOIN fine_data e ON d.fine_id=e.id INNER JOIN afk_mode_data f ON d.afk_mode_id=f.id INNER JOIN user_data g ON a.user_id=g.user_id INNER JOIN belong_data h ON g.belong_id = h.id WHERE c.region_name = '$emp'");
+							else if ($emp == 'toshi'){
+								$result = pg_query($conn, "SELECT a.id, a.timestamp, h.belong_name, c.region_name, b.car_classify_num, b.car_classify_hiragana, b.car_number, a.longitude, a.latitude, e.fine_amount, f.afk_mode, a.is_payment FROM warn_info a INNER JOIN car_data b ON a.car_data_id=b.id INNER JOIN region_data c ON b.car_region_id=c.id INNER JOIN punish_data d ON a.punish_id=d.id INNER JOIN fine_data e ON d.fine_id=e.id INNER JOIN afk_mode_data f ON d.afk_mode_id=f.id INNER JOIN user_data g ON a.user_id=g.user_id INNER JOIN belong_data h ON g.belong_id = h.id WHERE c.region_name = '$toshi'");
 							} 
-							else if ($emp == 'date' && $data != null){
+							else if ($emp == 'date'){
 								$result = pg_query($conn, "SELECT a.id, a.timestamp, h.belong_name, c.region_name, b.car_classify_num, b.car_classify_hiragana, b.car_number, a.longitude, a.latitude, e.fine_amount, f.afk_mode, a.is_payment FROM warn_info a INNER JOIN car_data b ON a.car_data_id=b.id INNER JOIN region_data c ON b.car_region_id=c.id INNER JOIN punish_data d ON a.punish_id=d.id INNER JOIN fine_data e ON d.fine_id=e.id INNER JOIN afk_mode_data f ON d.afk_mode_id=f.id INNER JOIN user_data g ON a.user_id=g.user_id INNER JOIN belong_data h ON g.belong_id = h.id WHERE a.timestamp LIKE '%$data%'");
 							} 
 							else if($emp == 'word' && $word != null){
@@ -292,6 +296,11 @@
 					function change() {
 							if (document.getElementById("selbox")) {
 									selboxValue = document.getElementById("selbox").value;
+									if(selboxValue == "toshi"){
+										document.getElementById("txt3").style.display = "";
+											//input1を表示
+											document.getElementById("to").style.display = "";
+									}
 									if (selboxValue == "date") {
 											//文字1を表示
 											document.getElementById("txt1").style.display = "";
