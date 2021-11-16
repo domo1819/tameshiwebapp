@@ -263,7 +263,7 @@
 						<input type="button" id="btn_ex11" class="btn btn-outline-info btn-lg" value="表示"  style="text-align: center; margin-left: 15px; font-size:18px; padding:10px; margin-bottom:10px;">
 						<script>
 							$(function(){
-								if($row != null){
+								if($row != 0){
 									$('#btn_ex11').click(function(){
 											$('table').toggle();
 											$('.none').show();
