@@ -46,7 +46,7 @@
 								?>
 								<label>検索項目</label>
 								<select class="form-select" aria-label="Default select example" name="emp" id="selbox" onchange="change();">
-									<option disabled selected value>選択してください</option>
+									<option value="" disabled selected >選択してください</option>
 										<optgroup label="検索項目">
 											<option value="all">全件検索</option>
 											<option value="date">日付検索</option>
@@ -216,7 +216,6 @@
 					}, false);
 					</script>
 					<?php
-							$row = '1';
 							$emp = '';
 							$data = '';
 							if (isset($_POST['emp']) === TRUE) {
@@ -260,7 +259,7 @@
 									print 'DB接続失敗';
 								}
 						?>
-							<div class="table-responsive">
+							<div class="table-responsive" id="ta">
 								<?php
 								if($row!==0){
 									echo '<table class="table table-bordered" id="ta"><tr>
@@ -294,7 +293,9 @@
 						function change() {
 								if (document.getElementById("selbox")) {
 										selboxValue = document.getElementById("selbox").value;
-										if (selboxValue == "date") {
+										if(selboxValue == ""){
+											document.getElementById("ta").style.display = "none";
+										}else if (selboxValue == "date") {
 												//文字1を表示
 												document.getElementById("txt1").style.display = "";
 												//input1を表示
