@@ -303,7 +303,16 @@
 						function change() {
 								if (document.getElementById("selbox")) {
 										selboxValue = document.getElementById("selbox").value;
-										if (selboxValue == "date") {
+										if(selboxValue == "all"){
+												//文字1を非表示
+												document.getElementById("txt1").style.display = "none";
+												//input1を非表示
+												document.getElementById("da").style.display = "none";
+												//文字2を非表示
+												document.getElementById("txt2").style.display = "none";
+												//input2を非表示
+												document.getElementById("search_text").style.display = "none";
+										}else if (selboxValue == "date") {
 												//文字1を表示
 												document.getElementById("txt1").style.display = "";
 												//input1を表示
