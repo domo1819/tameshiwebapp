@@ -193,7 +193,7 @@
 								<input type="text" id="search_text" name="word" placeholder="検索語を入力してください" style="display:none">
 								<br><br><br>
 									<div class="engine">
-										<input type="submit"  name="submit" value="検索" id="sub" disabled="disabled" class="btn btn-outline-info disabled" style="padding:10px;font-size:18px;   margin-bottom:10px; margin-left:15px; text-align: center;">
+										<input type="submit"  name="submit" value="検索" id="sub" class="btn btn-outline-info disabled" style="padding:10px;font-size:18px;   margin-bottom:10px; margin-left:15px; text-align: center;">
 									</div>
 							</div>
 						</form>
