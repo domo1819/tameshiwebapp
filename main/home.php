@@ -262,10 +262,8 @@
 						?>
 							<div class="table-responsive">
 								<?php
-								if($row==0){
-									echo '<p>該当するデータはありません</p>';
-								}else{
-                  echo '<table class="table table-bordered" id="ta"><tr>
+								if($row!==0){
+									echo '<table class="table table-bordered" id="ta"><tr>
 									<th>ID</th>
 									<th>日時</th>
 									<th>所属名</th>
@@ -286,6 +284,8 @@
 									}
 								}
 								echo "</table>\n";
+								}else{
+                  echo '<p>該当するデータはありません</p>';
 								}
 								?>
 							</div>
