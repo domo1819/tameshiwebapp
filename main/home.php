@@ -193,7 +193,7 @@
 								<input type="text" id="search_text" name="word" placeholder="検索語を入力してください" style="display:none">
 								<br><br><br>
 									<div class="engine">
-										<input type="submit"  name="submit" value="検索" id="sub" disabled="disabled" class="btn btn-outline-info" style="padding:10px;font-size:18px;   margin-bottom:10px; margin-left:15px; text-align: center;">
+										<input type="submit"  name="submit" value="検索" id="sub"  class="btn btn-outline-info" style="padding:10px;   display:none; font-size:18px;   margin-bottom:10px; margin-left:15px; text-align: center;">
 									</div>
 							</div>
 						</form>
@@ -304,6 +304,8 @@
 								if (document.getElementById("selbox")) {
 										selboxValue = document.getElementById("selbox").value;
 										if(selboxValue == "all"){
+											  //ボタンを表示
+												document.getElementById("sub").style.display = "";
 												//文字1を非表示
 												document.getElementById("txt1").style.display = "none";
 												//input1を非表示
@@ -313,6 +315,8 @@
 												//input2を非表示
 												document.getElementById("search_text").style.display = "none";
 										}else if (selboxValue == "date") {
+											  //ボタンを表示
+												document.getElementById("sub").style.display = "";
 												//文字1を表示
 												document.getElementById("txt1").style.display = "";
 												//input1を表示
@@ -322,6 +326,8 @@
 												//input2を非表示
 												document.getElementById("search_text").style.display = "none";
 										} else if (selboxValue == "word") {
+											  //ボタンを表示
+												document.getElementById("sub").style.display = "";
 												//文字2を表示
 												document.getElementById("txt2").style.display = "";
 												//input2を表示
