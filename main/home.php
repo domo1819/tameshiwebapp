@@ -273,7 +273,7 @@
 								<?php
 								if($row==0){
 									echo '<p>該当するデータはありません</p>';
-								}else if($row==1){
+								}else{
                   echo '<table class="table table-bordered" id="ta" style="display:none"><tr>
 									<th>ID</th>
 									<th>日時</th>
@@ -298,7 +298,6 @@
 								}
 								?>
 							</div>
-						</div>
 						<br><br>
 						<script type="text/javascript">
 						function change() {
