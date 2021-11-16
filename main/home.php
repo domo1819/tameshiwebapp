@@ -293,18 +293,11 @@
 									}
 								}
 								echo "</table>\n";
-								}else{
-                  echo '<p id="na" style="display:none">該当するデータはありません</p>';
+								}else if($result==0){
+                  echo '<p>該当するデータはありません</p>';
 								}
 								?>
 							</div>
-							<script>
-						$(function(){
-								$('input#sub').click(function(){
-										$('#na').show();
-								});
-						});
-						</script>
 						<br><br>
 						<script type="text/javascript">
 						function change() {
