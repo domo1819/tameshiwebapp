@@ -12,7 +12,6 @@
 		  <script src="../js/bootstrap.min.js"></script>
 			<script type="text/javascript" src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 			<script type="text/javascript" src="../jquery-3.6.0.min.js"></script>
-			<script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 		  <link rel="stylesheet" href="../css/style.css">
 	</head>
 	<body><!--  人間が見る内容を記述 -->
@@ -40,7 +39,7 @@
 					<div class="engine2">
 						<h2 id="engine">データ検索</h2>
 						<p>検索したい項目を下記より選び、検索ボタンをクリックすると該当する結果が検索されます</p>
-						<form id="test" action="javascript:void(0);">
+						<form method="POST" action="home.php">
 							<div class="engine2">
 								<?php
 								$sel = isset($_POST['emp']) ? $_POST['emp'] : '';
@@ -194,29 +193,11 @@
 								<input type="text" id="search_text" name="word" placeholder="検索語を入力してください" style="display:none">
 								<br><br><br>
 									<div class="engine">
-										<input type="submit"  name="submit" value="検索" id="su" class="btn btn-outline-info" style="padding:10px;font-size:18px;   margin-bottom:10px; margin-left:15px; text-align: center;">
+										<input type="submit"  name="submit" value="検索" id="submit" class="btn btn-outline-info" style="padding:10px;font-size:18px;   margin-bottom:10px; margin-left:15px; text-align: center;">
 									</div>
 							</div>
 						</form>
 					</div>
-					<script type="text/javascript">
-							$(function(){
-									$('input#su').click(function(){
-										var formData = $('#test').serialize();
-
-
-										console.log(formData);
-										$.ajax({
-												url: "home.php",  //POST送信を行うファイル名を指定
-												type: "POST",
-												data: formData  //POST送信するデータを指定（{ 'hoge': 'hoge' }のように連想配列で直接書いてもOK）
-										}).done(function(data) {
-												$('div#sample').text(data2);
-										});
-
-									});
-							});
-							</script>
 					<script>
 					var slc_elm = document.querySelector("#selbox");
 
@@ -284,12 +265,16 @@
 							$(function(){
 									$('#btn_ex11').click(function(){
 											$('table').toggle();
+											$('.none').show();
 									});
 							});
 							</script>
-						<div class="table-responsive" id="sample">
-							<table class="table table-bordered" id="ta" style="display:none">
-								<tr>
+							<div class="table-responsive">
+								<?php
+								if($row==0){
+									echo '<p>該当するデータはありません</p>';
+								}else if($row==1){
+                  echo '<table class="table table-bordered" id="ta" style="display:none"><tr>
 									<th>ID</th>
 									<th>日時</th>
 									<th>所属名</th>
@@ -302,20 +287,14 @@
 									<th>罰金額</th>
 									<th>違反態様</th>
 									<th>支払い状況</th>
-								</tr>
-								<?php
+								</tr>';
 								foreach($arr as $rows){
 									echo "<tr>\n";
 									foreach($rows as $value){
 										printf("<td>" .$value. "</td>\n");
 									}
 								}
-								?>
-							</table>
-							<div class="none" style="display:none">
-								<?php
-								if($row==0){
-									echo '<p>該当するデータはありません</p>';
+								echo "</table>\n";
 								}
 								?>
 							</div>
