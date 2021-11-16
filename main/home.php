@@ -46,7 +46,7 @@
 								?>
 								<label>検索項目</label>
 								<select class="form-select" aria-label="Default select example" name="emp" id="selbox" onchange="change();">
-									<option value="" disabled selected >選択してください</option>
+									<option disabled selected value>選択してください</option>
 										<optgroup label="検索項目">
 											<option value="all">全件検索</option>
 											<option value="date">日付検索</option>
@@ -284,7 +284,7 @@
 								}
 								echo "</table>\n";
 								}else if($row==0){
-                  echo '<p id="ta">該当するデータはありません</p>';
+                  echo '<p>該当するデータはありません</p>';
 								}
 								?>
 							</div>
@@ -293,9 +293,7 @@
 						function change() {
 								if (document.getElementById("selbox")) {
 										selboxValue = document.getElementById("selbox").value;
-										if(selboxValue == "selected"){
-											document.getElementById("ta").style.display = "none";
-										}else if (selboxValue == "date") {
+										if (selboxValue == "date") {
 												//文字1を表示
 												document.getElementById("txt1").style.display = "";
 												//input1を表示
