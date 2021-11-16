@@ -259,7 +259,7 @@
 									print 'DB接続失敗';
 								}
 						?>
-							<div class="table-responsive" id="ta">
+							<div class="table-responsive">
 								<?php
 								if($row!==0){
 									echo '<table class="table table-bordered" id="ta"><tr>
@@ -284,7 +284,7 @@
 								}
 								echo "</table>\n";
 								}else if($row==0){
-                  echo '<p>該当するデータはありません</p>';
+                  echo '<p id="ta">該当するデータはありません</p>';
 								}
 								?>
 							</div>
@@ -293,7 +293,7 @@
 						function change() {
 								if (document.getElementById("selbox")) {
 										selboxValue = document.getElementById("selbox").value;
-										if(selboxValue == ""){
+										if(selboxValue == "selected"){
 											document.getElementById("ta").style.display = "none";
 										}else if (selboxValue == "date") {
 												//文字1を表示
