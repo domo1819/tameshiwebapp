@@ -264,7 +264,7 @@
 						<script>
 							$(function(){
 									$('#btn_ex11').click(function(){
-											if($arr != 0){
+											if($result !== 0){
 												$('table').toggle();
 											}
 											else{
