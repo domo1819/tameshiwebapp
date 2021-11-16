@@ -216,6 +216,7 @@
 					}, false);
 					</script>
 					<?php
+							$row = '1';
 							$emp = '';
 							$data = '';
 							if (isset($_POST['emp']) === TRUE) {
