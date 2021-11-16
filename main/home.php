@@ -336,6 +336,17 @@
 												document.getElementById("txt1").style.display = "none";
 												//input1を非表示
 												document.getElementById("da").style.display = "none";
+										}else if (selboxValue != null) {
+											  //ボタンを表示
+												document.getElementById("sub").style.display = "";
+												//文字2を表示
+												document.getElementById("txt2").style.display = "none";
+												//input2を表示
+												document.getElementById("search_text").style.display = "none";
+												//文字1を非表示
+												document.getElementById("txt1").style.display = "none";
+												//input1を非表示
+												document.getElementById("da").style.display = "none";
 										}
 								}
 						}
