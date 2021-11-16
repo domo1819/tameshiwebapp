@@ -261,7 +261,7 @@
 						?>
 							<div class="table-responsive">
 								<?php
-								if($row!==0){
+								if($row!=0){
 									echo '<table class="table table-bordered" id="ta"><tr>
 									<th>ID</th>
 									<th>日時</th>
