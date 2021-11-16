@@ -39,7 +39,7 @@
 					<div class="engine2">
 						<h2 id="engine">データ検索</h2>
 						<p>検索したい項目を下記より選び、検索ボタンをクリックすると該当する結果が検索されます</p>
-						<form method="POST" action="home.php">
+						<form id="test" action="javascript:void(0);">
 							<div class="engine2">
 								<?php
 								$sel = isset($_POST['emp']) ? $_POST['emp'] : '';
@@ -193,15 +193,26 @@
 								<input type="text" id="search_text" name="word" placeholder="検索語を入力してください" style="display:none">
 								<br><br><br>
 									<div class="engine">
-										<input type="submit"  name="submit" value="検索" id="submit" class="btn btn-outline-info" style="padding:10px;font-size:18px;   margin-bottom:10px; margin-left:15px; text-align: center;">
+										<input type="submit"  name="submit" value="検索" id="su" class="btn btn-outline-info" style="padding:10px;font-size:18px;   margin-bottom:10px; margin-left:15px; text-align: center;">
 									</div>
 							</div>
 						</form>
 					</div>
 					<script>
 							$(function(){
-									$('#submit').click(function(){
-											$('.none').show();
+									$('input#su').click(function(){
+										var formData = $('#test').serialize();
+
+
+										console.log(formData);
+										$.ajax({
+												url: "home.php",  //POST送信を行うファイル名を指定
+												type: "POST",
+												data: formData  //POST送信するデータを指定（{ 'hoge': 'hoge' }のように連想配列で直接書いてもOK）
+										}).done(function(data) {
+												$('div#sample').text(data2);
+										});
+
 									});
 							});
 							</script>
@@ -275,7 +286,7 @@
 									});
 							});
 							</script>
-						<div class="table-responsive">
+						<div class="table-responsive" id="sample">
 							<table class="table table-bordered" id="ta" style="display:none">
 								<tr>
 									<th>ID</th>
