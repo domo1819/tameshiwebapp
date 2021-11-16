@@ -274,7 +274,7 @@
 								if($row==0){
 									echo '<p>該当するデータはありません</p>';
 								}else{
-                  echo '<table class="table table-bordered" id="ta" style="display:none"><tr>
+                  echo '<table class="table table-bordered" id="ta"><tr>
 									<th>ID</th>
 									<th>日時</th>
 									<th>所属名</th>
