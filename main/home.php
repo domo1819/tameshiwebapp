@@ -293,7 +293,7 @@
 									}
 								}
 								echo "</table>\n";
-								}else if($result==0){
+								}else if($arr==0){
                   echo '<p>該当するデータはありません</p>';
 								}
 								?>
