@@ -294,7 +294,7 @@
 								}
 								echo "</table>\n";
 								}else if($row==0 AND $emp !=null){
-                  echo '<p>該当するデータはありません</p>';
+                  echo '<p id="na">該当するデータはありません</p>';
 								}
 								?>
 							</div>
@@ -314,6 +314,7 @@
 												document.getElementById("txt2").style.display = "none";
 												//input2を非表示
 												document.getElementById("search_text").style.display = "none";
+												document.getElementById("na").style.display = "none";
 										}else if (selboxValue == "date") {
 											  //ボタンを表示
 												document.getElementById("sub").style.display = "";
@@ -325,6 +326,7 @@
 												document.getElementById("txt2").style.display = "none";
 												//input2を非表示
 												document.getElementById("search_text").style.display = "none";
+												document.getElementById("na").style.display = "none";
 										} else if (selboxValue == "word") {
 											  //ボタンを表示
 												document.getElementById("sub").style.display = "";
@@ -336,6 +338,7 @@
 												document.getElementById("txt1").style.display = "none";
 												//input1を非表示
 												document.getElementById("da").style.display = "none";
+												document.getElementById("na").style.display = "none";
 										}else if (selboxValue != null) {
 											  //ボタンを表示
 												document.getElementById("sub").style.display = "";
@@ -347,6 +350,8 @@
 												document.getElementById("txt1").style.display = "none";
 												//input1を非表示
 												document.getElementById("da").style.display = "none";
+												//input1を非表示
+												document.getElementById("na").style.display = "none";
 										}
 								}
 						}
