@@ -283,7 +283,7 @@
 									}
 								}
 								echo "</table>\n";
-								}else if($row==0){
+								}else{
                   echo '<p>該当するデータはありません</p>';
 								}
 								?>
